@@ -231,51 +231,76 @@ export const Hero = ({ onOpenAiModal }) => {
               Building production-grade AI systems with Generative AI, RAG and Agentic AI, backed by 5+ years of experience in scalable backend systems and cloud-native solutions.
             </p>
 
-            {/* Mobile-Only Dedicated High-Res Landing Poster Showcase */}
-            <div className="mobile-hero-poster-frame" style={{ marginBottom: '1.75rem' }}>
+            {/* Mobile-Only Focused Portrait Showcase with Soft Ambient Blur */}
+            <div className="mobile-hero-poster-frame" style={{ margin: '1.25rem auto 2rem', textAlign: 'center', maxWidth: '320px', position: 'relative' }}>
+              
+              {/* Ambient Blurred Aura from Poster */}
+              <div 
+                style={{
+                  position: 'absolute',
+                  inset: '-10px',
+                  backgroundImage: 'url(/hero.png)',
+                  backgroundPosition: 'center 30%',
+                  backgroundSize: 'cover',
+                  filter: 'blur(24px)',
+                  opacity: 0.5,
+                  borderRadius: '2rem',
+                  zIndex: 0
+                }}
+              />
+
+              {/* Centered Focused Portrait Frame (Only Bhavesh visible, surroundings cropped out) */}
               <div 
                 style={{
                   position: 'relative',
-                  width: '100%',
-                  borderRadius: '1.25rem',
+                  zIndex: 1,
+                  width: '260px',
+                  height: '310px',
+                  margin: '0 auto',
+                  borderRadius: '1.75rem',
                   overflow: 'hidden',
-                  border: '1.5px solid rgba(226, 232, 240, 0.9)',
-                  boxShadow: '0 10px 30px rgba(0, 0, 0, 0.08)',
+                  border: '2.5px solid #ffffff',
+                  boxShadow: '0 12px 35px rgba(29, 104, 254, 0.2), 0 4px 12px rgba(0, 0, 0, 0.08)',
                   background: '#ffffff'
                 }}
               >
+                {/* Zoomed in tightly on Bhavesh only */}
                 <img 
                   src="/hero.png" 
-                  alt="Bhavesh Rathod - AI Engineer & Senior Software Engineer"
+                  alt="Bhavesh Rathod"
                   style={{
                     width: '100%',
-                    height: 'auto',
-                    maxHeight: '380px',
+                    height: '100%',
                     objectFit: 'cover',
                     objectPosition: 'center 20%',
+                    transform: 'scale(1.55)',
+                    transformOrigin: 'center 24%',
                     display: 'block'
                   }}
                 />
-                {/* Subtle bottom gradient & floating badge on mobile poster */}
+
+                {/* Soft bottom vignette overlay */}
                 <div 
                   style={{
                     position: 'absolute',
                     inset: 0,
-                    background: 'linear-gradient(to top, rgba(15, 23, 42, 0.75) 0%, rgba(15, 23, 42, 0.1) 40%, transparent 100%)',
+                    background: 'linear-gradient(to top, rgba(15, 23, 42, 0.65) 0%, rgba(15, 23, 42, 0.05) 35%, transparent 100%)',
+                    pointerEvents: 'none',
                     display: 'flex',
                     flexDirection: 'column',
                     justifyContent: 'flex-end',
-                    padding: '1rem'
+                    padding: '0.85rem'
                   }}
                 >
-                  <div style={{ color: '#ffffff', fontWeight: 800, fontSize: '1.1rem', textShadow: '0 2px 4px rgba(0,0,0,0.5)' }}>
-                    Bhaveshkumar Rathod
+                  <div style={{ color: '#ffffff', fontWeight: 800, fontSize: '0.98rem', textShadow: '0 2px 6px rgba(0,0,0,0.6)' }}>
+                    Bhavesh Rathod
                   </div>
-                  <div style={{ color: '#93c5fd', fontSize: '0.8rem', fontWeight: 700, fontFamily: 'var(--font-mono)' }}>
+                  <div style={{ color: '#93c5fd', fontSize: '0.72rem', fontWeight: 700, fontFamily: 'var(--font-mono)' }}>
                     AI Engineer • Senior Software Engineer
                   </div>
                 </div>
               </div>
+
             </div>
 
             {/* Action Buttons */}
