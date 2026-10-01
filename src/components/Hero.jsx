@@ -194,41 +194,43 @@ export const Hero = ({ onOpenAiModal }) => {
             className="hero-left-content"
           >
 
-            {/* Top Featured Credentials Badge: Google Cloud Certified GenAI Leader */}
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.65rem', alignItems: 'center', marginBottom: '1rem' }}>
+            {/* Top Featured Credentials Badge: Google Cloud Certified GenAI Leader & LinkedIn */}
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.55rem', alignItems: 'center', marginBottom: '1rem', width: '100%', maxWidth: '100%' }}>
 
-              <Magnetic strength={0.2}>
+              <Magnetic strength={isDesktop ? 0.2 : 0}>
                 <motion.a
-                  whileHover={{ scale: 1.04, y: -2 }}
+                  whileHover={isDesktop ? { scale: 1.04, y: -2 } : {}}
                   whileTap={{ scale: 0.96 }}
                   href="#certifications"
                   title="Jump to Certifications & Awards"
                   style={{
                     display: 'inline-flex',
                     alignItems: 'center',
-                    gap: '0.55rem',
-                    padding: '0.4rem 0.95rem',
+                    gap: '0.45rem',
+                    padding: '0.35rem 0.8rem',
                     borderRadius: '9999px',
                     background: 'var(--bg-card)',
                     backdropFilter: 'blur(12px)',
                     WebkitBackdropFilter: 'blur(12px)',
                     border: '1px solid rgba(26, 115, 232, 0.35)',
                     color: '#1a73e8',
-                    fontSize: '0.82rem',
+                    fontSize: 'clamp(0.72rem, 2.7vw, 0.82rem)',
                     fontWeight: 800,
                     textDecoration: 'none',
                     boxShadow: 'var(--shadow-sm)',
-                    cursor: 'pointer'
+                    cursor: 'pointer',
+                    maxWidth: '100%',
+                    lineHeight: 1.3
                   }}
                 >
-                  <GoogleCloudLogo size={18} />
-                  <span>Google Cloud Certified Generative AI Leader</span>
+                  <GoogleCloudLogo size={16} />
+                  <span>Google Cloud Certified GenAI Leader</span>
                 </motion.a>
               </Magnetic>
 
-              <Magnetic strength={0.2}>
+              <Magnetic strength={isDesktop ? 0.2 : 0}>
                 <motion.a
-                  whileHover={{ scale: 1.04, y: -2 }}
+                  whileHover={isDesktop ? { scale: 1.04, y: -2 } : {}}
                   whileTap={{ scale: 0.96 }}
                   href={personal.linkedin}
                   target="_blank"
@@ -236,21 +238,23 @@ export const Hero = ({ onOpenAiModal }) => {
                   style={{
                     display: 'inline-flex',
                     alignItems: 'center',
-                    gap: '0.5rem',
-                    padding: '0.4rem 0.9rem',
+                    gap: '0.45rem',
+                    padding: '0.35rem 0.8rem',
                     borderRadius: '9999px',
                     background: 'var(--bg-card)',
                     backdropFilter: 'blur(12px)',
                     WebkitBackdropFilter: 'blur(12px)',
                     border: '1px solid rgba(10, 102, 194, 0.35)',
                     color: '#0a66c2',
-                    fontSize: '0.82rem',
+                    fontSize: 'clamp(0.72rem, 2.7vw, 0.82rem)',
                     fontWeight: 800,
                     textDecoration: 'none',
-                    boxShadow: 'var(--shadow-sm)'
+                    boxShadow: 'var(--shadow-sm)',
+                    maxWidth: '100%',
+                    whiteSpace: 'nowrap'
                   }}
                 >
-                  <LinkedinOfficialLogo size={18} />
+                  <LinkedinOfficialLogo size={16} />
                   <span>5K+ LinkedIn Family</span>
                 </motion.a>
               </Magnetic>
@@ -430,11 +434,14 @@ export const Hero = ({ onOpenAiModal }) => {
             {/* Summary Text */}
             <p
               style={{
-                fontSize: '1.02rem',
-                lineHeight: 1.6,
+                fontSize: 'clamp(0.92rem, 3.4vw, 1.04rem)',
+                lineHeight: 1.62,
                 color: '#475569',
                 marginBottom: '1.5rem',
-                maxWidth: '490px'
+                width: '100%',
+                maxWidth: '490px',
+                wordBreak: 'normal',
+                overflowWrap: 'break-word'
               }}
             >
               Building production-grade AI systems with Generative AI, RAG and Agentic AI, backed by {personal.experienceYears} of experience in scalable backend systems and cloud-native solutions.
