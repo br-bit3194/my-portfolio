@@ -9,7 +9,7 @@
   --google-red: #ea4335;
   --google-yellow: #f9ab00;
   --google-green: #1e8e3e;
-  
+
   --google-blue-soft: rgba(26, 115, 232, 0.08);
   --google-red-soft: rgba(234, 67, 53, 0.08);
   --google-yellow-soft: rgba(249, 171, 0, 0.1);
@@ -19,23 +19,29 @@
   --google-blue-gradient: linear-gradient(135deg, #1a73e8 0%, #4285f4 100%);
   --google-green-gradient: linear-gradient(135deg, #1e8e3e 0%, #34a853 100%);
 
-  /* Default Theme: Premium Light (Google Studio & 21st.dev minimal clean aesthetic) */
-  --bg-primary: #ffffff;
-  --bg-secondary: #f8fafd;
-  --bg-card: #ffffff;
-  --bg-card-hover: #ffffff;
-  --bg-card-solid: #ffffff;
-  --bg-input: #f1f3f4;
-  --bg-nav: rgba(255, 255, 255, 0.88);
+  /* Jade Sky 4-Color Palette (21st.dev Bloom Field Style) */
+  --jade-sky-1: #EEF6E3;
+  --jade-sky-2: #B7D98E;
+  --jade-sky-3: #7FBF9A;
+  --jade-sky-4: #CFE9F0;
 
-  --text-primary: #202124;
-  --text-secondary: #5f6368;
-  --text-muted: #80868b;
+  /* Frosted Sage Glassmorphism on Jade Sky */
+  --bg-primary: #EEF6E3;
+  --bg-secondary: rgba(207, 233, 240, 0.45);
+  --bg-card: rgba(255, 255, 255, 0.58);
+  --bg-card-hover: rgba(255, 255, 255, 0.78);
+  --bg-card-solid: rgba(244, 249, 241, 0.94);
+  --bg-input: rgba(255, 255, 255, 0.65);
+  --bg-nav: rgba(238, 246, 227, 0.82);
+
+  --text-primary: #192e24;
+  --text-secondary: #3d5648;
+  --text-muted: #5e7a6b;
   --text-inverse: #ffffff;
 
-  --border-color: #e8eaed;
-  --border-subtle: #f1f3f4;
-  --border-hover: rgba(26, 115, 232, 0.35);
+  --border-color: rgba(255, 255, 255, 0.75);
+  --border-subtle: rgba(127, 191, 154, 0.28);
+  --border-hover: rgba(127, 191, 154, 0.75);
 
   --accent-primary: #1a73e8;
   --accent-primary-light: #4285f4;
@@ -43,50 +49,12 @@
   --accent-red: #ea4335;
   --accent-yellow: #f9ab00;
 
-  --shadow-sm: 0 1px 3px rgba(60, 64, 67, 0.08);
-  --shadow-md: 0 4px 12px rgba(60, 64, 67, 0.08), 0 1px 2px rgba(60, 64, 67, 0.05);
-  --shadow-lg: 0 12px 32px rgba(60, 64, 67, 0.12), 0 2px 6px rgba(60, 64, 67, 0.06);
-  --shadow-glow: 0 0 24px rgba(66, 133, 244, 0.2);
+  --shadow-sm: 0 4px 16px rgba(127, 191, 154, 0.12), inset 0 1px 1px rgba(255, 255, 255, 0.85);
+  --shadow-md: 0 8px 28px rgba(127, 191, 154, 0.16), 0 2px 6px rgba(0, 0, 0, 0.03), inset 0 1px 1px rgba(255, 255, 255, 0.9);
+  --shadow-lg: 0 16px 44px rgba(127, 191, 154, 0.22), 0 4px 12px rgba(0, 0, 0, 0.04), inset 0 1px 2px rgba(255, 255, 255, 0.95);
+  --shadow-glow: 0 0 32px rgba(127, 191, 154, 0.4);
 
-  --pattern-dot: #e2e8f0;
-}
-
-[data-theme="dark"] {
-  /* Premium Executive Dark Mode (Deep Charcoal with vibrant Google accents) */
-  --bg-primary: #0d1117;
-  --bg-secondary: #161b22;
-  --bg-card: rgba(22, 27, 34, 0.85);
-  --bg-card-hover: rgba(33, 38, 45, 0.95);
-  --bg-card-solid: #161b22;
-  --bg-input: #0d1117;
-  --bg-nav: rgba(13, 17, 23, 0.88);
-
-  --text-primary: #f0f6fc;
-  --text-secondary: #8b949e;
-  --text-muted: #6e7681;
-  --text-inverse: #0d1117;
-
-  --border-color: rgba(240, 246, 252, 0.1);
-  --border-subtle: rgba(240, 246, 252, 0.05);
-  --border-hover: rgba(66, 133, 244, 0.5);
-
-  --google-blue-soft: rgba(66, 133, 244, 0.15);
-  --google-red-soft: rgba(234, 67, 53, 0.15);
-  --google-yellow-soft: rgba(251, 188, 5, 0.15);
-  --google-green-soft: rgba(52, 168, 83, 0.15);
-
-  --accent-primary: #4285f4;
-  --accent-primary-light: #8ab4f8;
-  --accent-secondary: #34a853;
-  --accent-red: #ea4335;
-  --accent-yellow: #fbbc05;
-
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
-  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.45);
-  --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.55);
-  --shadow-glow: 0 0 24px rgba(66, 133, 244, 0.35);
-
-  --pattern-dot: rgba(255, 255, 255, 0.06);
+  --pattern-dot: rgba(127, 191, 154, 0.35);
 }
 
 * {
@@ -100,20 +68,31 @@ html {
   font-family: var(--font-sans);
   color: var(--text-primary);
   background-color: var(--bg-primary);
-  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
 body {
   min-height: 100vh;
   overflow-x: hidden;
   background-color: var(--bg-primary);
-  background-image: radial-gradient(var(--pattern-dot) 1.2px, transparent 1.2px);
-  background-size: 24px 24px;
+  background-image: 
+    radial-gradient(at 15% 15%, #CFE9F0 0px, transparent 55%),
+    radial-gradient(at 85% 12%, #B7D98E 0px, transparent 50%),
+    radial-gradient(at 50% 50%, #EEF6E3 0px, transparent 65%),
+    radial-gradient(at 82% 88%, #7FBF9A 0px, transparent 55%),
+    radial-gradient(at 12% 90%, #CFE9F0 0px, transparent 50%),
+    radial-gradient(var(--pattern-dot) 1.2px, transparent 1.2px);
+  background-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 24px 24px;
+  background-attachment: fixed;
   line-height: 1.6;
 }
 
 /* Typography */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-heading);
   letter-spacing: -0.025em;
   font-weight: 700;
@@ -137,13 +116,16 @@ button {
 ::-webkit-scrollbar {
   width: 8px;
 }
+
 ::-webkit-scrollbar-track {
   background: var(--bg-primary);
 }
+
 ::-webkit-scrollbar-thumb {
   background: var(--border-color);
   border-radius: 4px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
   background: var(--accent-primary);
 }
@@ -194,15 +176,19 @@ button {
   .section {
     padding: 4rem 0 !important;
   }
+
   .section-header {
     margin-bottom: 2.25rem !important;
   }
+
   .section-title {
     font-size: 1.85rem !important;
   }
+
   .section-subtitle {
     font-size: 0.92rem !important;
   }
+
   .container {
     padding: 0 1.15rem !important;
   }
@@ -212,14 +198,17 @@ button {
   .section {
     padding: 3.25rem 0 !important;
   }
+
   .section-title {
     font-size: 1.6rem !important;
   }
 }
 
-/* 21st.dev Style Bento & Glass Cards */
+/* 21st.dev Style Bento & Glass Cards (Frosted Sage Glassmorphism) */
 .bento-card {
   background: var(--bg-card);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
   border: 1px solid var(--border-color);
   border-radius: 1.15rem;
   box-shadow: var(--shadow-sm);
@@ -229,8 +218,17 @@ button {
 }
 
 .bento-card:hover {
+  background: var(--bg-card-hover);
   border-color: var(--border-hover);
   transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.glass-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid var(--border-color);
   box-shadow: var(--shadow-md);
 }
 
@@ -395,9 +393,9 @@ button {
 
 /* Touch targets for mobile */
 @media (max-width: 640px) {
-  button, a {
+
+  button,
+  a {
     min-height: 38px;
   }
 }
-
-

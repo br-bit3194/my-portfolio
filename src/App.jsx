@@ -10,10 +10,10 @@ import { Certifications } from './components/Certifications';
 import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
 import { AiAssistantModal } from './components/AiAssistantModal';
+import { JadeSkyBackground } from './components/ui/JadeSkyBackground';
 import { Bot, Sparkles } from 'lucide-react';
 
 export function App() {
-  const [theme, setTheme] = useState('light');
   const [isAiModalOpen, setIsAiModalOpen] = useState(false);
   const [mousePos, setMousePos] = useState({ x: -1000, y: -1000 });
 
@@ -26,15 +26,9 @@ export function App() {
   });
 
   useEffect(() => {
-    // Check saved theme in localStorage or default to light
-    const savedTheme = localStorage.getItem('portfolio-theme');
-    if (savedTheme) {
-      setTheme(savedTheme);
-      document.documentElement.setAttribute('data-theme', savedTheme);
-    } else {
-      setTheme('light');
-      document.documentElement.setAttribute('data-theme', 'light');
-    }
+    // Lock to Jade Sky Light Theme
+    document.documentElement.setAttribute('data-theme', 'light');
+    localStorage.removeItem('portfolio-theme');
 
     const handleMouseMove = (e) => {
       setMousePos({ x: e.clientX, y: e.clientY });
@@ -42,13 +36,6 @@ export function App() {
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
-
-  const toggleTheme = () => {
-    const nextTheme = theme === 'dark' ? 'light' : 'dark';
-    setTheme(nextTheme);
-    localStorage.setItem('portfolio-theme', nextTheme);
-    document.documentElement.setAttribute('data-theme', nextTheme);
-  };
 
   return (
     <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', position: 'relative' }}>
@@ -67,6 +54,19 @@ export function App() {
         }}
       />
 
+      {/* 21st.dev Jade Sky Bloom Field Background */}
+      <div
+        style={{
+          position: 'fixed',
+          inset: 0,
+          zIndex: 0,
+          pointerEvents: 'none',
+          overflow: 'hidden'
+        }}
+      >
+        <JadeSkyBackground variant="hero" animate={true} blur="90px" opacity={0.88} />
+      </div>
+
       {/* Dynamic Cursor Spotlight Radial Glow */}
       <div 
         style={{
@@ -77,15 +77,13 @@ export function App() {
           height: '100vh',
           pointerEvents: 'none',
           zIndex: 1,
-          background: `radial-gradient(750px circle at ${mousePos.x}px ${mousePos.y}px, ${theme === 'dark' ? 'rgba(66, 133, 244, 0.08)' : 'rgba(26, 115, 232, 0.045)'}, transparent 80%)`,
+          background: `radial-gradient(750px circle at ${mousePos.x}px ${mousePos.y}px, rgba(26, 115, 232, 0.045), transparent 80%)`,
           transition: 'background 0.15s ease-out'
         }}
       />
 
       {/* Top Fixed Navigation */}
       <Navbar 
-        theme={theme} 
-        toggleTheme={toggleTheme} 
         onOpenAiModal={() => setIsAiModalOpen(true)} 
       />
 

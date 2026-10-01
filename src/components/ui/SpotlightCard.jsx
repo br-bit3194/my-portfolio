@@ -70,6 +70,8 @@ export const SpotlightCard = ({
           height: '100%',
           width: '100%',
           background: 'var(--bg-card)',
+          backdropFilter: 'blur(16px) saturate(180%)',
+          WebkitBackdropFilter: 'blur(16px) saturate(180%)',
           borderRadius: 'inherit',
           overflow: 'hidden'
         }}

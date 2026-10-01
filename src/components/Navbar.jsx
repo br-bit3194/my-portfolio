@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  Sun, 
-  Moon, 
-  Download, 
-  Menu, 
-  X, 
-  Bot, 
+import {
+  Download,
+  Menu,
+  X,
+  Bot,
   ChevronRight
 } from 'lucide-react';
 import { portfolioData } from '../data/portfolioData';
 
-export const Navbar = ({ theme, toggleTheme, onOpenAiModal }) => {
+export const Navbar = ({ onOpenAiModal }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeNav, setActiveNav] = useState('Home');
@@ -35,7 +33,7 @@ export const Navbar = ({ theme, toggleTheme, onOpenAiModal }) => {
   ];
 
   return (
-    <header 
+    <header
       style={{
         position: 'fixed',
         top: 0,
@@ -51,22 +49,22 @@ export const Navbar = ({ theme, toggleTheme, onOpenAiModal }) => {
       }}
     >
       <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '1rem' }}>
-        
+
         {/* Brand Logo with Profile Photo (Always Single Line with Modern Typography) */}
-        <motion.a 
+        <motion.a
           whileHover={{ scale: 1.03 }}
           whileTap={{ scale: 0.97 }}
-          href="#" 
-          style={{ 
-            display: 'flex', 
-            alignItems: 'center', 
+          href="#"
+          style={{
+            display: 'flex',
+            alignItems: 'center',
             gap: '0.65rem',
             textDecoration: 'none',
             whiteSpace: 'nowrap',
             flexShrink: 0
           }}
         >
-          <div 
+          <div
             style={{
               width: '36px',
               height: '36px',
@@ -80,8 +78,8 @@ export const Navbar = ({ theme, toggleTheme, onOpenAiModal }) => {
               boxShadow: '0 2px 8px rgba(0, 0, 0, 0.12)'
             }}
           >
-            <img 
-              src={portfolioData.personal.avatarUrl} 
+            <img
+              src={portfolioData.personal.avatarUrl}
               alt="Bhavesh Rathod"
               style={{
                 width: '100%',
@@ -91,11 +89,11 @@ export const Navbar = ({ theme, toggleTheme, onOpenAiModal }) => {
               }}
             />
           </div>
-          <div 
-            style={{ 
+          <div
+            style={{
               fontFamily: 'var(--font-heading)',
-              fontWeight: 800, 
-              fontSize: '1.05rem', 
+              fontWeight: 800,
+              fontSize: '1.05rem',
               letterSpacing: '-0.02em',
               whiteSpace: 'nowrap',
               color: 'var(--text-primary)',
@@ -107,10 +105,10 @@ export const Navbar = ({ theme, toggleTheme, onOpenAiModal }) => {
         </motion.a>
 
         {/* Center Nav Links */}
-        <nav 
-          style={{ 
-            display: 'none', 
-            alignItems: 'center', 
+        <nav
+          style={{
+            display: 'none',
+            alignItems: 'center',
             gap: '1.25rem',
             flexShrink: 0,
             whiteSpace: 'nowrap'
@@ -140,7 +138,7 @@ export const Navbar = ({ theme, toggleTheme, onOpenAiModal }) => {
               >
                 <span>{link.label}</span>
                 {isActive && (
-                  <motion.span 
+                  <motion.span
                     layoutId="activeNavIndicator"
                     style={{
                       position: 'absolute',
@@ -159,7 +157,7 @@ export const Navbar = ({ theme, toggleTheme, onOpenAiModal }) => {
 
         {/* Right Action Buttons */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexShrink: 0, whiteSpace: 'nowrap' }}>
-          
+
           {/* Open to Remote Pill Button */}
           <motion.a
             whileHover={{ scale: 1.04, y: -1 }}
@@ -214,28 +212,7 @@ export const Navbar = ({ theme, toggleTheme, onOpenAiModal }) => {
             <span style={{ whiteSpace: 'nowrap' }}>Ask AI</span>
           </motion.button>
 
-          {/* Theme Toggle */}
-          <motion.button
-            whileHover={{ scale: 1.1, rotate: 20 }}
-            whileTap={{ scale: 0.9 }}
-            onClick={toggleTheme}
-            aria-label="Toggle Theme"
-            style={{
-              width: '36px',
-              height: '36px',
-              borderRadius: '50%',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              background: 'var(--bg-card)',
-              border: '1px solid var(--border-color)',
-              color: 'var(--text-primary)',
-              cursor: 'pointer',
-              flexShrink: 0
-            }}
-          >
-            {theme === 'dark' ? <Sun size={17} color="#f59e0b" /> : <Moon size={17} color="#1a73e8" />}
-          </motion.button>
+
 
           {/* Resume Download Button */}
           <motion.a

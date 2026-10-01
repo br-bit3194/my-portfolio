@@ -22,146 +22,149 @@ import { portfolioData } from '../data/portfolioData';
 import { SpotlightCard } from './ui/SpotlightCard';
 import { Magnetic } from './ui/Magnetic';
 
+// Experience levels in decreasing order (Level 5 = 2026+ Present down to Level 1 = 2021)
+const CHRONOLOGICAL_LEVELS = [
+  {
+    levelNum: 5,
+    id: "talentica-sr",
+    era: "2026 - Present",
+    rank: "Senior AI & Multi-Agent Architect (MAX LEVEL)",
+    title: "Senior Software Engineer",
+    company: "Talentica Software",
+    period: "April 2026 - Present",
+    location: "Pune, India / Remote",
+    badge: "🏆 MAX LEVEL • Multi-Agent Architect",
+    color: "#1a73e8",
+    statBoost: "Multi-Agent A2A & MCP • AWS Hackathon Winner",
+    statDetail: "Architecting enterprise multi-agent collaboration systems and AWS Bedrock autonomous IT platforms",
+    powersUnlocked: ["Multi-Agent Collaboration (A2A)", "Model Context Protocol (MCP)", "🏆 SuperHacks 2025 Special Jury Award", "FastAPI Async Architecture", "Enterprise AI Guardrails"],
+    missionBrief: [
+      "Architected and delivered production-grade Multi-Agent AI platform leveraging Agent-to-Agent (A2A) protocol and Model Context Protocol (MCP) for tool calling.",
+      "Engineered autonomous multi-agent task routing, RAG orchestration, and high-performance FastAPI microservices for enterprise automation.",
+      "Built MAESTRO IT Operations platform winning 'Special Jury Mention Award' at SuperHacks 2025 powered by AWS."
+    ],
+    equipment: ["Multi-Agent AI (A2A)", "Model Context Protocol (MCP)", "FastAPI", "Amazon Bedrock", "RAG Orchestration", "Python"]
+  },
+  {
+    levelNum: 4,
+    id: "talentica-se2",
+    era: "2024 - 2026",
+    rank: "Production GenAI & Performance Specialist",
+    title: "Software Engineer II",
+    company: "Talentica Software",
+    period: "January 2024 - March 2026",
+    location: "Pune, India / Remote",
+    badge: "GenAI & 94% Optimization Quest",
+    color: "#4285F4",
+    statBoost: "94% API Latency Cut • -67% Agent Latency",
+    statDetail: "Built GCP Vertex AI recommendation engine and scaled sports platform to 90,000+ athletes",
+    powersUnlocked: ["94% API Latency Cut (1,200/min to 4s)", "67% Agent Speedup (OpenTelemetry/Langfuse)", "70% Manual Cut (Vertex AI & Gemini)", "90K+ Athletes GMS Scale", "Talentica 'PAT on the Back' Award"],
+    missionBrief: [
+      "Led development of GenAI Makegood recommendation system using Vertex AI, Google Gemini, and Google ADK; architected GCP Pub/Sub, GCS, and BigQuery workflows with AI Guardrails (70% manual reduction).",
+      "Instrumented OpenTelemetry and Langfuse trace observability, optimizing multi-agent bottlenecks from 3 minutes to 1 minute (67% speedup).",
+      "Optimized core Django API from 1,200 records/minute to 4 seconds, achieving 94% performance improvement.",
+      "Integrated Razorpay engine for Game Management System (GMS), supporting 7 national championships and 90,000+ athletes.",
+      "Automated refund-failure monitoring via AWS CloudWatch and Lambda with real-time Slack alerts; awarded 'PAT on the Back'."
+    ],
+    equipment: ["Vertex AI", "Google Gemini", "Google ADK", "GCP Pub/Sub", "BigQuery", "OpenTelemetry", "Langfuse", "AWS Lambda", "Razorpay", "Django"]
+  },
+  {
+    levelNum: 3,
+    id: "online-psb",
+    era: "2022 - 2023",
+    rank: "FinTech Scale & Security Architect",
+    title: "Python Developer",
+    company: "Online PSB Loans",
+    period: "July 2022 - December 2023",
+    location: "Ahmedabad, Gujarat, India",
+    badge: "FinTech Scale Quest",
+    color: "#34A853",
+    statBoost: "14+ Indian Banks • +25% Speed Boost",
+    statDetail: "Engineered banking deduplication with RSA cryptography and partitioned Oracle cluster",
+    powersUnlocked: ["14+ Commercial Banks Scaled", "Partitioned Oracle Indexing", "RSA Asymmetric Cryptography", "+25% Multithreading Boost", "Python ELT Automation (-2 hrs daily)"],
+    missionBrief: [
+      "Developed high-throughput Django API serving 14+ Indian Banks for duplicate customer identification.",
+      "Designed partitioned Oracle database architectures with advanced indexing for sub-second query latency.",
+      "Built automated financial CAM-pdf scraper with data visualization and charts.",
+      "Architected multi-database Python ELT pipelines saving 2 hours of manual analysis daily.",
+      "Implemented multithreading to accelerate API response speed by 25%, secured with RSA asymmetric encryption."
+    ],
+    equipment: ["Python", "Django", "Oracle DB (Partitioning)", "Multithreading", "ELT Pipelines", "RSA Cryptography", "Pandas"]
+  },
+  {
+    levelNum: 2,
+    id: "klearcom",
+    era: "2021 - 2022",
+    rank: "Telecom AI & Systems Engineer",
+    title: "Junior Software Engineer",
+    company: "Klearcom",
+    period: "September 2021 - July 2022",
+    location: "Ireland / Remote",
+    badge: "NLP & Automation Quest",
+    color: "#EA4335",
+    statBoost: "99% Intent Accuracy • -75% Downtime",
+    statDetail: "Extracted high-precision intent while automating server operations across 15+ machines",
+    powersUnlocked: ["~99% IVR Intent Extraction", "75% Queue Downtime Reduction", "15+ Server Bash Automation", "String Matching 98%"],
+    missionBrief: [
+      "Developed IVR-Intent-extraction algorithm with ~99% accuracy, eliminating manual human intervention.",
+      "Built real-time log processor with automated email alerts, reducing critical downtime and queue backlogs by 75%.",
+      "Upgraded string matching preprocessing algorithm from 80% to 98% accuracy.",
+      "Engineered automated Bash deployment scripts for synchronized Git pulls across 15 production servers."
+    ],
+    equipment: ["Python", "NLP / Intent Extraction", "IVR Algorithms", "Bash Automation", "Linux / Unix", "Log Processing"]
+  },
+  {
+    levelNum: 1,
+    id: "flyingspark",
+    era: "2021",
+    rank: "Junior Data Scientist",
+    title: "Data Scientist",
+    company: "FlyingSpark Infotech",
+    period: "June 2021 - September 2021",
+    location: "Remote / Ahmedabad",
+    badge: "Foundational Quest",
+    color: "#FBBC05",
+    statBoost: "100% Manual Effort Reduction",
+    statDetail: "Automated unstructured log conversion into structured intelligence",
+    powersUnlocked: ["Collaborative Filtering", "Anime Recommendation Model", "Data Pipeline Automation", "Pandas & NumPy"],
+    missionBrief: [
+      "Engineered an Anime Recommendation Engine using collaborative filtering algorithms.",
+      "Converted unstructured raw log data into informative structured pipelines, eliminating manual effort by 100%."
+    ],
+    equipment: ["Python", "Recommendation Systems", "Collaborative Filtering", "Pandas", "Data Pipelines"]
+  }
+];
+
 export const Experience = () => {
   const [currentLevelIndex, setCurrentLevelIndex] = useState(0); // 0 = Level 5 (Current Present)
   const [viewMode, setViewMode] = useState('rpg'); // 'rpg' or 'classic'
   const [isPlaying, setIsPlaying] = useState(false);
 
-  // Experience levels in decreasing order (Level 5 = 2026+ Present down to Level 1 = 2021)
-  const chronologicalLevels = [
-    {
-      levelNum: 5,
-      id: "talentica-sr",
-      era: "2026 - Present",
-      rank: "Senior AI & Multi-Agent Architect (MAX LEVEL)",
-      title: "Senior Software Engineer",
-      company: "Talentica Software",
-      period: "April 2026 - Present",
-      location: "Pune, India",
-      badge: "🏆 MAX LEVEL • Multi-Agent Architect",
-      color: "#1a73e8",
-      statBoost: "Multi-Agent A2A & MCP • AWS Hackathon Winner",
-      statDetail: "Architecting enterprise multi-agent collaboration systems and AWS Bedrock autonomous IT platforms",
-      powersUnlocked: ["Multi-Agent Collaboration (A2A)", "Model Context Protocol (MCP)", "🏆 SuperHacks 2025 Special Jury Award", "FastAPI Async Architecture", "Enterprise AI Guardrails"],
-      missionBrief: [
-        "Architected and delivered production-grade Multi-Agent AI platform leveraging Agent-to-Agent (A2A) protocol and Model Context Protocol (MCP) for tool calling.",
-        "Engineered autonomous multi-agent task routing, RAG orchestration, and high-performance FastAPI microservices for enterprise automation.",
-        "Built MAESTRO IT Operations platform winning 'Special Jury Mention Award' at SuperHacks 2025 powered by AWS."
-      ],
-      equipment: ["Multi-Agent AI (A2A)", "Model Context Protocol (MCP)", "FastAPI", "Amazon Bedrock", "RAG Orchestration", "Python"]
-    },
-    {
-      levelNum: 4,
-      id: "talentica-se2",
-      era: "2024 - 2026",
-      rank: "Production GenAI & Performance Specialist",
-      title: "Software Engineer II",
-      company: "Talentica Software",
-      period: "January 2024 - March 2026",
-      location: "Pune, India",
-      badge: "GenAI & 94% Optimization Quest",
-      color: "#4285F4",
-      statBoost: "94% API Latency Cut • -67% Agent Latency",
-      statDetail: "Built GCP Vertex AI recommendation engine and scaled sports platform to 90,000+ athletes",
-      powersUnlocked: ["94% API Latency Cut (1,200/min to 4s)", "67% Agent Speedup (OpenTelemetry/Langfuse)", "70% Manual Cut (Vertex AI & Gemini)", "90K+ Athletes GMS Scale", "Talentica 'PAT on the Back' Award"],
-      missionBrief: [
-        "Led development of GenAI Makegood recommendation system using Vertex AI, Google Gemini, and Google ADK; architected GCP Pub/Sub, GCS, and BigQuery workflows with AI Guardrails (70% manual reduction).",
-        "Instrumented OpenTelemetry and Langfuse trace observability, optimizing multi-agent bottlenecks from 3 minutes to 1 minute (67% speedup).",
-        "Optimized core Django API from 1,200 records/minute to 4 seconds, achieving 94% performance improvement.",
-        "Integrated Razorpay engine for Game Management System (GMS), supporting 7 national championships and 90,000+ athletes.",
-        "Automated refund-failure monitoring via AWS CloudWatch and Lambda with real-time Slack alerts; awarded 'PAT on the Back'."
-      ],
-      equipment: ["Vertex AI", "Google Gemini", "Google ADK", "GCP Pub/Sub", "BigQuery", "OpenTelemetry", "Langfuse", "AWS Lambda", "Razorpay", "Django"]
-    },
-    {
-      levelNum: 3,
-      id: "online-psb",
-      era: "2022 - 2023",
-      rank: "FinTech Scale & Security Architect",
-      title: "Python Developer",
-      company: "Online PSB Loans",
-      period: "July 2022 - December 2023",
-      location: "Ahmedabad, Gujarat, India",
-      badge: "FinTech Scale Quest",
-      color: "#34A853",
-      statBoost: "14+ Indian Banks • +25% Speed Boost",
-      statDetail: "Engineered banking deduplication with RSA cryptography and partitioned Oracle cluster",
-      powersUnlocked: ["14+ Commercial Banks Scaled", "Partitioned Oracle Indexing", "RSA Asymmetric Cryptography", "+25% Multithreading Boost", "Python ELT Automation (-2 hrs daily)"],
-      missionBrief: [
-        "Developed high-throughput Django API serving 14+ Indian Banks for duplicate customer identification.",
-        "Designed partitioned Oracle database architectures with advanced indexing for sub-second query latency.",
-        "Built automated financial CAM-pdf scraper with data visualization and charts.",
-        "Architected multi-database Python ELT pipelines saving 2 hours of manual analysis daily.",
-        "Implemented multithreading to accelerate API response speed by 25%, secured with RSA asymmetric encryption."
-      ],
-      equipment: ["Python", "Django", "Oracle DB (Partitioning)", "Multithreading", "ELT Pipelines", "RSA Cryptography", "Pandas"]
-    },
-    {
-      levelNum: 2,
-      id: "klearcom",
-      era: "2021 - 2022",
-      rank: "Telecom AI & Systems Engineer",
-      title: "Junior Software Engineer",
-      company: "Klearcom",
-      period: "September 2021 - July 2022",
-      location: "Ireland / Remote",
-      badge: "NLP & Automation Quest",
-      color: "#EA4335",
-      statBoost: "99% Intent Accuracy • -75% Downtime",
-      statDetail: "Extracted high-precision intent while automating server operations across 15+ machines",
-      powersUnlocked: ["~99% IVR Intent Extraction", "75% Queue Downtime Reduction", "15+ Server Bash Automation", "String Matching 98%"],
-      missionBrief: [
-        "Developed IVR-Intent-extraction algorithm with ~99% accuracy, eliminating manual human intervention.",
-        "Built real-time log processor with automated email alerts, reducing critical downtime and queue backlogs by 75%.",
-        "Upgraded string matching preprocessing algorithm from 80% to 98% accuracy.",
-        "Engineered automated Bash deployment scripts for synchronized Git pulls across 15 production servers."
-      ],
-      equipment: ["Python", "NLP / Intent Extraction", "IVR Algorithms", "Bash Automation", "Linux / Unix", "Log Processing"]
-    },
-    {
-      levelNum: 1,
-      id: "flyingspark",
-      era: "2021",
-      rank: "Junior Data Scientist",
-      title: "Data Scientist",
-      company: "FlyingSpark Infotech",
-      period: "June 2021 - September 2021",
-      location: "Remote / Ahmedabad",
-      badge: "Foundational Quest",
-      color: "#FBBC05",
-      statBoost: "100% Manual Effort Reduction",
-      statDetail: "Automated unstructured log conversion into structured intelligence",
-      powersUnlocked: ["Collaborative Filtering", "Anime Recommendation Model", "Data Pipeline Automation", "Pandas & NumPy"],
-      missionBrief: [
-        "Engineered an Anime Recommendation Engine using collaborative filtering algorithms.",
-        "Converted unstructured raw log data into informative structured pipelines, eliminating manual effort by 100%."
-      ],
-      equipment: ["Python", "Recommendation Systems", "Collaborative Filtering", "Pandas", "Data Pipelines"]
-    }
-  ];
+  const chronologicalLevels = CHRONOLOGICAL_LEVELS;
 
-  // Auto-play progression timer (levels up from Level 1 to Level 5)
+  // Auto-play progression timer (levels up from Level 1 to Level 5 every 3 seconds)
   useEffect(() => {
-    let interval = null;
-    if (isPlaying) {
-      interval = setInterval(() => {
-        setCurrentLevelIndex((prev) => {
-          const nextIdx = prev > 0 ? prev - 1 : chronologicalLevels.length - 1;
-          if (chronologicalLevels[nextIdx].levelNum === 5) {
-            try {
-              confetti({
-                particleCount: 60,
-                spread: 70,
-                origin: { y: 0.6 }
-              });
-            } catch (e) {}
-          }
-          return nextIdx;
-        });
-      }, 3500);
-    }
+    if (!isPlaying) return;
+
+    const interval = setInterval(() => {
+      setCurrentLevelIndex((prev) => {
+        // Levels in chronological order: index 4 (Lvl 1) -> 3 (Lvl 2) -> 2 (Lvl 3) -> 1 (Lvl 4) -> 0 (Lvl 5)
+        const nextIdx = prev > 0 ? prev - 1 : chronologicalLevels.length - 1;
+        if (chronologicalLevels[nextIdx].levelNum === 5) {
+          try {
+            confetti({
+              particleCount: 60,
+              spread: 70,
+              origin: { y: 0.6 }
+            });
+          } catch (e) {}
+        }
+        return nextIdx;
+      });
+    }, 3000);
+
     return () => clearInterval(interval);
-  }, [isPlaying, chronologicalLevels]);
+  }, [isPlaying]);
 
   const activeQuest = chronologicalLevels[currentLevelIndex];
 
@@ -179,13 +182,14 @@ export const Experience = () => {
   };
 
   const toggleAutoTour = () => {
-    if (!isPlaying) {
-      const level1Idx = chronologicalLevels.findIndex((l) => l.levelNum === 1);
-      setCurrentLevelIndex(level1Idx !== -1 ? level1Idx : chronologicalLevels.length - 1);
-      setIsPlaying(true);
-    } else {
-      setIsPlaying(false);
-    }
+    setIsPlaying((prevPlaying) => {
+      if (!prevPlaying) {
+        // If starting from Level 5 (index 0), jump to Level 1 (index 4) so user watches the progression up to Level 5
+        setCurrentLevelIndex((curr) => (curr === 0 ? chronologicalLevels.length - 1 : curr));
+        return true;
+      }
+      return false;
+    });
   };
 
   const handlePrevLevel = () => {
@@ -284,19 +288,33 @@ export const Experience = () => {
                 display: 'flex',
                 alignItems: 'center',
                 gap: '0.45rem',
-                padding: '0.45rem 1rem',
+                padding: '0.45rem 1.1rem',
                 borderRadius: '9999px',
-                background: isPlaying ? 'rgba(234, 67, 53, 0.1)' : 'var(--bg-card)',
-                border: isPlaying ? '1px solid var(--google-red)' : '1px solid var(--border-color)',
-                color: isPlaying ? 'var(--google-red)' : 'var(--text-secondary)',
+                background: isPlaying ? 'rgba(234, 67, 53, 0.12)' : 'var(--bg-card)',
+                border: isPlaying ? '1.5px solid var(--google-red)' : '1px solid var(--border-color)',
+                color: isPlaying ? 'var(--google-red)' : 'var(--text-primary)',
                 fontSize: '0.82rem',
                 fontWeight: 700,
                 cursor: 'pointer',
+                boxShadow: isPlaying ? '0 0 16px rgba(234, 67, 53, 0.25)' : 'var(--shadow-sm)',
                 transition: 'all 0.2s ease'
               }}
             >
-              {isPlaying ? <Pause size={14} /> : <Play size={14} />}
-              <span>{isPlaying ? 'Pause Auto Tour' : '▶ Auto Tour Career (Lvl 1 → 5)'}</span>
+              {isPlaying ? (
+                <>
+                  <motion.div
+                    animate={{ scale: [1, 1.3, 1] }}
+                    transition={{ repeat: Infinity, duration: 1.2 }}
+                    style={{ width: '8px', height: '8px', borderRadius: '50%', background: 'var(--google-red)' }}
+                  />
+                  <span>Tour Active (Lvl 0{activeQuest.levelNum}) • Pause</span>
+                </>
+              ) : (
+                <>
+                  <Play size={14} color="var(--google-green)" />
+                  <span>▶ Auto Tour Career (Lvl 1 → 5)</span>
+                </>
+              )}
             </motion.button>
           )}
         </div>

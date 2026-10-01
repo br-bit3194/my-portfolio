@@ -23,49 +23,28 @@ import { portfolioData } from '../data/portfolioData';
 // System prompt for live Gemini model (when API key is provided)
 const buildSystemContext = () => {
   const expYears = portfolioData.personal.experienceYears || '5.8+ Years';
-  return `You are the official AI Assistant for Bhaveshkumar (Bhavesh) Rathod's personal engineering portfolio website.
-Answer all questions about Bhavesh Rathod professionally, accurately, and enthusiastically using ONLY his verified background below.
+  return `You are Bhaveshkumar (Bhavesh) Rathod's personal engineering AI Assistant.
+Always give concise, precise, grounded, and technically accurate answers. Do NOT generate generic AI fluff or buzzword soup. Always cite verified details, real companies, and real metrics below.
 
-CORE IDENTITY & PROFILE:
+CORE PROFILE:
 - Name: Bhaveshkumar Rathod (Bhavesh)
-- Title: AI Engineer & Senior Software Engineer (${expYears} industry experience)
-- Headline: AI Engineer | Agentic AI • Multi-Agent Systems • RAG • LLM Applications | Senior Software Engineer | Python | AWS & GCP
-- Location: Ahmedabad, Gujarat, India (100% Open to Remote Opportunities in India & Worldwide)
+- Role: AI Engineer & Senior Software Engineer (${expYears} industry experience)
+- Company: Talentica Software (Senior Software Engineer)
+- Location: Ahmedabad, Gujarat, India (Open to 100% Remote worldwide)
 - Email: bhavesh3194@gmail.com
-- LinkedIn: https://www.linkedin.com/in/bhaveshkumar-rathod/ (5K+ LinkedIn Family)
+- LinkedIn: https://www.linkedin.com/in/bhaveshkumar-rathod/ (5K+ Network)
 - GitHub: https://github.com/br-bit3194
 - Top Cert: Google Cloud Certified Generative AI Leader
 
-KEY 2-SECOND METRICS:
-1. ${expYears} Industry Experience: Production GenAI, Agentic AI & distributed Python systems.
-2. 94% API Latency Cut: Optimized Django API from 1,200 records/minute to 4 seconds.
-3. 67% Multi-Agent Speedup: Reduced response time from 3 minutes to 1 minute using OpenTelemetry and Langfuse trace observability.
-4. 14+ Indian Banks Scaled: High-throughput banking customer deduplication with partitioned Oracle clusters & RSA encryption.
-5. 90,000+ Athletes Scaled: Integrated Razorpay payments for Game Management System (GMS) across 7 national championships.
-6. 70% Manual Effort Reduction: GenAI ad spot recommendation engine using Google Vertex AI, Gemini, and Google ADK with AI Guardrails.
+VERIFIED ACCOMPLISHMENTS & METRICS:
+1. AWS SuperHacks 2025 Winner: Built MAESTRO (Autonomous Multi-Agent IT Ops platform with Amazon Bedrock & FastAPI), winning Special Jury Mention Award. Video: https://youtu.be/eP-s9D_WXeY?si=5PPzf2HBK4fnKeXf
+2. 94% API Latency Reduction: Scaled Django processing from 1,200 records/minute down to 4 seconds using advanced Python data-handling techniques.
+3. 67% Multi-Agent Latency Reduction: Reduced agent task execution time from 3 minutes to 1 minute using OpenTelemetry & Langfuse trace observability at Talentica Software.
+4. 70% Manual Effort Cut: Built GenAI Makegood Recommendation Engine using Google Vertex AI, Gemini, Google ADK, BigQuery, Pub/Sub, and AI Guardrails.
+5. 90,000+ Athletes & Razorpay: Scaled Game Management System (GMS) backend across 7 national championships with AWS Lambda & S3.
+6. 14+ Commercial Banks: Engineered customer deduplication API using Django, partitioned Oracle database clusters, and RSA cryptography.
 
-FEATURED PROJECTS:
-1. MAESTRO: Autonomous Multi-Agent IT Operations Platform built with Amazon Bedrock, FastAPI, and Python. Won 'Special Jury Mention Award' at SuperHacks 2025 powered by AWS.
-2. GenAI Makegood Recommendation Engine: Vertex AI, Google Gemini, Google ADK, GCP Pub/Sub, BigQuery, GCS, AI Guardrails.
-3. Production Multi-Agent AI Platform: Agent-to-Agent (A2A) protocol, Model Context Protocol (MCP) for tool calling, FastAPI, Langfuse, RAG.
-4. Game Management System (GMS): Scaled to 90k+ athletes, Razorpay integration, AWS Lambda & CloudWatch automated monitoring (awarded 'PAT on the Back').
-5. Banking Deduplication Engine: 14+ Indian Banks, partitioned Oracle DB, Python ELT pipelines (saving 2 hrs daily), RSA asymmetric cryptography.
-
-EXPERIENCE TIMELINE (${expYears.toUpperCase()}):
-- April 2026 - Present: Senior Software Engineer at Talentica Software (Multi-Agent A2A/MCP, Amazon Bedrock, FastAPI)
-- January 2024 - March 2026: Software Engineer II at Talentica Software (Vertex AI, Gemini, Langfuse, Django 94% optimization)
-- July 2022 - December 2023: Python Developer at Online PSB Loans (14+ Banks, Oracle partitioning, ELT pipelines)
-- September 2021 - July 2022: Junior Software Engineer at Klearcom (IVR Intent 99% extraction, 15+ server Bash automation)
-- June 2021 - September 2021: Data Scientist at FlyingSpark Infotech (Anime recommendation engine, unstructured log automation)
-
-EDUCATION & CREDENTIALS:
-- Bachelor of Engineering (B.E.) in Information Technology from Vishwakarma Government Engineering College (VGEC), 2017-2021.
-- Google Cloud Certified Generative AI Leader
-- Top 5% Global in Python Skill Assessment (LinkedIn)
-- Databricks Certified Generative AI Engineer Associate
-- AWS Machine Learning Foundations
-
-Always be helpful, precise, friendly, and structure answers with clean formatting and bullet points where helpful.`;
+Keep answers structured, punchy, under 150 words where possible, and provide direct GitHub or YouTube citations.`;
 };
 
 export const AiAssistantModal = ({ isOpen, onClose }) => {
@@ -109,9 +88,10 @@ export const AiAssistantModal = ({ isOpen, onClose }) => {
     // 1. MAESTRO & Hackathon
     if (q.includes('maestro') || q.includes('superhack') || q.includes('hackathon') || q.includes('aws award') || q.includes('special jury')) {
       return {
-        text: `🏆 **MAESTRO: Autonomous Multi-Agent IT Operations Platform**\n\n• **Achievement**: Won the **'Special Jury Mention Award'** at **SuperHacks 2025 powered by AWS**.\n• **Architecture**: Powered by Amazon Bedrock foundation models, autonomous agent orchestration, and event-driven FastAPI microservices.\n• **Capabilities**: Real-time log ingestion, root cause correlation, proactive issue resolution, and autonomous task remediation.\n• **Tech Stack**: Amazon Bedrock, FastAPI, Multi-Agent Orchestration, RAG, Python.`,
+        text: `🏆 **MAESTRO: Autonomous Multi-Agent IT Operations Platform**\n\n• **Award**: **'Special Jury Mention Award'** at **AWS SuperHacks 2025**.\n• **Architecture**: Amazon Bedrock foundation models + Multi-Agent orchestration + event-driven FastAPI microservices.\n• **Core Capabilities**: Real-time log ingestion, root cause correlation, and autonomous issue remediation.\n• **Code & Proof**: Live video demo and GitHub repository available below.`,
         actions: [
-          { label: "▶ Watch MAESTRO Demo", link: "https://youtu.be/eP-s9D_WXeY?si=5PPzf2HBK4fnKeXf", external: true },
+          { label: "▶ Watch Demo Video", link: "https://youtu.be/eP-s9D_WXeY?si=5PPzf2HBK4fnKeXf", external: true },
+          { label: "💻 GitHub Profile", link: "https://github.com/br-bit3194", external: true },
           { label: "Explore Projects Section", targetId: "projects" }
         ]
       };
@@ -120,9 +100,10 @@ export const AiAssistantModal = ({ isOpen, onClose }) => {
     // 2. Multi-Agent Systems, A2A & MCP
     if (q.includes('multi-agent') || q.includes('multi agent') || q.includes('a2a') || q.includes('mcp') || q.includes('agentic') || q.includes('langfuse') || q.includes('opentelemetry')) {
       return {
-        text: `🤖 **Production Multi-Agent Platform (A2A & MCP)**\n\nAt **Talentica Software**, Bhavesh architected a production-grade Multi-Agent AI system:\n• **Agent-to-Agent (A2A) Protocol**: Enables autonomous collaboration and task handoffs between specialized agents.\n• **Model Context Protocol (MCP)**: Implements dynamic tool discovery and secure tool invocation for LLMs.\n• **67% Latency Reduction**: Instrumented OpenTelemetry and Langfuse trace observability, slashing agent response bottlenecks from 3 minutes to 1 minute.\n• **Tech**: Multi-Agent A2A, MCP, FastAPI, RAG, OpenTelemetry, Langfuse, Python.`,
+        text: `🤖 **Production Multi-Agent Platform (A2A & MCP)**\n\nAt **Talentica Software**, Bhavesh engineered an enterprise multi-agent stack:\n• **Agent-to-Agent (A2A)**: Protocol for autonomous peer collaboration and dynamic routing.\n• **Model Context Protocol (MCP)**: Standardized dynamic tool discovery & execution.\n• **67% Latency Cut**: OpenTelemetry & Langfuse telemetry cut agent execution from 3m → 1m.\n• **Stack**: Python, FastAPI, Amazon Bedrock, Vertex AI, RAG, Langfuse.`,
         actions: [
-          { label: "View Architecture", targetId: "projects" }
+          { label: "View Architecture", targetId: "architecture" },
+          { label: "💻 GitHub Profile", link: "https://github.com/br-bit3194", external: true }
         ]
       };
     }
@@ -130,9 +111,10 @@ export const AiAssistantModal = ({ isOpen, onClose }) => {
     // 3. 94% Latency Cut & Backend Optimization
     if (q.includes('94%') || q.includes('latency') || q.includes('optimize') || q.includes('optimization') || q.includes('speed') || q.includes('performance') || q.includes('bottleneck')) {
       return {
-        text: `⚡ **Key Engineering & Latency Optimizations**:\n\n1. **94% Django API Cut**: Optimized API throughput from 1,200 records/minute down to 4 seconds using advanced data-handling techniques.\n2. **67% Agent Speedup**: Cut Multi-Agent AI response time from 3 minutes to 1 minute via OpenTelemetry and Langfuse trace bottleneck analysis.\n3. **GMS Sports Platform**: Reduced critical batch execution times from 30-40 minutes to milliseconds.\n4. **FinTech Multi-Threading**: Boosted API response speed by 25% for 14+ Indian commercial banks.`,
+        text: `⚡ **Verified Production Performance Benchmarks**:\n\n1. **94% Django API Cut**: Scaled processing from **1,200 records/min to 4 seconds** with batch data pipeline optimizations.\n2. **67% Agent Speedup**: Reduced Multi-Agent response from **3m to 1m** via Langfuse trace analysis.\n3. **GMS Batch Optimization**: Reduced critical execution times from **30-40 minutes to milliseconds**.\n4. **FinTech Multi-Threading**: Achieved **25% faster lookups** across 14+ Indian commercial banks.`,
         actions: [
-          { label: "View 5+ Yrs Experience", targetId: "experience" }
+          { label: "View Experience", targetId: "experience" },
+          { label: "💻 GitHub Profile", link: "https://github.com/br-bit3194", external: true }
         ]
       };
     }
@@ -140,9 +122,10 @@ export const AiAssistantModal = ({ isOpen, onClose }) => {
     // 4. Vertex AI & Makegood Recommendation Engine
     if (q.includes('makegood') || q.includes('vertex') || q.includes('gemini') || q.includes('adk') || q.includes('guardrail') || q.includes('gcp')) {
       return {
-        text: `✨ **GenAI Makegood Recommendation Engine (Google Cloud)**\n\n• **Impact**: Reduced manual recommendation effort by **70%**.\n• **Tech Stack**: Google Vertex AI, Google Gemini, Google ADK (Agent Development Kit), GCP Pub/Sub, BigQuery, GCS.\n• **AI Safety**: Enforced Responsible AI with custom AI Guardrails and schema validation for production stability.`,
+        text: `✨ **GenAI Makegood Recommendation Engine (Google Cloud)**\n\n• **Enterprise Impact**: Automated ad spot recommendations, slashing manual effort by **70%**.\n• **GCP Stack**: Google Vertex AI, Google Gemini, Google ADK, Pub/Sub, BigQuery, GCS.\n• **Responsible AI**: Implemented strict AI Guardrails, schema validation, and fallback handling for production reliability.`,
         actions: [
-          { label: "View Projects", targetId: "projects" }
+          { label: "View Project Details", targetId: "projects" },
+          { label: "💻 GitHub Profile", link: "https://github.com/br-bit3194", external: true }
         ]
       };
     }
@@ -150,7 +133,7 @@ export const AiAssistantModal = ({ isOpen, onClose }) => {
     // 5. Contact, Hiring, Availability, Remote Work & Resume
     if (q.includes('contact') || q.includes('hire') || q.includes('email') || q.includes('reach') || q.includes('remote') || q.includes('resume') || q.includes('linkedin') || q.includes('available') || q.includes('job') || q.includes('relocate')) {
       return {
-        text: `📬 **Let's Connect with Bhavesh**\n\n• **Status**: Actively open to **Remote Opportunities (India & Worldwide)** as an **AI Engineer, Senior Backend Architect, or GenAI Lead**.\n• **Email**: [bhavesh3194@gmail.com](mailto:bhavesh3194@gmail.com)\n• **LinkedIn**: [linkedin.com/in/bhaveshkumar-rathod](https://www.linkedin.com/in/bhaveshkumar-rathod/) (5K+ Network)\n• **Location**: Ahmedabad, Gujarat, India (100% Remote Available)\n• **Experience**: 5+ Years Industry Exp.`,
+        text: `📬 **Direct Contact & Collaboration**\n\n• **Status**: Actively available for **Remote Roles (India & Worldwide)** as an **AI Engineer, Senior Backend Architect, or GenAI Lead**.\n• **Email**: [bhavesh3194@gmail.com](mailto:bhavesh3194@gmail.com)\n• **LinkedIn**: [linkedin.com/in/bhaveshkumar-rathod](https://www.linkedin.com/in/bhaveshkumar-rathod/) (5K+ Network)\n• **GitHub**: [github.com/br-bit3194](https://github.com/br-bit3194)\n• **Location**: Ahmedabad, Gujarat, India (100% Remote Ready)`,
         actions: [
           { label: "✉️ Email Bhavesh", link: "mailto:bhavesh3194@gmail.com", external: true },
           { label: "📄 Download Resume", link: "/Bhavesh_Rathod_GenAI_Engineer_Resume.pdf", external: true },
@@ -162,9 +145,9 @@ export const AiAssistantModal = ({ isOpen, onClose }) => {
     // 6. Certifications & Badges
     if (q.includes('certif') || q.includes('badge') || q.includes('credential') || q.includes('google cloud certified') || q.includes('databricks') || q.includes('aws ml')) {
       return {
-        text: `🏅 **Key Verified Certifications & Badges**:\n\n• **Google Cloud Certified Generative AI Leader** (Featured)\n• **Google AI Essentials Certificate** (GenAI & Prompt Engineering)\n• **Databricks Certified Generative AI Engineer Associate**\n• **Develop GenAI Apps with Gemini and Streamlit** (DeepLearning.AI / Google Cloud)\n• **AWS Machine Learning Foundations**\n• **Top 5% Global in Python Skill Assessment** (LinkedIn - 1.5M+ candidates)\n• **'PAT on the Back' Corporate Award** (Talentica Software)`,
+        text: `🏅 **Verified Professional Credentials**:\n\n• **Google Cloud Certified Generative AI Leader** (Executive Credential)\n• **Google AI Essentials Certificate** (GenAI & Prompt Engineering)\n• **Databricks Certified Generative AI Engineer Associate**\n• **Develop GenAI Apps with Gemini and Streamlit** (Google Cloud / DeepLearning.AI)\n• **AWS Machine Learning Foundations**\n• **Top 5% Global in Python Assessment** (LinkedIn - 1.5M+ engineers)\n• **'PAT on the Back' Corporate Award** (Talentica Software)`,
         actions: [
-          { label: "View Certifications & Awards", targetId: "certifications" }
+          { label: "View Certifications", targetId: "certifications" }
         ]
       };
     }
@@ -172,9 +155,9 @@ export const AiAssistantModal = ({ isOpen, onClose }) => {
     // 7. Full Experience / Career History
     if (q.includes('experience') || q.includes('company') || q.includes('work') || q.includes('history') || q.includes('career') || q.includes('online psb') || q.includes('klearcom') || q.includes('flyingspark')) {
       return {
-        text: `💼 **Bhavesh's 5+ Years Career Progression**:\n\n1. **Talentica Software (Apr 2026 - Present)**: Senior Software Engineer — Multi-Agent AI (A2A & MCP), Amazon Bedrock, FastAPI, RAG.\n2. **Talentica Software (Jan 2024 - Mar 2026)**: Software Engineer II — Vertex AI Makegood Engine (70% manual cut), 94% Django API latency cut, Langfuse/OpenTelemetry (67% speedup), GMS Razorpay scale (90k+ athletes).\n3. **Online PSB Loans (Jul 2022 - Dec 2023)**: Python Developer — 14+ Indian Commercial Banks duplicate detection API, Partitioned Oracle DB, Python ELT pipelines.\n4. **Klearcom (Sep 2021 - Jul 2022)**: Junior Software Engineer — IVR Intent extraction (~99% accuracy), 15+ Linux server Bash automation.\n5. **FlyingSpark Infotech (Jun 2021 - Sep 2021)**: Data Scientist — Anime recommendation engine, unstructured log pipelines.`,
+        text: `💼 **Career Milestones (${portfolioData.personal.experienceYears})**:\n\n1. **Talentica Software (Senior Software Engineer)**: Multi-Agent Systems (A2A & MCP), Amazon Bedrock, FastAPI, RAG.\n2. **Talentica Software (Software Engineer II)**: Vertex AI Makegood Engine (70% cut), 94% Django API cut, Langfuse (67% speedup), GMS Razorpay (90k+ athletes).\n3. **Online PSB Loans (Python Developer)**: 14+ Indian Banks customer deduplication, Partitioned Oracle DB, ELT automation.\n4. **Klearcom (Junior Software Engineer)**: IVR Intent extraction (99% accuracy), Bash automation.\n5. **FlyingSpark Infotech (Data Scientist)**: Anime recommendation engine & log pipelines.`,
         actions: [
-          { label: "Explore Interactive Questline", targetId: "experience" }
+          { label: "Explore Interactive Journey", targetId: "experience" }
         ]
       };
     }
@@ -182,28 +165,19 @@ export const AiAssistantModal = ({ isOpen, onClose }) => {
     // 8. Tech Stack & Skills
     if (q.includes('skill') || q.includes('stack') || q.includes('python') || q.includes('django') || q.includes('fastapi') || q.includes('database') || q.includes('cloud') || q.includes('technolog')) {
       return {
-        text: `🛠️ **Core Technical Skills & Stack**:\n\n• **AI & GenAI**: Multi-Agent Systems (A2A, MCP), RAG, Google Vertex AI, Google Gemini, Amazon Bedrock, Google ADK, AI Guardrails, Langfuse, Streamlit.\n• **Backend Engineering**: Python (Top 5% Global), FastAPI, Django & DRF, Microservices, Multithreading, Asymmetric Cryptography (RSA).\n• **Cloud & Telemetry**: Google Cloud Platform (Pub/Sub, BigQuery, GCS), AWS (Lambda, Bedrock, S3, CloudWatch), OpenTelemetry, Docker, Linux/Bash.\n• **Databases**: BigQuery, Oracle (Partitioning & Indexing), PostgreSQL, MySQL, Python ELT Pipelines, Pandas.`,
+        text: `🛠️ **Verified Technical Stack**:\n\n• **AI & GenAI**: Multi-Agent Systems (A2A, MCP), RAG, Google Vertex AI, Gemini, Amazon Bedrock, Google ADK, AI Guardrails, Langfuse, Streamlit.\n• **Backend Engineering**: Python (Top 5% Global), FastAPI, Django REST Framework, Async microservices, RSA cryptography.\n• **Cloud & Observability**: GCP (Pub/Sub, BigQuery, GCS), AWS (Lambda, Bedrock, S3, CloudWatch), OpenTelemetry, Docker.\n• **Databases**: BigQuery, Oracle (Partitioning & Indexing), PostgreSQL, MySQL, Python ELT pipelines.`,
         actions: [
-          { label: "View Skills Breakdown", targetId: "skills" }
+          { label: "View Skills Matrix", targetId: "skills" }
         ]
       };
     }
 
-    // 9. Education
-    if (q.includes('education') || q.includes('college') || q.includes('degree') || q.includes('university') || q.includes('vgec') || q.includes('bachelor')) {
-      return {
-        text: `🎓 **Education**:\n\n• **Degree**: Bachelor of Engineering (B.E.) in Information Technology\n• **Institution**: Vishwakarma Government Engineering College (VGEC), Chandkheda, Gandhinagar, Gujarat, India\n• **Graduation**: 2017 - 2021`,
-        actions: [
-          { label: "View Education", targetId: "certifications" }
-        ]
-      };
-    }
-
-    // Default Comprehensive Introduction
+    // Default Introduction
     return {
-      text: `👋 **Bhaveshkumar Rathod** is an **AI Engineer & Senior Software Engineer** with **5+ years of experience** building production Multi-Agent AI systems (A2A, MCP, RAG) and scalable Python backends across **Google Cloud & AWS**.\n\n• **Current Role**: Senior Software Engineer at Talentica Software\n• **Award Winner**: Won Special Jury Mention Award at SuperHacks 2025 powered by AWS for **MAESTRO**\n• **Certified**: Google Cloud Certified Generative AI Leader\n• **Top Metric**: 94% Django API latency reduction & 67% multi-agent response speedup.\n\nFeel free to ask about his specific projects, architecture decisions, or download his resume!`,
+      text: `👋 **Bhaveshkumar Rathod** is an **AI Engineer & Senior Software Engineer** with **${portfolioData.personal.experienceYears} of experience** building production Multi-Agent AI systems (A2A, MCP, RAG) and high-throughput Python backends across **Google Cloud & AWS**.\n\n• **Key Win**: Special Jury Mention Award at AWS SuperHacks 2025 for **MAESTRO**\n• **Certified**: Google Cloud Certified Generative AI Leader\n• **Production Impact**: 94% API latency cut & 67% multi-agent latency cut.\n\nAsk me about his projects, architecture designs, or view his verified repositories!`,
       actions: [
-        { label: "▶ MAESTRO Hackathon Project", link: "https://youtu.be/eP-s9D_WXeY?si=5PPzf2HBK4fnKeXf", external: true },
+        { label: "▶ Watch MAESTRO Demo", link: "https://youtu.be/eP-s9D_WXeY?si=5PPzf2HBK4fnKeXf", external: true },
+        { label: "💻 GitHub Profile", link: "https://github.com/br-bit3194", external: true },
         { label: "📄 Download Resume", link: "/Bhavesh_Rathod_GenAI_Engineer_Resume.pdf", external: true },
         { label: "✉️ Email Bhavesh", link: "mailto:bhavesh3194@gmail.com", external: true }
       ]

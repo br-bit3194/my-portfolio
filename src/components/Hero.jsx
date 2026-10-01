@@ -2,29 +2,29 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Tilt from 'react-parallax-tilt';
 import confetti from 'canvas-confetti';
-import { 
-  ArrowRight, 
-  MapPin, 
-  Globe, 
-  Award, 
-  ChevronRight, 
-  Bot, 
-  Database, 
-  Cloud, 
-  MoreHorizontal, 
-  Users, 
-  ShieldCheck, 
-  Sparkles, 
-  Trophy 
+import {
+  ArrowRight,
+  MapPin,
+  Globe,
+  Award,
+  ChevronRight,
+  Bot,
+  Database,
+  Cloud,
+  MoreHorizontal,
+  Users,
+  ShieldCheck,
+  Sparkles,
+  Trophy
 } from 'lucide-react';
 import { LinkedinIcon } from './Icons';
-import { 
-  GoogleCloudLogo, 
+import {
+  GoogleCloudLogo,
   LinkedinOfficialLogo,
-  AwsLogo, 
-  PythonLogo, 
-  FastApiLogo, 
-  GeminiStarLogo 
+  AwsLogo,
+  PythonLogo,
+  FastApiLogo,
+  GeminiStarLogo
 } from './TechLogos';
 import { portfolioData } from '../data/portfolioData';
 import { ParticleCanvas } from './ui/ParticleCanvas';
@@ -112,8 +112,8 @@ export const Hero = ({ onOpenAiModal }) => {
   ];
 
   return (
-    <section 
-      id="about" 
+    <section
+      id="about"
       className="hero-poster-section"
       style={{
         position: 'relative',
@@ -123,14 +123,14 @@ export const Hero = ({ onOpenAiModal }) => {
         display: 'flex',
         alignItems: 'center',
         overflow: 'hidden',
-        background: '#ffffff'
+        background: 'transparent'
       }}
     >
       {/* 21st.dev Interactive Canvas Particle Constellation */}
       <ParticleCanvas quantity={30} color="#1a73e8" />
 
       {/* High-Resolution Center Studio Photo Background */}
-      <div 
+      <div
         className="hero-bg-poster"
         style={{
           position: 'absolute',
@@ -144,13 +144,13 @@ export const Hero = ({ onOpenAiModal }) => {
         }}
       />
 
-      {/* Light gradient scrim for crisp text readability */}
-      <div 
+      {/* Jade Sky gradient scrim for crisp text readability */}
+      <div
         className="hero-scrim"
         style={{
           position: 'absolute',
           inset: 0,
-          background: 'linear-gradient(90deg, rgba(255, 255, 255, 0.97) 0%, rgba(255, 255, 255, 0.94) 34%, rgba(255, 255, 255, 0.08) 50%, rgba(255, 255, 255, 0.88) 75%, rgba(255, 255, 255, 0.97) 100%)',
+          background: 'linear-gradient(90deg, rgba(238, 246, 227, 0.96) 0%, rgba(238, 246, 227, 0.92) 34%, rgba(238, 246, 227, 0.1) 50%, rgba(207, 233, 240, 0.88) 75%, rgba(238, 246, 227, 0.96) 100%)',
           zIndex: 1,
           pointerEvents: 'none'
         }}
@@ -158,31 +158,31 @@ export const Hero = ({ onOpenAiModal }) => {
 
       {/* Hero Content Container */}
       <div className="container" style={{ position: 'relative', zIndex: 2, width: '100%' }}>
-        <div 
-          style={{ 
-            display: 'grid', 
-            gridTemplateColumns: '1fr', 
-            gap: '2rem', 
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: '1fr',
+            gap: '2rem',
             alignItems: 'center',
             minHeight: '780px'
-          }} 
+          }}
           className="hero-layout-grid"
         >
-          
+
           {/* ========================================================================= */}
           {/* LEFT COLUMN: WHO I AM, TITLE, BIO, CTA BUTTONS, TRUST BAR, MARQUEE BAR */}
           {/* ========================================================================= */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            style={{ maxWidth: '560px' }} 
+            style={{ maxWidth: '560px' }}
             className="hero-left-content"
           >
-            
+
             {/* Top Featured Credentials Badge: Google Cloud Certified GenAI Leader */}
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.65rem', alignItems: 'center', marginBottom: '1rem' }}>
-              
+
               <Magnetic strength={0.2}>
                 <motion.a
                   whileHover={{ scale: 1.04, y: -2 }}
@@ -195,13 +195,15 @@ export const Hero = ({ onOpenAiModal }) => {
                     gap: '0.55rem',
                     padding: '0.4rem 0.95rem',
                     borderRadius: '9999px',
-                    background: '#ffffff',
+                    background: 'var(--bg-card)',
+                    backdropFilter: 'blur(12px)',
+                    WebkitBackdropFilter: 'blur(12px)',
                     border: '1px solid rgba(26, 115, 232, 0.35)',
                     color: '#1a73e8',
                     fontSize: '0.82rem',
                     fontWeight: 800,
                     textDecoration: 'none',
-                    boxShadow: '0 2px 10px rgba(26, 115, 232, 0.12)',
+                    boxShadow: 'var(--shadow-sm)',
                     cursor: 'pointer'
                   }}
                 >
@@ -223,13 +225,15 @@ export const Hero = ({ onOpenAiModal }) => {
                     gap: '0.5rem',
                     padding: '0.4rem 0.9rem',
                     borderRadius: '9999px',
-                    background: '#ffffff',
+                    background: 'var(--bg-card)',
+                    backdropFilter: 'blur(12px)',
+                    WebkitBackdropFilter: 'blur(12px)',
                     border: '1px solid rgba(10, 102, 194, 0.35)',
                     color: '#0a66c2',
                     fontSize: '0.82rem',
                     fontWeight: 800,
                     textDecoration: 'none',
-                    boxShadow: '0 2px 10px rgba(10, 102, 194, 0.12)'
+                    boxShadow: 'var(--shadow-sm)'
                   }}
                 >
                   <LinkedinOfficialLogo size={18} />
@@ -244,11 +248,11 @@ export const Hero = ({ onOpenAiModal }) => {
             </div>
 
             {/* Huge Two-Tone Name */}
-            <h1 
-              style={{ 
-                fontSize: 'clamp(3rem, 5.8vw, 4.75rem)', 
-                lineHeight: 1.05, 
-                fontWeight: 900, 
+            <h1
+              style={{
+                fontSize: 'clamp(3rem, 5.8vw, 4.75rem)',
+                lineHeight: 1.05,
+                fontWeight: 900,
                 letterSpacing: '-0.04em',
                 marginBottom: '0.85rem'
               }}
@@ -258,8 +262,8 @@ export const Hero = ({ onOpenAiModal }) => {
             </h1>
 
             {/* Kinetic Animated Role Subtitle */}
-            <div 
-              style={{ 
+            <div
+              style={{
                 minHeight: '2.4rem',
                 display: 'flex',
                 alignItems: 'center',
@@ -268,7 +272,7 @@ export const Hero = ({ onOpenAiModal }) => {
                 flexWrap: 'wrap'
               }}
             >
-              <div 
+              <div
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
@@ -305,11 +309,11 @@ export const Hero = ({ onOpenAiModal }) => {
             </div>
 
             {/* Summary Text */}
-            <p 
-              style={{ 
-                fontSize: '1.02rem', 
-                lineHeight: 1.6, 
-                color: '#475569', 
+            <p
+              style={{
+                fontSize: '1.02rem',
+                lineHeight: 1.6,
+                color: '#475569',
                 marginBottom: '1.5rem',
                 maxWidth: '490px'
               }}
@@ -317,55 +321,104 @@ export const Hero = ({ onOpenAiModal }) => {
               Building production-grade AI systems with Generative AI, RAG and Agentic AI, backed by {personal.experienceYears} of experience in scalable backend systems and cloud-native solutions.
             </p>
 
-            {/* Mobile Visual Portrait Centerpiece */}
-            <div className="mobile-portrait-center" style={{ margin: '1.25rem auto 1.75rem', textAlign: 'center', maxWidth: '300px', position: 'relative' }}>
+            {/* Mobile-Only Focused Poster Portrait Showcase with Ambient Blur Aura */}
+            <div className="mobile-portrait-center" style={{ margin: '1.5rem auto 2rem', textAlign: 'center', maxWidth: '320px', position: 'relative' }}>
+              
+              {/* Ambient Blurred Aura from Poster */}
+              <div 
+                style={{
+                  position: 'absolute',
+                  inset: '-10px',
+                  backgroundImage: 'url(/hero-cropped-mobile.png)',
+                  backgroundPosition: 'center 20%',
+                  backgroundSize: 'cover',
+                  filter: 'blur(24px)',
+                  opacity: 0.5,
+                  borderRadius: '2rem',
+                  zIndex: 0
+                }}
+              />
+
+              {/* Centered Focused Portrait Frame (Direct from Poster) */}
               <Tilt
-                tiltMaxAngleX={10}
-                tiltMaxAngleY={10}
+                tiltMaxAngleX={8}
+                tiltMaxAngleY={8}
                 glareEnable={true}
-                glareMaxOpacity={0.2}
+                glareMaxOpacity={0.15}
                 glareColor="#ffffff"
                 glarePosition="all"
-                style={{ borderRadius: '1.5rem' }}
+                style={{ borderRadius: '1.75rem', position: 'relative', zIndex: 1 }}
               >
                 <div 
                   style={{
                     position: 'relative',
-                    zIndex: 1,
-                    width: '240px',
-                    height: '310px',
+                    width: '270px',
+                    height: '340px',
                     margin: '0 auto',
-                    borderRadius: '1.5rem',
+                    borderRadius: '1.75rem',
                     overflow: 'hidden',
-                    border: '2.5px solid #ffffff',
-                    boxShadow: '0 12px 32px rgba(29, 104, 254, 0.22), 0 4px 12px rgba(0,0,0,0.08)',
-                    background: '#ffffff'
+                    border: '2.5px solid var(--border-color)',
+                    boxShadow: '0 14px 36px rgba(29, 104, 254, 0.22), 0 4px 12px rgba(0, 0, 0, 0.08)',
+                    background: 'var(--bg-card)'
                   }}
                 >
                   <img 
-                    src="/hero-mobile.png" 
-                    alt="Bhaveshkumar Rathod"
+                    src="/hero-cropped-mobile.png" 
+                    alt="Bhavesh Rathod"
+                    onError={(e) => {
+                      const target = e.currentTarget;
+                      if (!target.dataset.tried1) {
+                        target.dataset.tried1 = 'true';
+                        target.src = '/hero-mobile.png';
+                      } else if (!target.dataset.tried2) {
+                        target.dataset.tried2 = 'true';
+                        target.src = '/hero.png';
+                      }
+                    }}
                     style={{
                       width: '100%',
                       height: '100%',
                       objectFit: 'cover',
-                      objectPosition: 'center 20%',
+                      objectPosition: 'center 10%',
                       display: 'block'
                     }}
                   />
+
+                  {/* Soft bottom vignette overlay */}
+                  <div 
+                    style={{
+                      position: 'absolute',
+                      inset: 0,
+                      background: 'linear-gradient(to top, rgba(15, 23, 42, 0.75) 0%, rgba(15, 23, 42, 0.05) 35%, transparent 100%)',
+                      pointerEvents: 'none',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      justifyContent: 'flex-end',
+                      padding: '0.85rem',
+                      textAlign: 'left'
+                    }}
+                  >
+                    <div style={{ color: '#ffffff', fontWeight: 800, fontSize: '1rem', textShadow: '0 2px 6px rgba(0,0,0,0.6)' }}>
+                      Bhavesh Rathod
+                    </div>
+                    <div style={{ color: '#93c5fd', fontSize: '0.72rem', fontWeight: 700, fontFamily: 'var(--font-mono)' }}>
+                      AI Engineer • Senior Software Engineer
+                    </div>
+                  </div>
                 </div>
               </Tilt>
+
             </div>
 
             {/* Action Buttons with 21st.dev Magnetic Attraction */}
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.85rem', alignItems: 'center', marginBottom: '2rem' }}>
-              
+
               {/* View My Work Button */}
               <Magnetic strength={0.25}>
-                <motion.a 
+                <motion.a
                   whileHover={{ scale: 1.04, y: -2 }}
                   whileTap={{ scale: 0.96 }}
-                  href="#projects" 
+                  href="#projects"
                   className="btn-hero-primary"
                   style={{
                     display: 'inline-flex',
@@ -388,7 +441,7 @@ export const Hero = ({ onOpenAiModal }) => {
 
               {/* Get In Touch with LinkedIn badge */}
               <Magnetic strength={0.25}>
-                <motion.a 
+                <motion.a
                   whileHover={{ scale: 1.04, y: -2 }}
                   whileTap={{ scale: 0.96 }}
                   href={personal.linkedin}
@@ -400,12 +453,14 @@ export const Hero = ({ onOpenAiModal }) => {
                     gap: '0.65rem',
                     padding: '0.85rem 1.6rem',
                     borderRadius: '9999px',
-                    background: '#ffffff',
-                    border: '1px solid #e2e8f0',
-                    color: '#0f172a',
+                    background: 'var(--bg-card)',
+                    backdropFilter: 'blur(12px)',
+                    WebkitBackdropFilter: 'blur(12px)',
+                    border: '1px solid var(--border-color)',
+                    color: 'var(--text-primary)',
                     fontWeight: 700,
                     fontSize: '0.98rem',
-                    boxShadow: '0 4px 14px rgba(0, 0, 0, 0.06)',
+                    boxShadow: 'var(--shadow-sm)',
                     textDecoration: 'none'
                   }}
                 >
@@ -417,76 +472,82 @@ export const Hero = ({ onOpenAiModal }) => {
             </div>
 
             {/* Solid High-Contrast Trust Metabar */}
-            <div 
-              style={{ 
-                display: 'flex', 
-                alignItems: 'center', 
-                gap: '0.85rem', 
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.85rem',
                 flexWrap: 'wrap',
                 paddingBottom: '1.5rem',
-                borderBottom: '1px solid rgba(226, 232, 240, 0.8)',
+                borderBottom: '1px solid var(--border-subtle)',
                 marginBottom: '1.5rem'
               }}
             >
               {/* Location Pill */}
-              <div 
-                style={{ 
-                  display: 'flex', 
-                  alignItems: 'center', 
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
                   gap: '0.65rem',
-                  background: '#ffffff',
+                  background: 'var(--bg-card)',
+                  backdropFilter: 'blur(12px)',
+                  WebkitBackdropFilter: 'blur(12px)',
                   padding: '0.45rem 0.85rem',
                   borderRadius: '12px',
-                  border: '1px solid #e2e8f0',
-                  boxShadow: '0 2px 6px rgba(0,0,0,0.04)'
+                  border: '1px solid var(--border-color)',
+                  boxShadow: 'var(--shadow-sm)'
                 }}
               >
                 <div style={{ width: '28px', height: '28px', borderRadius: '8px', background: 'rgba(29, 104, 254, 0.1)', color: '#1d68fe', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   <MapPin size={15} />
                 </div>
                 <div>
-                  <div style={{ fontSize: '0.82rem', fontWeight: 800, color: '#0f172a' }}>Ahmedabad, India</div>
-                  <div style={{ fontSize: '0.7rem', color: '#64748b' }}>Based in India</div>
+                  <div style={{ fontSize: '0.82rem', fontWeight: 800, color: 'var(--text-primary)' }}>Ahmedabad, India</div>
+                  <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>Based in India</div>
                 </div>
               </div>
 
               {/* Remote Opportunities Pill */}
-              <div 
-                style={{ 
-                  display: 'flex', 
-                  alignItems: 'center', 
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
                   gap: '0.65rem',
-                  background: '#ffffff',
+                  background: 'var(--bg-card)',
+                  backdropFilter: 'blur(12px)',
+                  WebkitBackdropFilter: 'blur(12px)',
                   padding: '0.45rem 0.85rem',
                   borderRadius: '12px',
-                  border: '1px solid #e2e8f0',
-                  boxShadow: '0 2px 6px rgba(0,0,0,0.04)'
+                  border: '1px solid var(--border-color)',
+                  boxShadow: 'var(--shadow-sm)'
                 }}
               >
                 <div style={{ width: '28px', height: '28px', borderRadius: '8px', background: 'rgba(16, 185, 129, 0.12)', color: '#10b981', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   <Globe size={15} />
                 </div>
                 <div>
-                  <div style={{ fontSize: '0.82rem', fontWeight: 800, color: '#0f172a' }}>Remote Worldwide</div>
+                  <div style={{ fontSize: '0.82rem', fontWeight: 800, color: 'var(--text-primary)' }}>Remote Worldwide</div>
                   <div style={{ fontSize: '0.7rem', color: '#059669', fontWeight: 600 }}>Open to Roles</div>
                 </div>
               </div>
 
               {/* AWS SuperHacks 2025 Winner Pill with Confetti Burst */}
-              <motion.div 
+              <motion.div
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={triggerTrophyConfetti}
                 title="Click for celebration 🎉"
-                style={{ 
-                  display: 'flex', 
-                  alignItems: 'center', 
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
                   gap: '0.65rem',
-                  background: '#ffffff',
+                  background: 'var(--bg-card)',
+                  backdropFilter: 'blur(12px)',
+                  WebkitBackdropFilter: 'blur(12px)',
                   padding: '0.45rem 0.85rem',
                   borderRadius: '12px',
                   border: '1.5px solid rgba(245, 158, 11, 0.6)',
-                  boxShadow: '0 2px 8px rgba(245, 158, 11, 0.15)',
+                  boxShadow: '0 4px 16px rgba(245, 158, 11, 0.15)',
                   cursor: 'pointer'
                 }}
               >
@@ -494,14 +555,14 @@ export const Hero = ({ onOpenAiModal }) => {
                   <Trophy size={15} color="#d97706" />
                 </div>
                 <div>
-                  <div style={{ fontSize: '0.82rem', fontWeight: 900, color: '#0f172a' }}>AWS SuperHacks 🎉</div>
+                  <div style={{ fontSize: '0.82rem', fontWeight: 900, color: 'var(--text-primary)' }}>AWS SuperHacks 🎉</div>
                   <div style={{ fontSize: '0.72rem', color: '#b45309', fontWeight: 800 }}>2025 Winner</div>
                 </div>
               </motion.div>
 
             </div>
 
-            {/* 21st.dev Infinite Infinite Tech Stack Marquee */}
+            {/* 21st.dev Infinite Tech Stack Marquee */}
             <div style={{ marginTop: '0.5rem' }}>
               <div style={{ fontSize: '0.7rem', fontWeight: 800, color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.04em', marginBottom: '0.5rem', fontFamily: 'var(--font-mono)' }}>
                 ⚡ Core Tech & Architecture Competencies:
@@ -516,14 +577,16 @@ export const Hero = ({ onOpenAiModal }) => {
                       gap: '0.5rem',
                       padding: '0.45rem 0.85rem',
                       borderRadius: '12px',
-                      background: 'rgba(255, 255, 255, 0.95)',
-                      border: '1px solid rgba(226, 232, 240, 0.9)',
-                      boxShadow: '0 2px 6px rgba(0,0,0,0.03)',
+                      background: 'var(--bg-card)',
+                      backdropFilter: 'blur(12px)',
+                      WebkitBackdropFilter: 'blur(12px)',
+                      border: '1px solid var(--border-color)',
+                      boxShadow: 'var(--shadow-sm)',
                       whiteSpace: 'nowrap'
                     }}
                   >
                     {tech.logo}
-                    <span style={{ fontSize: '0.82rem', fontWeight: 700, color: '#1e293b' }}>
+                    <span style={{ fontSize: '0.82rem', fontWeight: 700, color: 'var(--text-primary)' }}>
                       {tech.name}
                     </span>
                   </div>
@@ -536,21 +599,21 @@ export const Hero = ({ onOpenAiModal }) => {
           {/* ========================================================================= */}
           {/* RIGHT COLUMN: 3 3D TILT FLOATING GLASS CARDS + HANDWRITTEN CALLOUT */}
           {/* ========================================================================= */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-            style={{ 
-              display: 'flex', 
-              flexDirection: 'column', 
-              alignItems: 'flex-end', 
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'flex-end',
               gap: '1.25rem',
               maxWidth: '380px',
               marginLeft: 'auto'
-            }} 
+            }}
             className="hero-right-content"
           >
-            
+
             {/* 3 3D Parallax Tilt Floating Glass Feature Cards */}
             {floatingCards.map((card, idx) => (
               <Tilt
@@ -574,16 +637,16 @@ export const Hero = ({ onOpenAiModal }) => {
                     justifyContent: 'space-between',
                     padding: '1.1rem 1.35rem',
                     borderRadius: '1.25rem',
-                    background: 'rgba(255, 255, 255, 0.88)',
+                    background: 'var(--bg-card)',
                     backdropFilter: 'blur(16px)',
                     WebkitBackdropFilter: 'blur(16px)',
-                    border: '1px solid rgba(255, 255, 255, 0.9)',
-                    boxShadow: '0 10px 30px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.04)',
+                    border: '1px solid var(--border-color)',
+                    boxShadow: 'var(--shadow-md)',
                     textDecoration: 'none'
                   }}
                 >
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.9rem' }}>
-                    <div 
+                    <div
                       style={{
                         width: '44px',
                         height: '44px',
@@ -615,7 +678,7 @@ export const Hero = ({ onOpenAiModal }) => {
                     </div>
                   </div>
 
-                  <div 
+                  <div
                     style={{
                       width: '28px',
                       height: '28px',
@@ -635,7 +698,7 @@ export const Hero = ({ onOpenAiModal }) => {
             ))}
 
             {/* Handwritten Signature / Callout */}
-            <motion.div 
+            <motion.div
               animate={{ rotate: [-4, -2, -4] }}
               transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
               style={{
@@ -645,7 +708,7 @@ export const Hero = ({ onOpenAiModal }) => {
                 paddingRight: '1rem'
               }}
             >
-              <div 
+              <div
                 style={{
                   fontFamily: "'Caveat', cursive",
                   fontSize: '2.5rem',
@@ -658,7 +721,7 @@ export const Hero = ({ onOpenAiModal }) => {
               >
                 Turning Ideas into Impact
               </div>
-              <div 
+              <div
                 style={{
                   width: '110px',
                   height: '4px',
@@ -680,13 +743,22 @@ export const Hero = ({ onOpenAiModal }) => {
           display: none;
         }
 
-        @media (min-width: 1024px) {
+        @media (min-width: 900px) {
           .hero-layout-grid {
             grid-template-columns: 1.15fr 0.85fr !important;
           }
+          .hero-bg-poster {
+            display: block !important;
+          }
+          .hero-scrim {
+            display: block !important;
+          }
+          .mobile-portrait-center {
+            display: none !important;
+          }
         }
 
-        @media (max-width: 1023px) {
+        @media (max-width: 899px) {
           .mobile-portrait-center {
             display: block !important;
           }
@@ -701,6 +773,7 @@ export const Hero = ({ onOpenAiModal }) => {
             display: none !important;
           }
           .hero-left-content {
+            padding-top: 0 !important;
             max-width: 100% !important;
           }
           .hero-right-content {

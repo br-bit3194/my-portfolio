@@ -140,7 +140,10 @@ export const portfolioData = {
       award: "🏆 Special Jury Mention Award Winner",
       tag: "GenAI & Agentic Systems",
       youtubeUrl: "https://youtu.be/eP-s9D_WXeY?si=5PPzf2HBK4fnKeXf",
+      githubUrl: "https://github.com/br-bit3194",
       videoId: "eP-s9D_WXeY",
+      verifiedBadge: "AWS SuperHacks Jury Award",
+      architectureRef: "#architecture",
       description: "Built MAESTRO, an AI-powered multi-agent IT operations platform leveraging AWS and Amazon Bedrock for intelligent orchestration, proactive issue resolution, and autonomous task execution, transforming IT management into a predictive and highly efficient system.",
       highlights: [
         "Won 'Special Jury Mention Award' at SuperHacks 2025 powered by AWS",
@@ -156,6 +159,9 @@ export const portfolioData = {
       subtitle: "Talentica Software",
       award: "⚡ 70% Manual Effort Reduction",
       tag: "Vertex AI & Google Cloud",
+      githubUrl: "https://github.com/br-bit3194",
+      architectureRef: "#architecture",
+      verifiedBadge: "Production Verified (GCP Vertex AI)",
       description: "Led the development of a GenAI-powered Makegood recommendation system using Vertex AI, Google Gemini, and Google ADK. Architected event-driven GCP workflows with Pub/Sub, leveraging GCS and BigQuery for data processing and storage, and implemented AI Guardrails for Responsible AI.",
       highlights: [
         "Automated ad spot recommendations, reducing manual effort by 70%",
@@ -171,6 +177,9 @@ export const portfolioData = {
       subtitle: "Talentica Software",
       award: "🚀 67% Response Time Reduction",
       tag: "Agentic AI & Architecture",
+      githubUrl: "https://github.com/br-bit3194",
+      architectureRef: "#architecture",
+      verifiedBadge: "A2A & MCP Protocol Stack",
       description: "Architected and delivered a production-grade Multi-Agent AI platform leveraging Agent-to-Agent (A2A) communication and Model Context Protocol (MCP) for tool calling, with LLM orchestration, RAG, and FastAPI for autonomous agent collaboration and intelligent task routing.",
       highlights: [
         "Autonomous agent collaboration via Agent-to-Agent (A2A) protocol",
@@ -186,6 +195,9 @@ export const portfolioData = {
       subtitle: "Talentica Software",
       award: "🌟 90,000+ Athletes & 7 National Championships",
       tag: "High-Scale Backend",
+      githubUrl: "https://github.com/br-bit3194",
+      architectureRef: "#experience",
+      verifiedBadge: "90,000+ Athletes Served",
       description: "Developed and enhanced key solutions for the Game Management System (GMS), including Razorpay payment gateway integration, supporting seven national championships across India and serving over 90,000 athletes.",
       highlights: [
         "Revamped critical backend processes, reducing execution times from 30-40 minutes to milliseconds",
@@ -201,6 +213,9 @@ export const portfolioData = {
       subtitle: "Online PSB Loans",
       award: "🏦 14+ Indian Banks Scaled",
       tag: "FinTech & Data Architecture",
+      githubUrl: "https://github.com/br-bit3194",
+      architectureRef: "#experience",
+      verifiedBadge: "14+ Tier-1 Indian Banks",
       description: "Developed Django API that served 14+ Indian Banks to find duplicate customers using their details. Designed Oracle database tables with advanced partitioning and indexing methods for high-speed queries.",
       highlights: [
         "High-throughput Django API serving 14+ Indian Banks",
@@ -218,7 +233,7 @@ export const portfolioData = {
       role: "Senior Software Engineer",
       company: "Talentica Software",
       period: "April 2026 - Present",
-      location: "Pune, India",
+      location: "Pune, India / Remote",
       badge: "Current Role",
       highlights: [
         "Architected and delivered a production-grade Multi-Agent AI platform leveraging A2A for agent-to-agent communication and MCP for tool calling.",
@@ -231,7 +246,7 @@ export const portfolioData = {
       role: "Software Engineer II",
       company: "Talentica Software",
       period: "January 2024 - March 2026 (2 yrs 3 mos)",
-      location: "Pune, India",
+      location: "Pune, India / Remote",
       badge: "Promoted to Senior",
       highlights: [
         "Led the development of a GenAI-powered Makegood recommendation system using Vertex AI, Google Gemini, and Google ADK, architecting event-driven GCP workflows with Pub/Sub, GCS, and BigQuery; implemented AI Guardrails for Responsible AI, automated ad spot recommendations, and reduced manual effort by 70%.",

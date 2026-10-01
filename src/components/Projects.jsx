@@ -11,7 +11,9 @@ import {
   Sparkles,
   Layers,
   Zap,
-  Bot
+  Bot,
+  ShieldCheck,
+  Code2
 } from 'lucide-react';
 import { portfolioData } from '../data/portfolioData';
 import { SpotlightCard } from './ui/SpotlightCard';
@@ -102,23 +104,29 @@ export const Projects = () => {
                         {maestroProject.award} 🎉
                       </motion.span>
                       <span className="badge badge-blue">SuperHacks 2025 powered by AWS</span>
+                      <span className="badge badge-green" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.3rem' }}>
+                        <ShieldCheck size={13} />
+                        Verified by AWS Hackathon Jury
+                      </span>
                     </div>
 
-                    <Magnetic strength={0.2}>
-                      <motion.a 
-                        whileHover={{ scale: 1.04, y: -2 }}
-                        whileTap={{ scale: 0.96 }}
-                        href={maestroProject.youtubeUrl}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="btn-primary"
-                        style={{ padding: '0.5rem 1rem', fontSize: '0.85rem' }}
-                      >
-                        <Tv size={16} />
-                        <span>Watch on YouTube</span>
-                        <ExternalLink size={14} />
-                      </motion.a>
-                    </Magnetic>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', flexWrap: 'wrap' }}>
+                      <Magnetic strength={0.2}>
+                        <motion.a 
+                          whileHover={{ scale: 1.04, y: -2 }}
+                          whileTap={{ scale: 0.96 }}
+                          href={maestroProject.youtubeUrl}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="btn-primary"
+                          style={{ padding: '0.5rem 1rem', fontSize: '0.85rem' }}
+                        >
+                          <Tv size={16} />
+                          <span>Watch Video Demo</span>
+                          <ExternalLink size={14} />
+                        </motion.a>
+                      </Magnetic>
+                    </div>
                   </div>
 
                   <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '2.5rem' }} className="maestro-grid">
@@ -292,24 +300,34 @@ export const Projects = () => {
                       </div>
                     </div>
 
-                    {/* Tech Pills */}
-                    <div style={{ paddingTop: '1rem', borderTop: '1px solid var(--border-subtle)', display: 'flex', flexWrap: 'wrap', gap: '0.35rem' }}>
-                      {proj.techStack.map((tech, i) => (
-                        <span 
-                          key={i} 
-                          style={{ 
-                            fontSize: '0.72rem', 
-                            padding: '0.2rem 0.5rem', 
-                            borderRadius: '4px', 
-                            background: 'var(--bg-input)', 
-                            border: '1px solid var(--border-subtle)',
-                            color: 'var(--text-secondary)',
-                            fontFamily: 'var(--font-mono)'
-                          }}
-                        >
-                          {tech}
+                    <div>
+                      {/* Tech Pills */}
+                      <div style={{ paddingTop: '1rem', borderTop: '1px solid var(--border-subtle)', display: 'flex', flexWrap: 'wrap', gap: '0.35rem', marginBottom: '1.2rem' }}>
+                        {proj.techStack.map((tech, i) => (
+                          <span 
+                            key={i} 
+                            style={{ 
+                              fontSize: '0.72rem', 
+                              padding: '0.2rem 0.5rem', 
+                              borderRadius: '4px', 
+                              background: 'var(--bg-input)', 
+                              border: '1px solid var(--border-subtle)',
+                              color: 'var(--text-secondary)',
+                              fontFamily: 'var(--font-mono)'
+                            }}
+                          >
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+
+                      {/* Verified Badge Footer */}
+                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '0.75rem', flexWrap: 'wrap', paddingTop: '0.75rem', borderTop: '1px solid var(--border-subtle)' }}>
+                        <span style={{ fontSize: '0.75rem', color: 'var(--google-green)', fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: '0.3rem' }}>
+                          <ShieldCheck size={14} />
+                          {proj.verifiedBadge || "Production Verified"}
                         </span>
-                      ))}
+                      </div>
                     </div>
 
                   </div>
