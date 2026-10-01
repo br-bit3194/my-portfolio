@@ -1,0 +1,311 @@
+:root {
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-heading: 'Plus Jakarta Sans', 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Google Brand Palette */
+  --google-blue: #1a73e8;
+  --google-blue-hover: #1557b0;
+  --google-red: #ea4335;
+  --google-yellow: #f9ab00;
+  --google-green: #1e8e3e;
+  
+  --google-blue-soft: rgba(26, 115, 232, 0.08);
+  --google-red-soft: rgba(234, 67, 53, 0.08);
+  --google-yellow-soft: rgba(249, 171, 0, 0.1);
+  --google-green-soft: rgba(30, 142, 62, 0.08);
+
+  --google-gradient: linear-gradient(135deg, #4285f4 0%, #ea4335 33%, #fbbc05 66%, #34a853 100%);
+  --google-blue-gradient: linear-gradient(135deg, #1a73e8 0%, #4285f4 100%);
+  --google-green-gradient: linear-gradient(135deg, #1e8e3e 0%, #34a853 100%);
+
+  /* Default Theme: Premium Light (Google Studio & 21st.dev minimal clean aesthetic) */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8fafd;
+  --bg-card: #ffffff;
+  --bg-card-hover: #ffffff;
+  --bg-card-solid: #ffffff;
+  --bg-input: #f1f3f4;
+  --bg-nav: rgba(255, 255, 255, 0.88);
+
+  --text-primary: #202124;
+  --text-secondary: #5f6368;
+  --text-muted: #80868b;
+  --text-inverse: #ffffff;
+
+  --border-color: #e8eaed;
+  --border-subtle: #f1f3f4;
+  --border-hover: rgba(26, 115, 232, 0.35);
+
+  --accent-primary: #1a73e8;
+  --accent-primary-light: #4285f4;
+  --accent-secondary: #1e8e3e;
+  --accent-red: #ea4335;
+  --accent-yellow: #f9ab00;
+
+  --shadow-sm: 0 1px 3px rgba(60, 64, 67, 0.08);
+  --shadow-md: 0 4px 12px rgba(60, 64, 67, 0.08), 0 1px 2px rgba(60, 64, 67, 0.05);
+  --shadow-lg: 0 12px 32px rgba(60, 64, 67, 0.12), 0 2px 6px rgba(60, 64, 67, 0.06);
+  --shadow-glow: 0 0 24px rgba(66, 133, 244, 0.2);
+
+  --pattern-dot: #e2e8f0;
+}
+
+[data-theme="dark"] {
+  /* Premium Executive Dark Mode (Deep Charcoal with vibrant Google accents) */
+  --bg-primary: #0d1117;
+  --bg-secondary: #161b22;
+  --bg-card: rgba(22, 27, 34, 0.85);
+  --bg-card-hover: rgba(33, 38, 45, 0.95);
+  --bg-card-solid: #161b22;
+  --bg-input: #0d1117;
+  --bg-nav: rgba(13, 17, 23, 0.88);
+
+  --text-primary: #f0f6fc;
+  --text-secondary: #8b949e;
+  --text-muted: #6e7681;
+  --text-inverse: #0d1117;
+
+  --border-color: rgba(240, 246, 252, 0.1);
+  --border-subtle: rgba(240, 246, 252, 0.05);
+  --border-hover: rgba(66, 133, 244, 0.5);
+
+  --google-blue-soft: rgba(66, 133, 244, 0.15);
+  --google-red-soft: rgba(234, 67, 53, 0.15);
+  --google-yellow-soft: rgba(251, 188, 5, 0.15);
+  --google-green-soft: rgba(52, 168, 83, 0.15);
+
+  --accent-primary: #4285f4;
+  --accent-primary-light: #8ab4f8;
+  --accent-secondary: #34a853;
+  --accent-red: #ea4335;
+  --accent-yellow: #fbbc05;
+
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.45);
+  --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.55);
+  --shadow-glow: 0 0 24px rgba(66, 133, 244, 0.35);
+
+  --pattern-dot: rgba(255, 255, 255, 0.06);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-family: var(--font-sans);
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+  background-color: var(--bg-primary);
+  background-image: radial-gradient(var(--pattern-dot) 1.2px, transparent 1.2px);
+  background-size: 24px 24px;
+  line-height: 1.6;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  letter-spacing: -0.025em;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background: none;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-primary);
+}
+
+/* Container & Layout */
+.container {
+  width: 100%;
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.section {
+  padding: 5.5rem 0;
+  position: relative;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 3.5rem;
+}
+
+.section-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.35rem 0.85rem;
+  background: var(--google-blue-soft);
+  border: 1px solid rgba(66, 133, 244, 0.25);
+  border-radius: 9999px;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--accent-primary);
+  letter-spacing: 0.02em;
+  margin-bottom: 0.85rem;
+}
+
+.section-title {
+  font-size: 2.25rem;
+  font-weight: 800;
+  margin-bottom: 0.75rem;
+  color: var(--text-primary);
+}
+
+@media (min-width: 768px) {
+  .section-title {
+    font-size: 2.75rem;
+  }
+}
+
+.section-subtitle {
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+  max-width: 620px;
+  margin: 0 auto;
+}
+
+/* 21st.dev Style Bento & Glass Cards */
+.bento-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 1.15rem;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.bento-card:hover {
+  border-color: var(--border-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Buttons */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  background: var(--google-blue);
+  color: #ffffff !important;
+  padding: 0.75rem 1.4rem;
+  border-radius: 0.65rem;
+  font-weight: 600;
+  font-size: 0.92rem;
+  box-shadow: 0 2px 8px rgba(26, 115, 232, 0.25);
+  transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+  background: var(--google-blue-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(26, 115, 232, 0.35);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  padding: 0.75rem 1.35rem;
+  border-radius: 0.65rem;
+  font-weight: 600;
+  font-size: 0.92rem;
+  transition: all 0.2s ease;
+}
+
+.btn-secondary:hover {
+  background: var(--bg-secondary);
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
+  transform: translateY(-1px);
+}
+
+/* Badges */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem 0.65rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  font-family: var(--font-mono);
+}
+
+.badge-blue {
+  background: var(--google-blue-soft);
+  color: var(--google-blue);
+  border: 1px solid rgba(26, 115, 232, 0.25);
+}
+
+.badge-green {
+  background: var(--google-green-soft);
+  color: var(--google-green);
+  border: 1px solid rgba(30, 142, 62, 0.25);
+}
+
+.badge-yellow {
+  background: var(--google-yellow-soft);
+  color: #b06000;
+  border: 1px solid rgba(249, 171, 0, 0.3);
+}
+
+.badge-red {
+  background: var(--google-red-soft);
+  color: var(--google-red);
+  border: 1px solid rgba(234, 67, 53, 0.25);
+}
+
+/* 4-Color Google Strip */
+.google-strip {
+  height: 4px;
+  width: 100%;
+  background: var(--google-gradient);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
