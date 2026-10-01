@@ -24,9 +24,9 @@ export const Projects = () => {
         <div className="section-header">
           <div className="section-tag">
             <Award size={14} color="var(--google-blue)" />
-            Featured Systems & Hackathons
+            RAG, LLMs & Production Projects
           </div>
-          <h2 className="section-title">Production AI Systems & Engineering Projects</h2>
+          <h2 className="section-title">Production GenAI & Engineering Projects</h2>
           <p className="section-subtitle">
             Autonomous multi-agent platforms, enterprise Vertex AI recommendation engines, and high-scale distributed backends.
           </p>

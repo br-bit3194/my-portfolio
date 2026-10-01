@@ -29,9 +29,9 @@ export const Skills = () => {
         <div className="section-header">
           <div className="section-tag" style={{ color: 'var(--google-blue)', background: 'var(--google-blue-soft)' }}>
             <Cpu size={14} />
-            Technical Expertise Matrix
+            Cloud & AI Engineering Stack
           </div>
-          <h2 className="section-title">Core Skills & Engineering Stack</h2>
+          <h2 className="section-title">Core Skills & Cloud Expertise</h2>
           <p className="section-subtitle">
             Prioritizing production Generative AI, autonomous Multi-Agent systems, high-scale Python distributed backends, and multi-cloud AI infrastructure.
           </p>

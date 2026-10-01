@@ -134,7 +134,12 @@ export const Contact = () => {
                         <LinkedinIcon size={20} />
                       </div>
                       <div>
-                        <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>LinkedIn Network</div>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem' }}>
+                          <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>LinkedIn Network</span>
+                          <span style={{ fontSize: '0.68rem', fontWeight: 700, padding: '0.1rem 0.4rem', borderRadius: '4px', background: 'rgba(10, 102, 194, 0.1)', color: '#0A66C2' }}>
+                            5K+ Family
+                          </span>
+                        </div>
                         <a href={personal.linkedin} target="_blank" rel="noreferrer" style={{ fontWeight: 600, color: 'var(--google-blue)', fontSize: '0.95rem' }}>
                           in/bhaveshkumar-rathod
                         </a>

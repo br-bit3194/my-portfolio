@@ -39,11 +39,11 @@ export const ArchitectureShowcase = () => {
         <div className="section-header">
           <div className="section-tag" style={{ color: 'var(--google-blue)', background: 'var(--google-blue-soft)' }}>
             <Network size={14} />
-            System Architecture Deep Dive
+            AI Agents & Architecture
           </div>
-          <h2 className="section-title">Production Engineering Patterns</h2>
+          <h2 className="section-title">Autonomous Multi-Agent AI Systems</h2>
           <p className="section-subtitle">
-            Interactive blueprints of production Multi-Agent workflows, GCP event streams, and high-concurrency FinTech data engines.
+            Interactive blueprints of production Multi-Agent workflows (A2A, MCP), GCP event streams, and high-concurrency FinTech data engines.
           </p>
         </div>
 

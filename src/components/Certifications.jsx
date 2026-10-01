@@ -35,7 +35,7 @@ export const Certifications = () => {
             <ShieldCheck size={14} />
             Verified Honors & Credentials
           </div>
-          <h2 className="section-title">Certifications & Accolades</h2>
+          <h2 className="section-title">Certifications & Awards</h2>
           <p className="section-subtitle">
             Formal credentials in Google Cloud Generative AI, Databricks AI Engineering, and algorithmic hackathons.
           </p>
@@ -43,70 +43,94 @@ export const Certifications = () => {
 
         {/* Certifications Grid */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))', gap: '1.5rem', marginBottom: '3rem' }}>
-          {portfolioData.certifications.map((cert) => (
-            <div
-              key={cert.id}
-              className="bento-card"
-              style={{
-                padding: '1.75rem',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-between',
-                borderLeft: `3px solid ${cert.brandColor || 'var(--google-blue)'}`
-              }}
-            >
-              <div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.85rem' }}>
-                  <div 
-                    style={{
-                      width: '40px',
-                      height: '40px',
-                      borderRadius: '10px',
-                      background: 'var(--bg-input)',
-                      border: '1px solid var(--border-color)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center'
-                    }}
-                  >
-                    {getCertIcon(cert.icon, cert.brandColor || 'var(--google-blue)')}
+          {portfolioData.certifications.map((cert) => {
+            const isGoogleLeader = cert.id === 'gcp-genai-leader';
+            return (
+              <div
+                key={cert.id}
+                className="bento-card"
+                style={{
+                  padding: '1.75rem',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'space-between',
+                  borderLeft: `4px solid ${cert.brandColor || 'var(--google-blue)'}`,
+                  background: isGoogleLeader ? 'linear-gradient(180deg, var(--bg-card) 0%, var(--google-blue-soft) 100%)' : 'var(--bg-card)',
+                  boxShadow: isGoogleLeader ? '0 8px 24px rgba(26, 115, 232, 0.12)' : 'none',
+                  borderColor: isGoogleLeader ? 'rgba(26, 115, 232, 0.35)' : 'var(--border-color)'
+                }}
+              >
+                <div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.85rem' }}>
+                    <div 
+                      style={{
+                        width: '42px',
+                        height: '42px',
+                        borderRadius: '10px',
+                        background: isGoogleLeader ? 'rgba(26, 115, 232, 0.15)' : 'var(--bg-input)',
+                        border: '1px solid var(--border-color)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center'
+                      }}
+                    >
+                      {getCertIcon(cert.icon, cert.brandColor || 'var(--google-blue)')}
+                    </div>
+                    
+                    <div style={{ display: 'flex', gap: '0.4rem', alignItems: 'center' }}>
+                      {isGoogleLeader && (
+                        <span 
+                          style={{
+                            fontSize: '0.72rem',
+                            fontWeight: 800,
+                            padding: '0.2rem 0.6rem',
+                            borderRadius: '9999px',
+                            background: 'var(--google-blue)',
+                            color: '#ffffff',
+                            boxShadow: '0 2px 6px rgba(26, 115, 232, 0.3)'
+                          }}
+                        >
+                          Featured Credential
+                        </span>
+                      )}
+                      <span 
+                        className="badge"
+                        style={{
+                          background: 'var(--bg-input)',
+                          color: cert.brandColor || 'var(--text-primary)',
+                          border: '1px solid var(--border-color)'
+                        }}
+                      >
+                        {cert.badge}
+                      </span>
+                    </div>
                   </div>
-                  <span 
-                    className="badge"
-                    style={{
-                      background: 'var(--bg-input)',
-                      color: cert.brandColor || 'var(--text-primary)',
-                      border: '1px solid var(--border-color)'
-                    }}
-                  >
-                    {cert.badge}
+
+                  <h4 style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '0.35rem', lineHeight: 1.35 }}>
+                    {cert.title}
+                  </h4>
+
+                  <div style={{ fontSize: '0.82rem', color: cert.brandColor || 'var(--google-blue)', fontWeight: 700, marginBottom: '0.65rem' }}>
+                    Issued by {cert.issuer}
+                  </div>
+
+                  <p style={{ fontSize: '0.86rem', color: 'var(--text-secondary)', lineHeight: 1.55 }}>
+                    {cert.description}
+                  </p>
+                </div>
+
+                <div style={{ marginTop: '1.25rem', paddingTop: '0.75rem', borderTop: '1px solid var(--border-subtle)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <span style={{ fontSize: '0.75rem', color: 'var(--google-green)', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
+                    <CheckCircle size={13} />
+                    Verified Credential
+                  </span>
+                  <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)', fontWeight: 600 }}>
+                    {cert.date}
                   </span>
                 </div>
-
-                <h4 style={{ fontSize: '1.1rem', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '0.35rem', lineHeight: 1.35 }}>
-                  {cert.title}
-                </h4>
-
-                <div style={{ fontSize: '0.82rem', color: cert.brandColor || 'var(--google-blue)', fontWeight: 600, marginBottom: '0.65rem' }}>
-                  Issued by {cert.issuer}
-                </div>
-
-                <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', lineHeight: 1.55 }}>
-                  {cert.description}
-                </p>
               </div>
-
-              <div style={{ marginTop: '1rem', paddingTop: '0.75rem', borderTop: '1px solid var(--border-subtle)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <span style={{ fontSize: '0.75rem', color: 'var(--google-green)', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
-                  <CheckCircle size={13} />
-                  Verified
-                </span>
-                <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>
-                  {cert.date}
-                </span>
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* Formal Education Card */}

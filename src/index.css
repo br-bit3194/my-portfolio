@@ -309,3 +309,32 @@ button {
   left: 0;
   right: 0;
 }
+
+/* Poster Hero Custom Enhancements */
+.hero-poster-section {
+  position: relative;
+  background-color: #ffffff;
+}
+
+.hero-bg-poster {
+  transition: transform 0.5s ease-out;
+}
+
+.floating-glass-pill {
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.btn-hero-primary:hover {
+  background: #1557b0 !important;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(29, 104, 254, 0.45) !important;
+}
+
+@media (max-width: 900px) {
+  .hero-poster-section {
+    padding-top: 5.5rem !important;
+    min-height: auto !important;
+  }
+}
+

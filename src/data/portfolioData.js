@@ -20,20 +20,23 @@ export const portfolioData = {
     availability: "Open to Remote Opportunities (India & Worldwide)",
     email: "bhavesh3194@gmail.com",
     linkedin: "https://www.linkedin.com/in/bhaveshkumar-rathod/",
+    linkedinFollowers: "5K+ LinkedIn Family",
     github: "https://github.com/br-bit3194",
     resumeUrl: "/Bhavesh_Rathod_GenAI_Engineer_Resume.pdf",
     avatarUrl: "/photo.jpeg",
+    featuredCert: "Google Cloud Certified Generative AI Leader",
     summary: "AI Engineer and Senior Software Engineer with 5+ years of experience building scalable backend systems and production-grade AI applications. Core focus on Generative AI, Retrieval-Augmented Generation (RAG), and Agentic AI systems (A2A, MCP), delivering client-facing AI solutions with Google Gemini, Vertex AI, BigQuery, AWS Bedrock, and FastAPI.",
     
-    // 2-Second Recruiter Metrics
+    // 2-Second Recruiter Metrics (5+ Years Industry Exp)
     metrics: [
-      { metric: "5+ Years", label: "Engineering Experience", desc: "Production GenAI, Agentic systems & high-scale backends" },
-      { metric: "94%", label: "API Latency Reduction", desc: "Optimized Django API from 1,200 records/min to 4 seconds" },
-      { metric: "67%", label: "Agent Response Speedup", desc: "Cut Multi-Agent latency from 3m to 1m via OpenTelemetry & Langfuse" },
-      { metric: "70%", label: "Manual Effort Automated", desc: "GenAI Makegood recommendation system on Vertex AI & Gemini" }
+      { metric: "5+ Years", label: "Industry Experience", desc: "Production GenAI, Agentic AI & distributed Python systems" },
+      { metric: "94%", label: "API Latency Cut", desc: "Optimized Django API from 1,200 records/min to 4 seconds" },
+      { metric: "67%", label: "Agent Speedup", desc: "Cut Multi-Agent latency from 3m to 1m via OpenTelemetry & Langfuse" },
+      { metric: "5K+", label: "LinkedIn Family", desc: "Active network of 5,000+ AI engineers, founders & tech leaders" }
     ],
 
     coreBadges: [
+      "Google Cloud Certified GenAI Leader",
       "Multi-Agent AI (A2A & MCP)",
       "Google Vertex AI & Gemini",
       "Amazon Bedrock",

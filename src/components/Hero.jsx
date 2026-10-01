@@ -1,307 +1,555 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { 
-  Bot, 
   ArrowRight, 
-  Download, 
-  Sparkles, 
-  Award, 
-  Mail, 
   MapPin, 
-  ExternalLink,
-  CheckCircle2,
-  Copy,
-  Check,
-  Zap,
-  Briefcase
+  Globe, 
+  Award, 
+  ChevronRight, 
+  Bot, 
+  Database, 
+  Cloud,
+  MoreHorizontal,
+  Users,
+  ShieldCheck,
+  Sparkles
 } from 'lucide-react';
 import { LinkedinIcon } from './Icons';
+import { 
+  GoogleCloudLogo, 
+  AwsLogo, 
+  PythonLogo, 
+  FastApiLogo, 
+  GeminiStarLogo 
+} from './TechLogos';
 import { portfolioData } from '../data/portfolioData';
 
 export const Hero = ({ onOpenAiModal }) => {
   const { personal } = portfolioData;
-  const [copiedEmail, setCopiedEmail] = useState(false);
 
-  const handleCopyEmail = () => {
-    navigator.clipboard.writeText(personal.email);
-    setCopiedEmail(true);
-    setTimeout(() => setCopiedEmail(false), 2000);
-  };
+  const floatingCards = [
+    {
+      title: "AI Agents",
+      subtitle: "Multi-Agent Systems",
+      detail: "A2A • MCP • Orchestration",
+      action: "View Architecture",
+      icon: <Bot size={22} color="#1D68FE" />,
+      bgIcon: "rgba(29, 104, 254, 0.12)",
+      href: "#architecture",
+      tag: "Agentic Systems"
+    },
+    {
+      title: "RAG & LLMs",
+      subtitle: "Enterprise GenAI & RAG",
+      detail: "MAESTRO • AWS Winner",
+      action: "Explore Projects",
+      icon: <Database size={22} color="#10B981" />,
+      bgIcon: "rgba(16, 185, 129, 0.12)",
+      href: "#projects",
+      tag: "Production RAG"
+    },
+    {
+      title: "Cloud & AI",
+      subtitle: "Vertex AI • Gemini • Bedrock",
+      detail: "GCP • AWS • BigQuery",
+      action: "View Skill Stack",
+      icon: <Cloud size={22} color="#F59E0B" />,
+      bgIcon: "rgba(245, 158, 11, 0.12)",
+      href: "#skills",
+      tag: "Cloud Stack"
+    }
+  ];
+
+  const techStack = [
+    { name: "Google Cloud", logo: <GoogleCloudLogo size={24} /> },
+    { name: "AWS", logo: <AwsLogo size={24} /> },
+    { name: "Python", logo: <PythonLogo size={24} /> },
+    { name: "FastAPI", logo: <FastApiLogo size={24} /> },
+    { name: "Gemini", logo: <GeminiStarLogo size={24} /> },
+    { name: "+ More", logo: <MoreHorizontal size={22} color="#64748B" /> }
+  ];
 
   return (
     <section 
       id="about" 
-      style={{ 
-        paddingTop: '6.5rem', 
-        paddingBottom: '4rem', 
-        position: 'relative' 
+      className="hero-poster-section"
+      style={{
+        position: 'relative',
+        minHeight: '100vh',
+        paddingTop: '6rem',
+        paddingBottom: '3rem',
+        display: 'flex',
+        alignItems: 'center',
+        overflow: 'hidden',
+        background: '#ffffff'
       }}
     >
-      <div className="container">
-        
-        {/* Main 2-Second Recruiter Spotlight Bento Card */}
+      {/* High-Resolution Center Studio Photo Background */}
+      <div 
+        className="hero-bg-poster"
+        style={{
+          position: 'absolute',
+          inset: 0,
+          backgroundImage: 'url(/hero.png)',
+          backgroundPosition: 'center 45%',
+          backgroundSize: 'cover',
+          backgroundRepeat: 'no-repeat',
+          zIndex: 0,
+          opacity: 0.98
+        }}
+      />
+
+      {/* Light gradient scrim for crisp text readability */}
+      <div 
+        className="hero-scrim"
+        style={{
+          position: 'absolute',
+          inset: 0,
+          background: 'linear-gradient(90deg, rgba(255, 255, 255, 0.97) 0%, rgba(255, 255, 255, 0.94) 34%, rgba(255, 255, 255, 0.08) 50%, rgba(255, 255, 255, 0.88) 75%, rgba(255, 255, 255, 0.97) 100%)',
+          zIndex: 1,
+          pointerEvents: 'none'
+        }}
+      />
+
+      {/* Hero Content Container */}
+      <div className="container" style={{ position: 'relative', zIndex: 2, width: '100%' }}>
         <div 
-          className="bento-card"
-          style={{
-            padding: '2.5rem',
-            marginBottom: '2.5rem',
-            position: 'relative'
-          }}
+          style={{ 
+            display: 'grid', 
+            gridTemplateColumns: '1fr', 
+            gap: '2rem', 
+            alignItems: 'center',
+            minHeight: '780px'
+          }} 
+          className="hero-layout-grid"
         >
-          {/* Subtle Google Top Color Strip */}
-          <div className="google-strip" />
-
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '2.5rem', alignItems: 'center' }} className="hero-grid-2sec">
+          
+          {/* ========================================================================= */}
+          {/* LEFT COLUMN: WHO I AM, TITLE, BIO, CTA BUTTONS, TRUST BAR, TECH BAR */}
+          {/* ========================================================================= */}
+          <div style={{ maxWidth: '560px' }} className="hero-left-content">
             
-            {/* Left: Your Photo & Availability */}
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
+            {/* Top Featured Credentials Badge: Google Cloud Certified GenAI Leader */}
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.6rem', alignItems: 'center', marginBottom: '0.85rem' }}>
               
-              <div style={{ position: 'relative', marginBottom: '1.25rem' }}>
-                <div 
-                  style={{
-                    width: '150px',
-                    height: '150px',
-                    borderRadius: '50%',
-                    padding: '3px',
-                    background: 'var(--google-gradient)',
-                    boxShadow: '0 8px 24px rgba(66, 133, 244, 0.2)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center'
-                  }}
-                >
-                  <img 
-                    src={personal.avatarUrl} 
-                    alt={personal.displayName}
-                    style={{
-                      width: '100%',
-                      height: '100%',
-                      borderRadius: '50%',
-                      objectFit: 'cover',
-                      background: '#ffffff'
-                    }}
-                  />
-                </div>
-
-                {/* Available Status Dot */}
-                <div 
-                  title="Open to Senior AI Engineer & GenAI Roles"
-                  style={{
-                    position: 'absolute',
-                    bottom: '6px',
-                    right: '8px',
-                    width: '20px',
-                    height: '20px',
-                    borderRadius: '50%',
-                    background: '#34A853',
-                    border: '3px solid #ffffff',
-                    boxShadow: '0 0 8px rgba(52, 168, 83, 0.7)'
-                  }}
-                />
-              </div>
-
-              {/* Status Pill */}
               <div 
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
-                  gap: '0.4rem',
+                  gap: '0.45rem',
+                  padding: '0.35rem 0.85rem',
+                  borderRadius: '9999px',
+                  background: 'rgba(26, 115, 232, 0.08)',
+                  border: '1px solid rgba(26, 115, 232, 0.3)',
+                  color: '#1a73e8',
                   fontSize: '0.8rem',
-                  fontWeight: 600,
-                  color: 'var(--google-green)',
-                  fontFamily: 'var(--font-mono)',
-                  marginBottom: '0.35rem'
+                  fontWeight: 700,
+                  boxShadow: '0 2px 8px rgba(26, 115, 232, 0.12)'
                 }}
               >
-                <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: 'var(--google-green)' }} />
-                Open to Remote (India & Worldwide)
+                <GoogleCloudLogo size={16} />
+                <span>Google Cloud Certified Generative AI Leader</span>
               </div>
 
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', fontSize: '0.8rem', color: 'var(--text-muted)' }}>
-                <MapPin size={13} />
-                <span>Ahmedabad, India • Remote Worldwide</span>
+              <div 
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '0.35rem',
+                  padding: '0.35rem 0.75rem',
+                  borderRadius: '9999px',
+                  background: 'rgba(10, 102, 194, 0.08)',
+                  border: '1px solid rgba(10, 102, 194, 0.25)',
+                  color: '#0a66c2',
+                  fontSize: '0.8rem',
+                  fontWeight: 700
+                }}
+              >
+                <Users size={14} />
+                <span>5K+ LinkedIn Family</span>
               </div>
+
             </div>
 
-            {/* Right: Who I Am, What I Do, Experience & Quick Actions */}
-            <div>
+            <div style={{ fontSize: '1.2rem', fontWeight: 600, color: '#334155', marginBottom: '0.3rem' }}>
+              Hi, I'm
+            </div>
+
+            {/* Huge Two-Tone Name */}
+            <h1 
+              style={{ 
+                fontSize: 'clamp(3rem, 5.8vw, 4.75rem)', 
+                lineHeight: 1.05, 
+                fontWeight: 900, 
+                letterSpacing: '-0.04em',
+                marginBottom: '0.85rem'
+              }}
+            >
+              <span style={{ color: '#0f172a', display: 'block' }}>Bhavesh</span>
+              <span style={{ color: '#1d68fe', display: 'block' }}>Rathod</span>
+            </h1>
+
+            {/* Role Subtitle with 5+ Years Flag */}
+            <div 
+              style={{ 
+                fontSize: '1.2rem', 
+                fontWeight: 800, 
+                color: '#0f172a', 
+                marginBottom: '1rem',
+                letterSpacing: '-0.01em',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.5rem',
+                flexWrap: 'wrap'
+              }}
+            >
+              <span>AI Engineer</span>
+              <span style={{ color: '#1d68fe' }}>•</span>
+              <span>Senior Software Engineer</span>
+              <span style={{ fontSize: '0.78rem', background: 'rgba(16, 185, 129, 0.1)', color: '#059669', padding: '0.2rem 0.55rem', borderRadius: '6px', fontWeight: 700 }}>
+                5+ Years Exp
+              </span>
+            </div>
+
+            {/* Summary Text */}
+            <p 
+              style={{ 
+                fontSize: '1.02rem', 
+                lineHeight: 1.6, 
+                color: '#475569', 
+                marginBottom: '1.75rem',
+                maxWidth: '490px'
+              }}
+            >
+              Building production-grade AI systems with Generative AI, RAG and Agentic AI, backed by 5+ years of experience in scalable backend systems and cloud-native solutions.
+            </p>
+
+            {/* Action Buttons */}
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.85rem', alignItems: 'center', marginBottom: '2rem' }}>
               
-              {/* Badges Row */}
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', alignItems: 'center', marginBottom: '0.85rem' }}>
-                <span className="badge badge-blue">
-                  <Briefcase size={12} />
-                  AI Engineer (5+ Years Exp)
-                </span>
-                <span className="badge badge-green">
-                  🟢 100% Remote Available (India / Worldwide)
-                </span>
-                <span className="badge badge-yellow">
-                  <Award size={12} />
-                  AWS SuperHacks 2025 Winner
-                </span>
+              {/* View My Work Button */}
+              <a 
+                href="#projects" 
+                className="btn-hero-primary"
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '0.6rem',
+                  padding: '0.85rem 1.75rem',
+                  borderRadius: '9999px',
+                  background: '#1d68fe',
+                  color: '#ffffff',
+                  fontWeight: 700,
+                  fontSize: '0.98rem',
+                  boxShadow: '0 8px 20px rgba(29, 104, 254, 0.35)',
+                  transition: 'all 0.2s ease',
+                  textDecoration: 'none'
+                }}
+              >
+                <span>View My Work</span>
+                <ArrowRight size={18} />
+              </a>
+
+              {/* Get In Touch with LinkedIn badge */}
+              <a 
+                href={personal.linkedin}
+                target="_blank"
+                rel="noreferrer"
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '0.65rem',
+                  padding: '0.85rem 1.6rem',
+                  borderRadius: '9999px',
+                  background: '#ffffff',
+                  border: '1px solid #e2e8f0',
+                  color: '#0f172a',
+                  fontWeight: 700,
+                  fontSize: '0.98rem',
+                  boxShadow: '0 4px 14px rgba(0, 0, 0, 0.06)',
+                  transition: 'all 0.2s ease',
+                  textDecoration: 'none'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = '#1d68fe';
+                  e.currentTarget.style.transform = 'translateY(-1px)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = '#e2e8f0';
+                  e.currentTarget.style.transform = 'translateY(0)';
+                }}
+              >
+                <span>Get In Touch</span>
+                <div 
+                  style={{ 
+                    width: '22px', 
+                    height: '22px', 
+                    borderRadius: '4px', 
+                    background: '#0a66c2', 
+                    display: 'flex', 
+                    alignItems: 'center', 
+                    justifyContent: 'center',
+                    color: '#ffffff'
+                  }}
+                >
+                  <LinkedinIcon size={14} color="#ffffff" />
+                </div>
+              </a>
+
+            </div>
+
+            {/* Trust Metabar */}
+            <div 
+              style={{ 
+                display: 'flex', 
+                alignItems: 'center', 
+                gap: '1.25rem', 
+                flexWrap: 'wrap',
+                paddingBottom: '1.75rem',
+                borderBottom: '1px solid rgba(226, 232, 240, 0.8)',
+                marginBottom: '1.75rem'
+              }}
+            >
+              {/* Location */}
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.55rem' }}>
+                <div style={{ width: '32px', height: '32px', borderRadius: '50%', background: 'rgba(29, 104, 254, 0.08)', color: '#1d68fe', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <MapPin size={16} />
+                </div>
+                <div>
+                  <div style={{ fontSize: '0.82rem', fontWeight: 800, color: '#0f172a' }}>Ahmedabad, India</div>
+                  <div style={{ fontSize: '0.72rem', color: '#64748b' }}>Based in India</div>
+                </div>
               </div>
 
-              {/* Name */}
-              <h1 
-                style={{ 
-                  fontSize: 'clamp(2.2rem, 4.5vw, 3.25rem)', 
-                  lineHeight: 1.15, 
-                  fontWeight: 800, 
-                  marginBottom: '0.75rem',
-                  letterSpacing: '-0.03em',
-                  color: 'var(--text-primary)'
-                }}
-              >
-                {personal.displayName}{' '}
-                <span style={{ fontSize: '1.25rem', fontWeight: 500, color: 'var(--text-muted)' }}>
-                  ({personal.name})
-                </span>
-              </h1>
+              <div style={{ width: '1px', height: '24px', background: '#e2e8f0' }} className="hide-mobile" />
 
-              {/* Punchy Recruiter Summary */}
-              <p 
-                style={{ 
-                  fontSize: '1.08rem', 
-                  lineHeight: 1.6, 
-                  color: 'var(--text-secondary)', 
-                  marginBottom: '1.25rem',
-                  maxWidth: '750px' 
-                }}
-              >
-                {personal.summary}
-              </p>
+              {/* Remote Opportunities */}
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.55rem' }}>
+                <div style={{ width: '32px', height: '32px', borderRadius: '50%', background: 'rgba(16, 185, 129, 0.08)', color: '#10b981', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <Globe size={16} />
+                </div>
+                <div>
+                  <div style={{ fontSize: '0.82rem', fontWeight: 800, color: '#0f172a' }}>Remote Worldwide</div>
+                  <div style={{ fontSize: '0.72rem', color: '#64748b' }}>Open to Opportunities</div>
+                </div>
+              </div>
 
-              {/* Core Skill Chips */}
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.45rem', marginBottom: '1.75rem' }}>
-                {personal.coreBadges.map((badge, idx) => (
-                  <span 
-                    key={idx}
-                    style={{
-                      padding: '0.25rem 0.65rem',
-                      borderRadius: '6px',
-                      background: 'var(--bg-input)',
-                      border: '1px solid var(--border-color)',
-                      fontSize: '0.78rem',
-                      fontWeight: 600,
-                      color: 'var(--text-primary)',
-                      fontFamily: 'var(--font-mono)'
-                    }}
-                  >
-                    {badge}
+              <div style={{ width: '1px', height: '24px', background: '#e2e8f0' }} className="hide-mobile" />
+
+              {/* AWS SuperHacks 2025 Winner */}
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.55rem' }}>
+                <div style={{ width: '32px', height: '32px', borderRadius: '50%', background: 'rgba(245, 158, 11, 0.1)', color: '#d97706', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <Award size={16} />
+                </div>
+                <div>
+                  <div style={{ fontSize: '0.82rem', fontWeight: 800, color: '#0f172a' }}>AWS SuperHacks</div>
+                  <div style={{ fontSize: '0.72rem', color: '#d97706', fontWeight: 600 }}>2025 Winner</div>
+                </div>
+              </div>
+
+            </div>
+
+            {/* Bottom Floating Tech Stack Bar */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', flexWrap: 'wrap' }}>
+              {techStack.map((tech, idx) => (
+                <div 
+                  key={idx}
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    width: '68px',
+                    height: '68px',
+                    borderRadius: '16px',
+                    background: 'rgba(255, 255, 255, 0.92)',
+                    backdropFilter: 'blur(10px)',
+                    WebkitBackdropFilter: 'blur(10px)',
+                    border: '1px solid rgba(226, 232, 240, 0.9)',
+                    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.04)',
+                    transition: 'all 0.2s ease',
+                    cursor: 'pointer'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = 'translateY(-3px)';
+                    e.currentTarget.style.borderColor = '#1d68fe';
+                    e.currentTarget.style.boxShadow = '0 8px 18px rgba(29, 104, 254, 0.15)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'translateY(0)';
+                    e.currentTarget.style.borderColor = 'rgba(226, 232, 240, 0.9)';
+                    e.currentTarget.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.04)';
+                  }}
+                >
+                  <div style={{ marginBottom: '0.2rem' }}>{tech.logo}</div>
+                  <span style={{ fontSize: '0.65rem', fontWeight: 700, color: '#475569', textAlign: 'center', lineHeight: 1 }}>
+                    {tech.name}
                   </span>
-                ))}
-              </div>
-
-              {/* Actions: Direct Email, LinkedIn, Resume (NO PHONE/WHATSAPP) */}
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem', alignItems: 'center' }}>
-                
-                {/* Resume Download */}
-                <a 
-                  href={personal.resumeUrl}
-                  download="Bhavesh_Rathod_GenAI_Engineer_Resume.pdf"
-                  className="btn-primary"
-                >
-                  <Download size={16} />
-                  <span>Download Resume PDF</span>
-                </a>
-
-                {/* LinkedIn Profile */}
-                <a 
-                  href={personal.linkedin}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="btn-secondary"
-                >
-                  <LinkedinIcon size={16} color="#0A66C2" />
-                  <span>LinkedIn Profile</span>
-                  <ExternalLink size={13} />
-                </a>
-
-                {/* Direct Email with Copy Action */}
-                <button 
-                  onClick={handleCopyEmail}
-                  className="btn-secondary"
-                  title="Click to copy email address"
-                  style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}
-                >
-                  <Mail size={16} color="var(--google-red)" />
-                  <span>{copiedEmail ? "Email Copied!" : personal.email}</span>
-                  {copiedEmail ? <Check size={14} color="var(--google-green)" /> : <Copy size={13} />}
-                </button>
-
-                {/* Ask AI Trigger */}
-                <button 
-                  onClick={onOpenAiModal}
-                  className="btn-secondary"
-                  style={{ borderColor: 'rgba(26, 115, 232, 0.4)', color: 'var(--google-blue)' }}
-                >
-                  <Bot size={16} />
-                  <span>Ask AI Assistant</span>
-                </button>
-
-              </div>
-
+                </div>
+              ))}
             </div>
 
           </div>
-        </div>
 
-        {/* 4 Instant Recruiter Proof Metrics (Bento Row) */}
-        <div 
-          style={{ 
-            display: 'grid', 
-            gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', 
-            gap: '1.25rem' 
-          }}
-        >
-          {personal.metrics.map((item, idx) => (
+          {/* ========================================================================= */}
+          {/* RIGHT COLUMN: 3 FLOATING GLASS CARDS + HANDWRITTEN CALLOUT */}
+          {/* ========================================================================= */}
+          <div 
+            style={{ 
+              display: 'flex', 
+              flexDirection: 'column', 
+              alignItems: 'flex-end', 
+              gap: '1.25rem',
+              maxWidth: '380px',
+              marginLeft: 'auto'
+            }} 
+            className="hero-right-content"
+          >
+            
+            {/* 3 Floating Glass Feature Cards */}
+            {floatingCards.map((card, idx) => (
+              <a
+                key={idx}
+                href={card.href}
+                className="floating-glass-pill"
+                style={{
+                  width: '100%',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  padding: '1.1rem 1.35rem',
+                  borderRadius: '1.25rem',
+                  background: 'rgba(255, 255, 255, 0.88)',
+                  backdropFilter: 'blur(16px)',
+                  WebkitBackdropFilter: 'blur(16px)',
+                  border: '1px solid rgba(255, 255, 255, 0.9)',
+                  boxShadow: '0 10px 30px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.04)',
+                  transition: 'all 0.25s cubic-bezier(0.16, 1, 0.3, 1)',
+                  textDecoration: 'none'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-3px) scale(1.02)';
+                  e.currentTarget.style.boxShadow = '0 16px 36px rgba(29, 104, 254, 0.15)';
+                  e.currentTarget.style.borderColor = 'rgba(29, 104, 254, 0.4)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'translateY(0) scale(1)';
+                  e.currentTarget.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.04)';
+                  e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.9)';
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.9rem' }}>
+                  <div 
+                    style={{
+                      width: '44px',
+                      height: '44px',
+                      borderRadius: '12px',
+                      background: card.bgIcon,
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      flexShrink: 0
+                    }}
+                  >
+                    {card.icon}
+                  </div>
+                  <div>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                      <span style={{ fontSize: '1rem', fontWeight: 800, color: '#0f172a', lineHeight: 1.2 }}>
+                        {card.title}
+                      </span>
+                      <span style={{ fontSize: '0.68rem', padding: '0.1rem 0.4rem', borderRadius: '4px', background: 'rgba(241, 245, 249, 0.9)', color: '#64748b', fontWeight: 700, fontFamily: 'var(--font-mono)' }}>
+                        {card.tag}
+                      </span>
+                    </div>
+                    <div style={{ fontSize: '0.78rem', color: '#64748b', marginTop: '0.2rem', lineHeight: 1.3 }}>
+                      {card.subtitle}
+                    </div>
+                    <div style={{ fontSize: '0.72rem', color: '#94a3b8', marginTop: '0.1rem', fontFamily: 'var(--font-mono)' }}>
+                      {card.detail}
+                    </div>
+                  </div>
+                </div>
+
+                <div 
+                  style={{
+                    width: '28px',
+                    height: '28px',
+                    borderRadius: '50%',
+                    background: 'rgba(241, 245, 249, 0.8)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: '#64748b',
+                    flexShrink: 0
+                  }}
+                >
+                  <ChevronRight size={16} />
+                </div>
+              </a>
+            ))}
+
+            {/* Handwritten Signature / Callout */}
             <div 
-              key={idx}
-              className="bento-card"
               style={{
-                padding: '1.5rem',
-                borderTop: idx === 0 
-                  ? '3px solid var(--google-blue)' 
-                  : idx === 1 
-                  ? '3px solid var(--google-green)' 
-                  : idx === 2 
-                  ? '3px solid var(--google-yellow)' 
-                  : '3px solid var(--google-red)'
+                marginTop: '1.5rem',
+                textAlign: 'center',
+                transform: 'rotate(-4deg)',
+                alignSelf: 'center',
+                paddingRight: '1rem'
               }}
             >
               <div 
-                style={{ 
-                  fontSize: '2.1rem', 
-                  fontWeight: 800, 
-                  fontFamily: 'var(--font-mono)',
-                  color: idx === 0 
-                    ? 'var(--google-blue)' 
-                    : idx === 1 
-                    ? 'var(--google-green)' 
-                    : idx === 2 
-                    ? '#b06000' 
-                    : 'var(--google-red)',
-                  lineHeight: 1,
-                  marginBottom: '0.5rem'
+                style={{
+                  fontFamily: "'Caveat', cursive",
+                  fontSize: '2.5rem',
+                  fontWeight: 700,
+                  color: '#1e293b',
+                  lineHeight: 1.1,
+                  letterSpacing: '0.02em',
+                  textShadow: '0 2px 8px rgba(255,255,255,0.9)'
                 }}
               >
-                {item.metric}
+                Turning Ideas into Impact
               </div>
-              <div style={{ fontSize: '0.92rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '0.2rem' }}>
-                {item.label}
-              </div>
-              <div style={{ fontSize: '0.78rem', color: 'var(--text-secondary)', lineHeight: 1.4 }}>
-                {item.desc}
-              </div>
+              <div 
+                style={{
+                  width: '110px',
+                  height: '4px',
+                  borderRadius: '2px',
+                  background: '#1d68fe',
+                  margin: '0.4rem auto 0',
+                  boxShadow: '0 2px 6px rgba(29, 104, 254, 0.4)'
+                }}
+              />
             </div>
-          ))}
-        </div>
 
+          </div>
+
+        </div>
       </div>
 
       <style>{`
-        @media (min-width: 900px) {
-          .hero-grid-2sec {
-            grid-template-columns: 200px 1fr !important;
+        @media (min-width: 1024px) {
+          .hero-layout-grid {
+            grid-template-columns: 1.15fr 0.85fr !important;
+          }
+        }
+        @media (max-width: 1023px) {
+          .hero-poster-section {
+            background-position: center top !important;
+          }
+          .hero-scrim {
+            background: rgba(255, 255, 255, 0.94) !important;
+          }
+          .hero-right-content {
+            align-items: stretch !important;
+            margin-left: 0 !important;
+            max-width: 100% !important;
+          }
+        }
+        @media (max-width: 640px) {
+          .hide-mobile {
+            display: none !important;
           }
         }
       `}</style>
