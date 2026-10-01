@@ -101,7 +101,7 @@ export const ArchitectureShowcase = () => {
             style={{ borderRadius: '1.25rem' }}
           >
             <div 
-              className="bento-card"
+              className="bento-card arch-bento-card"
               style={{ 
                 padding: '2.5rem',
                 position: 'relative'
@@ -270,6 +270,9 @@ export const ArchitectureShowcase = () => {
 
       <style>{`
         @media (max-width: 640px) {
+          .arch-bento-card {
+            padding: 1.25rem !important;
+          }
           .arch-nodes-grid {
             grid-template-columns: 1fr 1fr !important;
             gap: 0.65rem !important;

@@ -32,8 +32,28 @@ export const Navbar = ({ onOpenAiModal }) => {
     { label: 'Contact', href: '#contact' }
   ];
 
+  const handleNavClick = (e, href, label) => {
+    e.preventDefault();
+    setActiveNav(label);
+    setMobileMenuOpen(false);
+
+    const targetId = href.replace('#', '');
+    if (targetId === 'about' || !targetId) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+
+    setTimeout(() => {
+      const targetElement = document.getElementById(targetId);
+      if (targetElement) {
+        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 50);
+  };
+
   return (
     <header
+      className="navbar-header"
       style={{
         position: 'fixed',
         top: 0,
@@ -121,7 +141,7 @@ export const Navbar = ({ onOpenAiModal }) => {
               <a
                 key={link.label}
                 href={link.href}
-                onClick={() => setActiveNav(link.label)}
+                onClick={(e) => handleNavClick(e, link.href, link.label)}
                 style={{
                   fontSize: '0.9rem',
                   fontWeight: isActive ? 700 : 500,
@@ -163,6 +183,7 @@ export const Navbar = ({ onOpenAiModal }) => {
             whileHover={{ scale: 1.04, y: -1 }}
             whileTap={{ scale: 0.96 }}
             href="#contact"
+            className="nav-remote-pill"
             style={{
               display: 'inline-flex',
               alignItems: 'center',
@@ -181,8 +202,8 @@ export const Navbar = ({ onOpenAiModal }) => {
             }}
           >
             <span style={{ width: '7px', height: '7px', borderRadius: '50%', background: '#10b981', boxShadow: '0 0 6px rgba(16, 185, 129, 0.8)', flexShrink: 0 }} />
-            <span style={{ whiteSpace: 'nowrap' }}>Open to Remote</span>
-            <ChevronRight size={13} color="var(--text-muted)" style={{ flexShrink: 0 }} />
+            <span className="remote-pill-text" style={{ whiteSpace: 'nowrap' }}>Open to Remote</span>
+            <ChevronRight size={13} color="var(--text-muted)" className="remote-pill-arrow" style={{ flexShrink: 0 }} />
           </motion.a>
 
           {/* Ask AI Trigger Button */}
@@ -267,18 +288,19 @@ export const Navbar = ({ onOpenAiModal }) => {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.25 }}
+            className="mobile-nav-drawer"
             style={{
               position: 'absolute',
               top: '100%',
               left: 0,
               right: 0,
-              background: 'var(--bg-card)',
-              borderBottom: '1px solid var(--border-color)',
+              background: '#f4f9f1',
+              borderBottom: '2px solid var(--google-blue)',
               padding: '1.5rem',
               display: 'flex',
               flexDirection: 'column',
-              gap: '1rem',
-              boxShadow: '0 10px 25px rgba(0, 0, 0, 0.1)',
+              gap: '0.85rem',
+              boxShadow: '0 16px 40px rgba(0, 0, 0, 0.16)',
               overflow: 'hidden'
             }}
           >
@@ -286,33 +308,41 @@ export const Navbar = ({ onOpenAiModal }) => {
               <a
                 key={link.label}
                 href={link.href}
-                onClick={() => {
-                  setActiveNav(link.label);
-                  setMobileMenuOpen(false);
-                }}
+                onClick={(e) => handleNavClick(e, link.href, link.label)}
                 style={{
-                  fontSize: '1rem',
-                  fontWeight: 600,
-                  color: 'var(--text-primary)',
+                  fontSize: '1.02rem',
+                  fontWeight: 700,
+                  color: '#0f172a',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'space-between',
-                  padding: '0.5rem 0',
-                  borderBottom: '1px solid var(--border-subtle)'
+                  padding: '0.65rem 0.5rem',
+                  borderRadius: '8px',
+                  background: 'rgba(255, 255, 255, 0.65)',
+                  border: '1px solid rgba(127, 191, 154, 0.3)'
                 }}
               >
                 <span>{link.label}</span>
-                <ChevronRight size={16} color="var(--text-muted)" />
+                <ChevronRight size={18} color="var(--google-blue)" />
               </a>
             ))}
             <a
               href={portfolioData.personal.resumeUrl}
               download="Bhavesh_Rathod_GenAI_Engineer_Resume.pdf"
               className="btn-primary"
-              style={{ marginTop: '0.5rem', width: '100%', borderRadius: '9999px', background: 'var(--google-blue)' }}
+              style={{ 
+                marginTop: '0.5rem', 
+                width: '100%', 
+                justifyContent: 'center', 
+                borderRadius: '9999px', 
+                background: 'var(--google-blue)', 
+                color: '#ffffff',
+                fontWeight: 700,
+                padding: '0.85rem'
+              }}
               onClick={() => setMobileMenuOpen(false)}
             >
-              <Download size={16} />
+              <Download size={17} />
               <span>Download Resume PDF</span>
             </a>
           </motion.div>
@@ -329,6 +359,15 @@ export const Navbar = ({ onOpenAiModal }) => {
           }
         }
         @media (max-width: 1023px) {
+          .navbar-header {
+            background: rgba(244, 249, 241, 0.98) !important;
+            backdrop-filter: blur(20px) !important;
+            -webkit-backdrop-filter: blur(20px) !important;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06) !important;
+          }
+          .mobile-nav-drawer {
+            background: #f4f9f1 !important;
+          }
           .desktop-nav {
             display: none !important;
           }
@@ -340,9 +379,18 @@ export const Navbar = ({ onOpenAiModal }) => {
           .hide-mobile {
             display: none !important;
           }
+          .nav-remote-pill .remote-pill-arrow {
+            display: none !important;
+          }
+          .nav-remote-pill {
+            padding: 0.4rem 0.75rem !important;
+          }
         }
         @media (max-width: 480px) {
           .hide-xs {
+            display: none !important;
+          }
+          .nav-remote-pill {
             display: none !important;
           }
         }

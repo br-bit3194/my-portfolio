@@ -81,7 +81,7 @@ export const Contact = () => {
               style={{ borderRadius: '1.25rem' }}
             >
               <div 
-                className="bento-card" 
+                className="bento-card contact-bento-card" 
                 style={{ 
                   padding: '2.5rem',
                   boxShadow: 'var(--shadow-md)'
@@ -269,6 +269,14 @@ export const Contact = () => {
         </div>
 
       </div>
+
+      <style>{`
+        @media (max-width: 640px) {
+          .contact-bento-card {
+            padding: 1.35rem !important;
+          }
+        }
+      `}</style>
     </section>
   );
 };

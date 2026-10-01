@@ -423,7 +423,7 @@ export const Experience = () => {
                       boxShadow: '0 12px 35px rgba(0, 0, 0, 0.06)'
                     }}
                   >
-                    <div style={{ padding: '2.5rem', position: 'relative' }}>
+                    <div className="quest-spotlight-inner" style={{ padding: '2.5rem', position: 'relative' }}>
                       <div className="google-strip" />
 
                     {/* Top Level Metadata Bar */}
@@ -683,8 +683,14 @@ export const Experience = () => {
 
       <style>{`
         @media (max-width: 768px) {
+          .quest-spotlight-inner {
+            padding: 1.35rem !important;
+          }
           .rpg-level-track {
-            gap: 0.4rem !important;
+            gap: 0.35rem !important;
+          }
+          .rpg-level-track > div {
+            padding: 0.65rem 0.4rem !important;
           }
           .quest-time-box {
             text-align: left !important;

@@ -305,7 +305,7 @@ export const AiAssistantModal = ({ isOpen, onClose }) => {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.92, y: 20 }}
             transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-            className="glass-card"
+            className="glass-card ai-modal-card"
             style={{
               width: '100%',
               maxWidth: '720px',
@@ -663,6 +663,17 @@ export const AiAssistantModal = ({ isOpen, onClose }) => {
           </motion.div>
         </motion.div>
       )}
+
+      <style>{`
+        @media (max-width: 640px) {
+          .ai-modal-card {
+            width: 95vw !important;
+            height: 90vh !important;
+            max-height: none !important;
+            border-radius: 1rem !important;
+          }
+        }
+      `}</style>
     </AnimatePresence>
   );
 };

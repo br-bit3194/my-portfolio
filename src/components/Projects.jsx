@@ -86,7 +86,7 @@ export const Projects = () => {
                   boxShadow: '0 12px 36px rgba(249, 171, 0, 0.08)'
                 }}
               >
-                <div style={{ padding: '2.5rem', position: 'relative', height: '100%' }}>
+                <div className="maestro-spotlight-inner" style={{ padding: '2.5rem', position: 'relative', height: '100%' }}>
                   <div className="google-strip" />
 
                   {/* Top Badge Ribbon */}
@@ -221,7 +221,7 @@ export const Projects = () => {
         {/* ========================================================================= */}
         {/* OTHER PRODUCTION PROJECTS BENTO GRID */}
         {/* ========================================================================= */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))', gap: '1.5rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 300px), 1fr))', gap: '1.5rem' }}>
           {otherProjects.map((proj, idx) => (
             <motion.div
               key={proj.id}
@@ -255,6 +255,7 @@ export const Projects = () => {
                   style={{ height: '100%' }}
                 >
                   <div 
+                    className="project-card-inner"
                     style={{
                       height: '100%',
                       padding: '2rem',
@@ -343,6 +344,14 @@ export const Projects = () => {
         @media (min-width: 1024px) {
           .maestro-grid {
             grid-template-columns: 1.1fr 0.9fr !important;
+          }
+        }
+        @media (max-width: 640px) {
+          .maestro-spotlight-inner {
+            padding: 1.35rem !important;
+          }
+          .project-card-inner {
+            padding: 1.25rem !important;
           }
         }
       `}</style>

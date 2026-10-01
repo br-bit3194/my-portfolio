@@ -111,7 +111,7 @@ export const Certifications = () => {
                   boxShadow: '0 12px 32px rgba(26, 115, 232, 0.12)'
                 }}
               >
-                <div style={{ padding: '2.5rem', position: 'relative', height: '100%' }}>
+                <div className="gcp-spotlight-inner" style={{ padding: '2.5rem', position: 'relative', height: '100%' }}>
                   <div className="google-strip" />
 
                   <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '2rem' }} className="gcp-spotlight-grid">
@@ -314,7 +314,7 @@ export const Certifications = () => {
         {/* ========================================================================= */}
         <motion.div 
           layout
-          style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '1.5rem', marginBottom: '3rem' }}
+          style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 290px), 1fr))', gap: '1.5rem', marginBottom: '3rem' }}
         >
           <AnimatePresence>
             {filteredItems.map((item) => {
@@ -449,7 +449,7 @@ export const Certifications = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="bento-card"
+          className="bento-card education-card"
           style={{
             padding: '2rem 2.5rem',
             display: 'flex',
@@ -504,6 +504,14 @@ export const Certifications = () => {
         @media (min-width: 900px) {
           .gcp-spotlight-grid {
             grid-template-columns: 1.3fr 0.7fr !important;
+          }
+        }
+        @media (max-width: 640px) {
+          .gcp-spotlight-inner {
+            padding: 1.35rem !important;
+          }
+          .education-card {
+            padding: 1.25rem !important;
           }
         }
       `}</style>

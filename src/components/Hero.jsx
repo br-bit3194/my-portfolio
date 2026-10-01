@@ -162,9 +162,9 @@ export const Hero = ({ onOpenAiModal }) => {
           style={{
             display: 'grid',
             gridTemplateColumns: '1fr',
-            gap: '2rem',
+            gap: 'clamp(1.5rem, 3vw, 2.5rem)',
             alignItems: 'center',
-            minHeight: '780px'
+            width: '100%'
           }}
           className="hero-layout-grid"
         >
@@ -176,7 +176,7 @@ export const Hero = ({ onOpenAiModal }) => {
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            style={{ maxWidth: '560px' }}
+            style={{ width: '100%', maxWidth: '620px' }}
             className="hero-left-content"
           >
 
@@ -447,6 +447,7 @@ export const Hero = ({ onOpenAiModal }) => {
                   href={personal.linkedin}
                   target="_blank"
                   rel="noreferrer"
+                  className="btn-hero-secondary"
                   style={{
                     display: 'inline-flex',
                     alignItems: 'center',
@@ -608,7 +609,8 @@ export const Hero = ({ onOpenAiModal }) => {
               flexDirection: 'column',
               alignItems: 'flex-end',
               gap: '1.25rem',
-              maxWidth: '380px',
+              width: '100%',
+              maxWidth: '440px',
               marginLeft: 'auto'
             }}
             className="hero-right-content"
@@ -745,7 +747,7 @@ export const Hero = ({ onOpenAiModal }) => {
 
         @media (min-width: 900px) {
           .hero-layout-grid {
-            grid-template-columns: 1.15fr 0.85fr !important;
+            grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr) !important;
           }
           .hero-bg-poster {
             display: block !important;
@@ -763,7 +765,7 @@ export const Hero = ({ onOpenAiModal }) => {
             display: block !important;
           }
           .hero-poster-section {
-            padding-top: 5rem !important;
+            padding-top: 4.75rem !important;
             padding-bottom: 2.5rem !important;
           }
           .hero-bg-poster {
@@ -789,10 +791,10 @@ export const Hero = ({ onOpenAiModal }) => {
             display: none !important;
           }
           .hero-poster-section {
-            padding-top: 4.75rem !important;
+            padding-top: 4.25rem !important;
             padding-bottom: 2rem !important;
           }
-          .btn-hero-primary {
+          .btn-hero-primary, .btn-hero-secondary {
             width: 100% !important;
             justify-content: center !important;
           }
@@ -800,8 +802,11 @@ export const Hero = ({ onOpenAiModal }) => {
 
         @media (max-width: 480px) {
           .hero-layout-grid {
-            gap: 1.5rem !important;
+            gap: 1.25rem !important;
             min-height: auto !important;
+          }
+          .hero-left-content h1 {
+            font-size: clamp(2.35rem, 11vw, 3.25rem) !important;
           }
         }
       `}</style>
