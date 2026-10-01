@@ -322,7 +322,7 @@ export const Hero = ({ onOpenAiModal }) => {
                         target.src = '/photo.jpeg';
                       } else if (!target.dataset.tried2) {
                         target.dataset.tried2 = 'true';
-                        target.src = '/cropped_poster.png';
+                        target.src = '/hero.png';
                       }
                     }}
                     style={{
