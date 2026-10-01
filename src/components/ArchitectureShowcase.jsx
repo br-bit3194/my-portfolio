@@ -102,6 +102,7 @@ export const ArchitectureShowcase = () => {
 
           {/* Interactive Flow Nodes */}
           <div 
+            className="arch-nodes-grid"
             style={{ 
               display: 'grid', 
               gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', 
@@ -231,6 +232,20 @@ export const ArchitectureShowcase = () => {
         </div>
 
       </div>
+
+      <style>{`
+        @media (max-width: 640px) {
+          .arch-nodes-grid {
+            grid-template-columns: 1fr 1fr !important;
+            gap: 0.65rem !important;
+          }
+        }
+        @media (max-width: 420px) {
+          .arch-nodes-grid {
+            grid-template-columns: 1fr !important;
+          }
+        }
+      `}</style>
     </section>
   );
 };

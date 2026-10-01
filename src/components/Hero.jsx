@@ -563,17 +563,35 @@ export const Hero = ({ onOpenAiModal }) => {
             background-position: center top !important;
           }
           .hero-scrim {
-            background: rgba(255, 255, 255, 0.94) !important;
+            background: rgba(255, 255, 255, 0.95) !important;
+          }
+          .hero-left-content {
+            max-width: 100% !important;
           }
           .hero-right-content {
             align-items: stretch !important;
             margin-left: 0 !important;
             max-width: 100% !important;
+            margin-top: 1rem;
           }
         }
         @media (max-width: 640px) {
           .hide-mobile {
             display: none !important;
+          }
+          .hero-poster-section {
+            padding-top: 4.75rem !important;
+            padding-bottom: 2rem !important;
+          }
+          .btn-hero-primary {
+            width: 100% !important;
+            justify-content: center !important;
+          }
+        }
+        @media (max-width: 480px) {
+          .hero-layout-grid {
+            gap: 1.5rem !important;
+            min-height: auto !important;
           }
         }
       `}</style>

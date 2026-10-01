@@ -189,17 +189,32 @@ button {
   color: var(--text-primary);
 }
 
-@media (min-width: 768px) {
+/* Responsive Typography & Spacing */
+@media (max-width: 768px) {
+  .section {
+    padding: 4rem 0 !important;
+  }
+  .section-header {
+    margin-bottom: 2.25rem !important;
+  }
   .section-title {
-    font-size: 2.75rem;
+    font-size: 1.85rem !important;
+  }
+  .section-subtitle {
+    font-size: 0.92rem !important;
+  }
+  .container {
+    padding: 0 1.15rem !important;
   }
 }
 
-.section-subtitle {
-  font-size: 1.05rem;
-  color: var(--text-secondary);
-  max-width: 620px;
-  margin: 0 auto;
+@media (max-width: 480px) {
+  .section {
+    padding: 3.25rem 0 !important;
+  }
+  .section-title {
+    font-size: 1.6rem !important;
+  }
 }
 
 /* 21st.dev Style Bento & Glass Cards */
@@ -217,6 +232,13 @@ button {
   border-color: var(--border-hover);
   transform: translateY(-2px);
   box-shadow: var(--shadow-md);
+}
+
+@media (max-width: 640px) {
+  .bento-card {
+    border-radius: 1rem !important;
+    padding: 1.35rem !important;
+  }
 }
 
 /* Buttons */
@@ -333,8 +355,16 @@ button {
 
 @media (max-width: 900px) {
   .hero-poster-section {
-    padding-top: 5.5rem !important;
+    padding-top: 5rem !important;
+    padding-bottom: 2.5rem !important;
     min-height: auto !important;
+  }
+}
+
+/* Touch targets for mobile */
+@media (max-width: 640px) {
+  button, a {
+    min-height: 38px;
   }
 }
 
