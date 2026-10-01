@@ -224,12 +224,59 @@ export const Hero = ({ onOpenAiModal }) => {
                 fontSize: '1.02rem', 
                 lineHeight: 1.6, 
                 color: '#475569', 
-                marginBottom: '1.75rem',
+                marginBottom: '1.5rem',
                 maxWidth: '490px'
               }}
             >
               Building production-grade AI systems with Generative AI, RAG and Agentic AI, backed by 5+ years of experience in scalable backend systems and cloud-native solutions.
             </p>
+
+            {/* Mobile-Only Dedicated High-Res Landing Poster Showcase */}
+            <div className="mobile-hero-poster-frame" style={{ marginBottom: '1.75rem' }}>
+              <div 
+                style={{
+                  position: 'relative',
+                  width: '100%',
+                  borderRadius: '1.25rem',
+                  overflow: 'hidden',
+                  border: '1.5px solid rgba(226, 232, 240, 0.9)',
+                  boxShadow: '0 10px 30px rgba(0, 0, 0, 0.08)',
+                  background: '#ffffff'
+                }}
+              >
+                <img 
+                  src="/hero.png" 
+                  alt="Bhavesh Rathod - AI Engineer & Senior Software Engineer"
+                  style={{
+                    width: '100%',
+                    height: 'auto',
+                    maxHeight: '380px',
+                    objectFit: 'cover',
+                    objectPosition: 'center 20%',
+                    display: 'block'
+                  }}
+                />
+                {/* Subtle bottom gradient & floating badge on mobile poster */}
+                <div 
+                  style={{
+                    position: 'absolute',
+                    inset: 0,
+                    background: 'linear-gradient(to top, rgba(15, 23, 42, 0.75) 0%, rgba(15, 23, 42, 0.1) 40%, transparent 100%)',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'flex-end',
+                    padding: '1rem'
+                  }}
+                >
+                  <div style={{ color: '#ffffff', fontWeight: 800, fontSize: '1.1rem', textShadow: '0 2px 4px rgba(0,0,0,0.5)' }}>
+                    Bhaveshkumar Rathod
+                  </div>
+                  <div style={{ color: '#93c5fd', fontSize: '0.8rem', fontWeight: 700, fontFamily: 'var(--font-mono)' }}>
+                    AI Engineer • Senior Software Engineer
+                  </div>
+                </div>
+              </div>
+            </div>
 
             {/* Action Buttons */}
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.85rem', alignItems: 'center', marginBottom: '2rem' }}>
@@ -553,17 +600,25 @@ export const Hero = ({ onOpenAiModal }) => {
       </div>
 
       <style>{`
+        .mobile-hero-poster-frame {
+          display: none;
+        }
+
         @media (min-width: 1024px) {
           .hero-layout-grid {
             grid-template-columns: 1.15fr 0.85fr !important;
           }
         }
+
         @media (max-width: 1023px) {
-          .hero-poster-section {
-            background-position: center top !important;
+          .mobile-hero-poster-frame {
+            display: block !important;
+          }
+          .hero-bg-poster {
+            display: none !important;
           }
           .hero-scrim {
-            background: rgba(255, 255, 255, 0.95) !important;
+            display: none !important;
           }
           .hero-left-content {
             max-width: 100% !important;
@@ -572,9 +627,10 @@ export const Hero = ({ onOpenAiModal }) => {
             align-items: stretch !important;
             margin-left: 0 !important;
             max-width: 100% !important;
-            margin-top: 1rem;
+            margin-top: 1.5rem;
           }
         }
+
         @media (max-width: 640px) {
           .hide-mobile {
             display: none !important;
@@ -588,6 +644,7 @@ export const Hero = ({ onOpenAiModal }) => {
             justify-content: center !important;
           }
         }
+
         @media (max-width: 480px) {
           .hero-layout-grid {
             gap: 1.5rem !important;
