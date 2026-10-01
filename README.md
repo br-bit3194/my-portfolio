@@ -18,7 +18,7 @@
 
 > ### 🚀 𝗦𝗼𝗺𝗲𝘁𝗵𝗶𝗻𝗴 𝗽𝗲𝗿𝘀𝗼𝗻𝗮𝗹 𝗜’𝘃𝗲 𝗯𝗲𝗲𝗻 𝗯𝘂𝗶𝗹𝗱𝗶𝗻𝗴 𝗶𝘀 𝗳𝗶𝗻𝗮𝗹𝗹𝘆 𝗹𝗶𝘃𝗲.
 > **My first personal portfolio.** 🎉  
-> 🔗 **[https://bhavesh-rathod.vercel.app/](https://bhavesh-rathod.vercel.app/)** • **[LinkedIn Announcement](https://lnkd.in/dmqVbxfK)**
+> 🔗 **[https://bhavesh-rathod.vercel.app/](https://bhavesh-rathod.vercel.app/)** • **[Read on LinkedIn](https://www.linkedin.com/posts/bhaveshkumar-rathod_ai-generativeai-agenticai-ugcPost-7511479848708685825-J7cL/)**
 >
 > *I’ve spent years building software for products and teams, but I’d never built a website that was completely my own.*  
 > *So I decided to give it a try.*  
