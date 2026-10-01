@@ -44,6 +44,16 @@ export const Hero = ({ onOpenAiModal }) => {
     "Senior Software Engineer"
   ];
   const [roleIndex, setRoleIndex] = useState(0);
+  const [isDesktop, setIsDesktop] = useState(typeof window !== 'undefined' ? window.innerWidth >= 900 : true);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsDesktop(window.innerWidth >= 900);
+    };
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -341,9 +351,10 @@ export const Hero = ({ onOpenAiModal }) => {
 
               {/* Centered Focused Portrait Frame (Direct from Poster) */}
               <Tilt
+                tiltEnable={isDesktop}
+                glareEnable={isDesktop}
                 tiltMaxAngleX={8}
                 tiltMaxAngleY={8}
-                glareEnable={true}
                 glareMaxOpacity={0.15}
                 glareColor="#ffffff"
                 glarePosition="all"
@@ -620,9 +631,10 @@ export const Hero = ({ onOpenAiModal }) => {
             {floatingCards.map((card, idx) => (
               <Tilt
                 key={idx}
+                tiltEnable={isDesktop}
+                glareEnable={isDesktop}
                 tiltMaxAngleX={8}
                 tiltMaxAngleY={8}
-                glareEnable={true}
                 glareMaxOpacity={0.15}
                 glareColor="#ffffff"
                 glarePosition="all"
@@ -631,13 +643,14 @@ export const Hero = ({ onOpenAiModal }) => {
                 <motion.a
                   href={card.href}
                   className="floating-glass-pill"
-                  whileHover={{ scale: 1.02 }}
+                  whileHover={isDesktop ? { scale: 1.02, y: -2 } : {}}
+                  whileTap={{ scale: 0.98 }}
                   style={{
                     width: '100%',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'space-between',
-                    padding: '1.1rem 1.35rem',
+                    padding: '1.05rem 1.25rem',
                     borderRadius: '1.25rem',
                     background: 'var(--bg-card)',
                     backdropFilter: 'blur(16px)',
@@ -647,11 +660,11 @@ export const Hero = ({ onOpenAiModal }) => {
                     textDecoration: 'none'
                   }}
                 >
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.9rem' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem', minWidth: 0 }}>
                     <div
                       style={{
-                        width: '44px',
-                        height: '44px',
+                        width: '42px',
+                        height: '42px',
                         borderRadius: '12px',
                         background: card.bgIcon,
                         display: 'flex',
@@ -662,19 +675,19 @@ export const Hero = ({ onOpenAiModal }) => {
                     >
                       {card.icon}
                     </div>
-                    <div>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                        <span style={{ fontSize: '1rem', fontWeight: 800, color: '#0f172a', lineHeight: 1.2 }}>
+                    <div style={{ minWidth: 0 }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', flexWrap: 'wrap' }}>
+                        <span style={{ fontSize: '0.98rem', fontWeight: 800, color: '#0f172a', lineHeight: 1.2 }}>
                           {card.title}
                         </span>
-                        <span style={{ fontSize: '0.68rem', padding: '0.1rem 0.4rem', borderRadius: '4px', background: 'rgba(241, 245, 249, 0.9)', color: '#64748b', fontWeight: 700, fontFamily: 'var(--font-mono)' }}>
+                        <span style={{ fontSize: '0.68rem', padding: '0.12rem 0.45rem', borderRadius: '4px', background: 'rgba(26, 115, 232, 0.08)', color: 'var(--google-blue)', fontWeight: 700, fontFamily: 'var(--font-mono)' }}>
                           {card.tag}
                         </span>
                       </div>
-                      <div style={{ fontSize: '0.78rem', color: '#64748b', marginTop: '0.2rem', lineHeight: 1.3 }}>
+                      <div style={{ fontSize: '0.8rem', color: '#475569', marginTop: '0.2rem', lineHeight: 1.3 }}>
                         {card.subtitle}
                       </div>
-                      <div style={{ fontSize: '0.72rem', color: '#94a3b8', marginTop: '0.1rem', fontFamily: 'var(--font-mono)' }}>
+                      <div style={{ fontSize: '0.72rem', color: '#64748b', marginTop: '0.15rem', fontFamily: 'var(--font-mono)' }}>
                         {card.detail}
                       </div>
                     </div>
@@ -685,12 +698,14 @@ export const Hero = ({ onOpenAiModal }) => {
                       width: '28px',
                       height: '28px',
                       borderRadius: '50%',
-                      background: 'rgba(241, 245, 249, 0.8)',
+                      background: 'var(--bg-input)',
+                      border: '1px solid var(--border-subtle)',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      color: '#64748b',
-                      flexShrink: 0
+                      color: 'var(--google-blue)',
+                      flexShrink: 0,
+                      marginLeft: '0.5rem'
                     }}
                   >
                     <ChevronRight size={16} />
@@ -701,7 +716,7 @@ export const Hero = ({ onOpenAiModal }) => {
 
             {/* Handwritten Signature / Callout */}
             <motion.div
-              animate={{ rotate: [-4, -2, -4] }}
+              animate={isDesktop ? { rotate: [-4, -2, -4] } : {}}
               transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
               style={{
                 marginTop: '1.5rem',
