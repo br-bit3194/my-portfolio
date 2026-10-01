@@ -50,7 +50,7 @@ export const Navbar = ({ theme, toggleTheme, onOpenAiModal }) => {
     >
       <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         
-        {/* Brand Logo */}
+        {/* Brand Logo with Profile Photo */}
         <a 
           href="#" 
           style={{ 
@@ -64,18 +64,26 @@ export const Navbar = ({ theme, toggleTheme, onOpenAiModal }) => {
             style={{
               width: '36px',
               height: '36px',
-              borderRadius: '8px',
-              background: '#0f172a',
+              borderRadius: '50%',
+              padding: '2px',
+              background: 'var(--google-gradient)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              color: '#ffffff',
-              fontWeight: 900,
-              fontSize: '1.05rem',
-              letterSpacing: '-0.02em'
+              flexShrink: 0,
+              boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)'
             }}
           >
-            BR
+            <img 
+              src={portfolioData.personal.avatarUrl} 
+              alt="Bhavesh Rathod"
+              style={{
+                width: '100%',
+                height: '100%',
+                borderRadius: '50%',
+                objectFit: 'cover'
+              }}
+            />
           </div>
           <div style={{ fontWeight: 800, fontSize: '1.05rem', letterSpacing: '-0.02em', color: '#0f172a' }}>
             Bhavesh Rathod
