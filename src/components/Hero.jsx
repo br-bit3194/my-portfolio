@@ -7,15 +7,17 @@ import {
   ChevronRight, 
   Bot, 
   Database, 
-  Cloud,
-  MoreHorizontal,
-  Users,
-  ShieldCheck,
-  Sparkles
+  Cloud, 
+  MoreHorizontal, 
+  Users, 
+  ShieldCheck, 
+  Sparkles, 
+  Trophy 
 } from 'lucide-react';
 import { LinkedinIcon } from './Icons';
 import { 
   GoogleCloudLogo, 
+  LinkedinOfficialLogo,
   AwsLogo, 
   PythonLogo, 
   FastApiLogo, 
@@ -28,34 +30,34 @@ export const Hero = ({ onOpenAiModal }) => {
 
   const floatingCards = [
     {
-      title: "AI Agents",
-      subtitle: "Multi-Agent Systems",
-      detail: "A2A • MCP • Orchestration",
+      title: "AI Agent Systems",
+      subtitle: "Autonomous Multi-Agent Systems",
+      detail: "A2A • MCP • Architecture Blueprints",
       action: "View Architecture",
       icon: <Bot size={22} color="#1D68FE" />,
       bgIcon: "rgba(29, 104, 254, 0.12)",
       href: "#architecture",
-      tag: "Agentic Systems"
+      tag: "Architecture"
     },
     {
-      title: "RAG & LLMs",
-      subtitle: "Enterprise GenAI & RAG",
-      detail: "MAESTRO • AWS Winner",
+      title: "GenAI Projects & RAG",
+      subtitle: "Production GenAI & RAG Systems",
+      detail: "MAESTRO • AWS SuperHacks Winner",
       action: "Explore Projects",
       icon: <Database size={22} color="#10B981" />,
       bgIcon: "rgba(16, 185, 129, 0.12)",
       href: "#projects",
-      tag: "Production RAG"
+      tag: "Projects"
     },
     {
-      title: "Cloud & AI",
-      subtitle: "Vertex AI • Gemini • Bedrock",
-      detail: "GCP • AWS • BigQuery",
-      action: "View Skill Stack",
+      title: "Cloud & AI Skills",
+      subtitle: "Vertex AI • Bedrock • Distributed Stack",
+      detail: "GCP • AWS • BigQuery • Python",
+      action: "View Skills",
       icon: <Cloud size={22} color="#F59E0B" />,
       bgIcon: "rgba(245, 158, 11, 0.12)",
       href: "#skills",
-      tag: "Cloud Stack"
+      tag: "Skills Matrix"
     }
   ];
 
@@ -129,44 +131,50 @@ export const Hero = ({ onOpenAiModal }) => {
           <div style={{ maxWidth: '560px' }} className="hero-left-content">
             
             {/* Top Featured Credentials Badge: Google Cloud Certified GenAI Leader */}
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.6rem', alignItems: 'center', marginBottom: '0.85rem' }}>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.65rem', alignItems: 'center', marginBottom: '1rem' }}>
               
               <div 
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
-                  gap: '0.45rem',
-                  padding: '0.35rem 0.85rem',
+                  gap: '0.55rem',
+                  padding: '0.4rem 0.95rem',
                   borderRadius: '9999px',
-                  background: 'rgba(26, 115, 232, 0.08)',
-                  border: '1px solid rgba(26, 115, 232, 0.3)',
+                  background: '#ffffff',
+                  border: '1px solid rgba(26, 115, 232, 0.35)',
                   color: '#1a73e8',
-                  fontSize: '0.8rem',
-                  fontWeight: 700,
-                  boxShadow: '0 2px 8px rgba(26, 115, 232, 0.12)'
+                  fontSize: '0.82rem',
+                  fontWeight: 800,
+                  boxShadow: '0 2px 10px rgba(26, 115, 232, 0.12)'
                 }}
               >
-                <GoogleCloudLogo size={16} />
+                <GoogleCloudLogo size={18} />
                 <span>Google Cloud Certified Generative AI Leader</span>
               </div>
 
-              <div 
+              <a
+                href={personal.linkedin}
+                target="_blank"
+                rel="noreferrer"
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
-                  gap: '0.35rem',
-                  padding: '0.35rem 0.75rem',
+                  gap: '0.5rem',
+                  padding: '0.4rem 0.9rem',
                   borderRadius: '9999px',
-                  background: 'rgba(10, 102, 194, 0.08)',
-                  border: '1px solid rgba(10, 102, 194, 0.25)',
+                  background: '#ffffff',
+                  border: '1px solid rgba(10, 102, 194, 0.35)',
                   color: '#0a66c2',
-                  fontSize: '0.8rem',
-                  fontWeight: 700
+                  fontSize: '0.82rem',
+                  fontWeight: 800,
+                  textDecoration: 'none',
+                  boxShadow: '0 2px 10px rgba(10, 102, 194, 0.12)',
+                  transition: 'all 0.2s ease'
                 }}
               >
-                <Users size={14} />
+                <LinkedinOfficialLogo size={18} />
                 <span>5K+ LinkedIn Family</span>
-              </div>
+              </a>
 
             </div>
 
@@ -205,7 +213,7 @@ export const Hero = ({ onOpenAiModal }) => {
               <span>AI Engineer</span>
               <span style={{ color: '#1d68fe' }}>•</span>
               <span>Senior Software Engineer</span>
-              <span style={{ fontSize: '0.78rem', background: 'rgba(16, 185, 129, 0.1)', color: '#059669', padding: '0.2rem 0.55rem', borderRadius: '6px', fontWeight: 700 }}>
+              <span style={{ fontSize: '0.78rem', background: 'rgba(16, 185, 129, 0.12)', color: '#059669', padding: '0.2rem 0.55rem', borderRadius: '6px', fontWeight: 700, border: '1px solid rgba(16, 185, 129, 0.25)' }}>
                 5+ Years Exp
               </span>
             </div>
@@ -279,70 +287,86 @@ export const Hero = ({ onOpenAiModal }) => {
                 }}
               >
                 <span>Get In Touch</span>
-                <div 
-                  style={{ 
-                    width: '22px', 
-                    height: '22px', 
-                    borderRadius: '4px', 
-                    background: '#0a66c2', 
-                    display: 'flex', 
-                    alignItems: 'center', 
-                    justifyContent: 'center',
-                    color: '#ffffff'
-                  }}
-                >
-                  <LinkedinIcon size={14} color="#ffffff" />
-                </div>
+                <LinkedinOfficialLogo size={18} />
               </a>
 
             </div>
 
-            {/* Trust Metabar */}
+            {/* Solid High-Contrast Trust Metabar (100% Opaque & Visible) */}
             <div 
               style={{ 
                 display: 'flex', 
                 alignItems: 'center', 
-                gap: '1.25rem', 
+                gap: '0.85rem', 
                 flexWrap: 'wrap',
                 paddingBottom: '1.75rem',
                 borderBottom: '1px solid rgba(226, 232, 240, 0.8)',
                 marginBottom: '1.75rem'
               }}
             >
-              {/* Location */}
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.55rem' }}>
-                <div style={{ width: '32px', height: '32px', borderRadius: '50%', background: 'rgba(29, 104, 254, 0.08)', color: '#1d68fe', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <MapPin size={16} />
+              {/* Location Pill */}
+              <div 
+                style={{ 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  gap: '0.65rem',
+                  background: '#ffffff',
+                  padding: '0.45rem 0.85rem',
+                  borderRadius: '12px',
+                  border: '1px solid #e2e8f0',
+                  boxShadow: '0 2px 6px rgba(0,0,0,0.04)'
+                }}
+              >
+                <div style={{ width: '28px', height: '28px', borderRadius: '8px', background: 'rgba(29, 104, 254, 0.1)', color: '#1d68fe', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <MapPin size={15} />
                 </div>
                 <div>
                   <div style={{ fontSize: '0.82rem', fontWeight: 800, color: '#0f172a' }}>Ahmedabad, India</div>
-                  <div style={{ fontSize: '0.72rem', color: '#64748b' }}>Based in India</div>
+                  <div style={{ fontSize: '0.7rem', color: '#64748b' }}>Based in India</div>
                 </div>
               </div>
 
-              <div style={{ width: '1px', height: '24px', background: '#e2e8f0' }} className="hide-mobile" />
-
-              {/* Remote Opportunities */}
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.55rem' }}>
-                <div style={{ width: '32px', height: '32px', borderRadius: '50%', background: 'rgba(16, 185, 129, 0.08)', color: '#10b981', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <Globe size={16} />
+              {/* Remote Opportunities Pill */}
+              <div 
+                style={{ 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  gap: '0.65rem',
+                  background: '#ffffff',
+                  padding: '0.45rem 0.85rem',
+                  borderRadius: '12px',
+                  border: '1px solid #e2e8f0',
+                  boxShadow: '0 2px 6px rgba(0,0,0,0.04)'
+                }}
+              >
+                <div style={{ width: '28px', height: '28px', borderRadius: '8px', background: 'rgba(16, 185, 129, 0.12)', color: '#10b981', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <Globe size={15} />
                 </div>
                 <div>
                   <div style={{ fontSize: '0.82rem', fontWeight: 800, color: '#0f172a' }}>Remote Worldwide</div>
-                  <div style={{ fontSize: '0.72rem', color: '#64748b' }}>Open to Opportunities</div>
+                  <div style={{ fontSize: '0.7rem', color: '#059669', fontWeight: 600 }}>Open to Roles</div>
                 </div>
               </div>
 
-              <div style={{ width: '1px', height: '24px', background: '#e2e8f0' }} className="hide-mobile" />
-
-              {/* AWS SuperHacks 2025 Winner */}
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.55rem' }}>
-                <div style={{ width: '32px', height: '32px', borderRadius: '50%', background: 'rgba(245, 158, 11, 0.1)', color: '#d97706', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <Award size={16} />
+              {/* AWS SuperHacks 2025 Winner Pill (Solid, Opaque & Clear) */}
+              <div 
+                style={{ 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  gap: '0.65rem',
+                  background: '#ffffff',
+                  padding: '0.45rem 0.85rem',
+                  borderRadius: '12px',
+                  border: '1.5px solid rgba(245, 158, 11, 0.5)',
+                  boxShadow: '0 2px 8px rgba(245, 158, 11, 0.12)'
+                }}
+              >
+                <div style={{ width: '28px', height: '28px', borderRadius: '8px', background: '#fffbeb', color: '#d97706', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px solid rgba(245, 158, 11, 0.3)' }}>
+                  <Trophy size={15} color="#d97706" />
                 </div>
                 <div>
-                  <div style={{ fontSize: '0.82rem', fontWeight: 800, color: '#0f172a' }}>AWS SuperHacks</div>
-                  <div style={{ fontSize: '0.72rem', color: '#d97706', fontWeight: 600 }}>2025 Winner</div>
+                  <div style={{ fontSize: '0.82rem', fontWeight: 900, color: '#0f172a' }}>AWS SuperHacks</div>
+                  <div style={{ fontSize: '0.72rem', color: '#b45309', fontWeight: 800 }}>2025 Winner</div>
                 </div>
               </div>
 

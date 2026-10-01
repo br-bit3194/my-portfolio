@@ -22,13 +22,13 @@ export const Projects = () => {
         
         {/* Section Header */}
         <div className="section-header">
-          <div className="section-tag">
+          <div className="section-tag" style={{ color: 'var(--google-blue)', background: 'var(--google-blue-soft)' }}>
             <Award size={14} color="var(--google-blue)" />
-            RAG, LLMs & Production Projects
+            GenAI Projects & RAG
           </div>
-          <h2 className="section-title">Production GenAI & Engineering Projects</h2>
+          <h2 className="section-title">GenAI Projects & RAG Applications</h2>
           <p className="section-subtitle">
-            Autonomous multi-agent platforms, enterprise Vertex AI recommendation engines, and high-scale distributed backends.
+            Autonomous multi-agent platforms, MAESTRO (AWS SuperHacks 2025 Winner), enterprise Vertex AI recommendation engines, and high-scale distributed backends.
           </p>
         </div>
 

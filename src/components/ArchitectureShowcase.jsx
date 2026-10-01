@@ -39,9 +39,9 @@ export const ArchitectureShowcase = () => {
         <div className="section-header">
           <div className="section-tag" style={{ color: 'var(--google-blue)', background: 'var(--google-blue-soft)' }}>
             <Network size={14} />
-            AI Agents & Architecture
+            AI Agent Systems
           </div>
-          <h2 className="section-title">Autonomous Multi-Agent AI Systems</h2>
+          <h2 className="section-title">AI Agents & System Architecture</h2>
           <p className="section-subtitle">
             Interactive blueprints of production Multi-Agent workflows (A2A, MCP), GCP event streams, and high-concurrency FinTech data engines.
           </p>

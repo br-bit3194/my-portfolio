@@ -1,9 +1,26 @@
 import React from 'react';
 
-export const GoogleCloudLogo = ({ size = 22 }) => (
+// Official Google Cloud Logo (Exact asset provided by user)
+export const GoogleCloudLogo = ({ size = 22, style = {} }) => (
+  <img 
+    src="/google-cloud-logo.png" 
+    alt="Google Cloud" 
+    style={{ 
+      width: `${size}px`, 
+      height: `${size}px`, 
+      objectFit: 'contain',
+      display: 'inline-block',
+      verticalAlign: 'middle',
+      ...style 
+    }} 
+  />
+);
+
+// Official LinkedIn Blue Logo
+export const LinkedinOfficialLogo = ({ size = 20 }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
-    <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z" fill="#4285F4"/>
-    <path d="M19 18H6c-2.21 0-4-1.79-4-4 0-2.05 1.53-3.76 3.56-3.97l1.07-.11.5-.95C8.08 7.14 9.94 6 12 6c2.62 0 4.88 1.86 5.39 4.43l.3 1.5 1.53.11c1.56.1 2.78 1.41 2.78 2.96 0 1.65-1.35 3-3 3z" fill="#ffffff" fillOpacity="0.8"/>
+    <rect width="24" height="24" rx="4" fill="#0A66C2"/>
+    <path d="M7.05 19H4.15V9.65h2.9V19zM5.6 8.36c-.93 0-1.68-.76-1.68-1.68 0-.93.75-1.68 1.68-1.68.93 0 1.68.75 1.68 1.68 0 .92-.75 1.68-1.68 1.68zm13.4 10.64h-2.9v-4.54c0-1.08-.02-2.47-1.51-2.47-1.51 0-1.74 1.18-1.74 2.4v4.61h-2.9V9.65h2.78v1.28h.04c.39-.73 1.33-1.51 2.74-1.51 2.93 0 3.47 1.93 3.47 4.44V19z" fill="#ffffff"/>
   </svg>
 );
 
