@@ -161,7 +161,7 @@ export const portfolioData = {
         "Automated ad spot recommendations, reducing manual effort by 70%",
         "Event-driven GCP workflows with Pub/Sub, Google Cloud Storage, and BigQuery",
         "Enforced Responsible AI with custom AI Guardrails and schema validation",
-        "Powered by Google Gemini 1.5 and Google ADK agent framework"
+        "Powered by Google Gemini and Google ADK agent framework"
       ],
       techStack: ["Vertex AI", "Google Gemini", "Google ADK", "GCP Pub/Sub", "BigQuery", "GCS", "AI Guardrails", "Python"]
     },
@@ -309,7 +309,7 @@ export const portfolioData = {
       id: "gcp-genai",
       title: "GCP Event-Driven GenAI Recommendation Pipeline",
       category: "Vertex AI & Cloud Architecture",
-      description: "Real-time TV/media ad spot makegood evaluation utilizing Vertex AI Gemini 1.5, Google ADK, and Pub/Sub event streams.",
+      description: "Real-time TV/media ad spot makegood evaluation utilizing Vertex AI Gemini, Google ADK, and Pub/Sub event streams.",
       nodes: [
         { id: "1", title: "Broadcast Discrepancy", type: "input", desc: "Schedule change or preemption event detected" },
         { id: "2", title: "GCP Pub/Sub Queue", type: "core", desc: "Asynchronous high-throughput message ingestion" },
@@ -344,7 +344,7 @@ export const portfolioData = {
       brandColor: "#1a73e8",
       icon: "Award",
       featured: true,
-      tags: ["Vertex AI", "Gemini 1.5", "GenAI Strategy", "Responsible AI", "Model Governance"],
+      tags: ["Vertex AI", "Gemini", "GenAI Strategy", "Responsible AI", "Model Governance"],
       description: "Validation of strategic and technical expertise in architecting enterprise GenAI solutions on Google Cloud Platform."
     },
     {

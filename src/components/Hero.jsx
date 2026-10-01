@@ -1,4 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import Tilt from 'react-parallax-tilt';
+import confetti from 'canvas-confetti';
 import { 
   ArrowRight, 
   MapPin, 
@@ -24,9 +27,43 @@ import {
   GeminiStarLogo 
 } from './TechLogos';
 import { portfolioData } from '../data/portfolioData';
+import { ParticleCanvas } from './ui/ParticleCanvas';
+import { Magnetic } from './ui/Magnetic';
+import { Marquee } from './ui/Marquee';
+import { NumberTicker } from './ui/NumberTicker';
 
 export const Hero = ({ onOpenAiModal }) => {
   const { personal } = portfolioData;
+
+  // Kinetic Rotating Headline Roles
+  const roles = [
+    "Agentic AI Engineer",
+    "Google Cloud GenAI Leader",
+    "Autonomous Multi-Agent Builder",
+    "AWS SuperHacks 2025 Winner",
+    "Senior Software Engineer"
+  ];
+  const [roleIndex, setRoleIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setRoleIndex((prev) => (prev + 1) % roles.length);
+    }, 3200);
+    return () => clearInterval(timer);
+  }, [roles.length]);
+
+  const triggerTrophyConfetti = (e) => {
+    e.stopPropagation();
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = (rect.left + rect.width / 2) / window.innerWidth;
+    const y = (rect.top + rect.height / 2) / window.innerHeight;
+    confetti({
+      particleCount: 50,
+      spread: 60,
+      origin: { x, y },
+      colors: ['#4285f4', '#ea4335', '#fbbc05', '#34a853']
+    });
+  };
 
   const floatingCards = [
     {
@@ -61,13 +98,17 @@ export const Hero = ({ onOpenAiModal }) => {
     }
   ];
 
-  const techStack = [
-    { name: "Google Cloud", logo: <GoogleCloudLogo size={24} /> },
-    { name: "AWS", logo: <AwsLogo size={24} /> },
-    { name: "Python", logo: <PythonLogo size={24} /> },
-    { name: "FastAPI", logo: <FastApiLogo size={24} /> },
-    { name: "Gemini", logo: <GeminiStarLogo size={24} /> },
-    { name: "+ More", logo: <MoreHorizontal size={22} color="#64748B" /> }
+  const techStackMarquee = [
+    { name: "Google Cloud", logo: <GoogleCloudLogo size={20} /> },
+    { name: "AWS", logo: <AwsLogo size={20} /> },
+    { name: "Python", logo: <PythonLogo size={20} /> },
+    { name: "FastAPI", logo: <FastApiLogo size={20} /> },
+    { name: "Gemini", logo: <GeminiStarLogo size={20} /> },
+    { name: "Agent-to-Agent (A2A)", logo: <Bot size={18} color="#1a73e8" /> },
+    { name: "Model Context Protocol", logo: <Database size={18} color="#10b981" /> },
+    { name: "Amazon Bedrock", logo: <Cloud size={18} color="#f59e0b" /> },
+    { name: "Vertex AI", logo: <Sparkles size={18} color="#ea4335" /> },
+    { name: "Langfuse Observability", logo: <ShieldCheck size={18} color="#8b5cf6" /> }
   ];
 
   return (
@@ -85,6 +126,9 @@ export const Hero = ({ onOpenAiModal }) => {
         background: '#ffffff'
       }}
     >
+      {/* 21st.dev Interactive Canvas Particle Constellation */}
+      <ParticleCanvas quantity={30} color="#1a73e8" />
+
       {/* High-Resolution Center Studio Photo Background */}
       <div 
         className="hero-bg-poster"
@@ -126,70 +170,72 @@ export const Hero = ({ onOpenAiModal }) => {
         >
           
           {/* ========================================================================= */}
-          {/* LEFT COLUMN: WHO I AM, TITLE, BIO, CTA BUTTONS, TRUST BAR, TECH BAR */}
+          {/* LEFT COLUMN: WHO I AM, TITLE, BIO, CTA BUTTONS, TRUST BAR, MARQUEE BAR */}
           {/* ========================================================================= */}
-          <div style={{ maxWidth: '560px' }} className="hero-left-content">
+          <motion.div 
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            style={{ maxWidth: '560px' }} 
+            className="hero-left-content"
+          >
             
             {/* Top Featured Credentials Badge: Google Cloud Certified GenAI Leader */}
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.65rem', alignItems: 'center', marginBottom: '1rem' }}>
               
-              <a
-                href="#certifications"
-                title="Jump to Certifications & Awards"
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '0.55rem',
-                  padding: '0.4rem 0.95rem',
-                  borderRadius: '9999px',
-                  background: '#ffffff',
-                  border: '1px solid rgba(26, 115, 232, 0.35)',
-                  color: '#1a73e8',
-                  fontSize: '0.82rem',
-                  fontWeight: 800,
-                  textDecoration: 'none',
-                  boxShadow: '0 2px 10px rgba(26, 115, 232, 0.12)',
-                  transition: 'all 0.2s ease',
-                  cursor: 'pointer'
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = '#1a73e8';
-                  e.currentTarget.style.boxShadow = '0 4px 14px rgba(26, 115, 232, 0.22)';
-                  e.currentTarget.style.transform = 'translateY(-1px)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = 'rgba(26, 115, 232, 0.35)';
-                  e.currentTarget.style.boxShadow = '0 2px 10px rgba(26, 115, 232, 0.12)';
-                  e.currentTarget.style.transform = 'translateY(0)';
-                }}
-              >
-                <GoogleCloudLogo size={18} />
-                <span>Google Cloud Certified Generative AI Leader</span>
-              </a>
+              <Magnetic strength={0.2}>
+                <motion.a
+                  whileHover={{ scale: 1.04, y: -2 }}
+                  whileTap={{ scale: 0.96 }}
+                  href="#certifications"
+                  title="Jump to Certifications & Awards"
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '0.55rem',
+                    padding: '0.4rem 0.95rem',
+                    borderRadius: '9999px',
+                    background: '#ffffff',
+                    border: '1px solid rgba(26, 115, 232, 0.35)',
+                    color: '#1a73e8',
+                    fontSize: '0.82rem',
+                    fontWeight: 800,
+                    textDecoration: 'none',
+                    boxShadow: '0 2px 10px rgba(26, 115, 232, 0.12)',
+                    cursor: 'pointer'
+                  }}
+                >
+                  <GoogleCloudLogo size={18} />
+                  <span>Google Cloud Certified Generative AI Leader</span>
+                </motion.a>
+              </Magnetic>
 
-              <a
-                href={personal.linkedin}
-                target="_blank"
-                rel="noreferrer"
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '0.5rem',
-                  padding: '0.4rem 0.9rem',
-                  borderRadius: '9999px',
-                  background: '#ffffff',
-                  border: '1px solid rgba(10, 102, 194, 0.35)',
-                  color: '#0a66c2',
-                  fontSize: '0.82rem',
-                  fontWeight: 800,
-                  textDecoration: 'none',
-                  boxShadow: '0 2px 10px rgba(10, 102, 194, 0.12)',
-                  transition: 'all 0.2s ease'
-                }}
-              >
-                <LinkedinOfficialLogo size={18} />
-                <span>5K+ LinkedIn Family</span>
-              </a>
+              <Magnetic strength={0.2}>
+                <motion.a
+                  whileHover={{ scale: 1.04, y: -2 }}
+                  whileTap={{ scale: 0.96 }}
+                  href={personal.linkedin}
+                  target="_blank"
+                  rel="noreferrer"
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '0.5rem',
+                    padding: '0.4rem 0.9rem',
+                    borderRadius: '9999px',
+                    background: '#ffffff',
+                    border: '1px solid rgba(10, 102, 194, 0.35)',
+                    color: '#0a66c2',
+                    fontSize: '0.82rem',
+                    fontWeight: 800,
+                    textDecoration: 'none',
+                    boxShadow: '0 2px 10px rgba(10, 102, 194, 0.12)'
+                  }}
+                >
+                  <LinkedinOfficialLogo size={18} />
+                  <span>5K+ LinkedIn Family</span>
+                </motion.a>
+              </Magnetic>
 
             </div>
 
@@ -211,25 +257,50 @@ export const Hero = ({ onOpenAiModal }) => {
               <span style={{ color: '#1d68fe', display: 'block' }}>Rathod</span>
             </h1>
 
-            {/* Role Subtitle with 5+ Years Flag */}
+            {/* Kinetic Animated Role Subtitle */}
             <div 
               style={{ 
-                fontSize: '1.2rem', 
-                fontWeight: 800, 
-                color: '#0f172a', 
-                marginBottom: '1rem',
-                letterSpacing: '-0.01em',
+                minHeight: '2.4rem',
                 display: 'flex',
                 alignItems: 'center',
-                gap: '0.5rem',
+                gap: '0.65rem',
+                marginBottom: '1rem',
                 flexWrap: 'wrap'
               }}
             >
-              <span>AI Engineer</span>
-              <span style={{ color: '#1d68fe' }}>•</span>
-              <span>Senior Software Engineer</span>
-              <span style={{ fontSize: '0.78rem', background: 'rgba(16, 185, 129, 0.12)', color: '#059669', padding: '0.2rem 0.55rem', borderRadius: '6px', fontWeight: 700, border: '1px solid rgba(16, 185, 129, 0.25)' }}>
-                {personal.experienceYearsShort || personal.experienceYears} Exp
+              <div 
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  overflow: 'hidden',
+                  height: '2rem'
+                }}
+              >
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={roleIndex}
+                    initial={{ opacity: 0, y: 18 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -18 }}
+                    transition={{ duration: 0.35, ease: 'easeOut' }}
+                    style={{
+                      fontSize: '1.2rem',
+                      fontWeight: 800,
+                      color: '#0f172a',
+                      letterSpacing: '-0.01em',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '0.45rem'
+                    }}
+                  >
+                    <span style={{ color: '#1d68fe' }}>⚡</span>
+                    <span>{roles[roleIndex]}</span>
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+
+              <span style={{ fontSize: '0.78rem', background: 'rgba(16, 185, 129, 0.12)', color: '#059669', padding: '0.2rem 0.55rem', borderRadius: '6px', fontWeight: 700, border: '1px solid rgba(16, 185, 129, 0.25)', display: 'inline-flex', alignItems: 'center', gap: '0.25rem' }}>
+                <NumberTicker value={parseFloat(personal.experienceDecimal) || 5.8} decimalPlaces={1} suffix="+ Yrs Exp" />
               </span>
             </div>
 
@@ -246,123 +317,115 @@ export const Hero = ({ onOpenAiModal }) => {
               Building production-grade AI systems with Generative AI, RAG and Agentic AI, backed by {personal.experienceYears} of experience in scalable backend systems and cloud-native solutions.
             </p>
 
-            {/* Mobile Visual Portrait Centerpiece (From Poster, Zero Text Artifacts) */}
+            {/* Mobile Visual Portrait Centerpiece */}
             <div className="mobile-portrait-center" style={{ margin: '1.25rem auto 1.75rem', textAlign: 'center', maxWidth: '300px', position: 'relative' }}>
-              
-              {/* Ambient Blurred Aura */}
-              <div 
-                style={{
-                  position: 'absolute',
-                  inset: '-6px',
-                  backgroundImage: 'url(/hero-mobile.png)',
-                  backgroundPosition: 'center',
-                  backgroundSize: 'cover',
-                  filter: 'blur(20px)',
-                  opacity: 0.4,
-                  borderRadius: '1.75rem',
-                  zIndex: 0
-                }}
-              />
-
-              <div 
-                style={{
-                  position: 'relative',
-                  zIndex: 1,
-                  width: '240px',
-                  height: '310px',
-                  margin: '0 auto',
-                  borderRadius: '1.5rem',
-                  overflow: 'hidden',
-                  border: '2.5px solid #ffffff',
-                  boxShadow: '0 12px 32px rgba(29, 104, 254, 0.22), 0 4px 12px rgba(0,0,0,0.08)',
-                  background: '#ffffff'
-                }}
+              <Tilt
+                tiltMaxAngleX={10}
+                tiltMaxAngleY={10}
+                glareEnable={true}
+                glareMaxOpacity={0.2}
+                glareColor="#ffffff"
+                glarePosition="all"
+                style={{ borderRadius: '1.5rem' }}
               >
-                <img 
-                  src="/hero-mobile.png" 
-                  alt="Bhaveshkumar Rathod"
+                <div 
                   style={{
-                    width: '100%',
-                    height: '100%',
-                    objectFit: 'cover',
-                    objectPosition: 'center 20%',
-                    display: 'block'
+                    position: 'relative',
+                    zIndex: 1,
+                    width: '240px',
+                    height: '310px',
+                    margin: '0 auto',
+                    borderRadius: '1.5rem',
+                    overflow: 'hidden',
+                    border: '2.5px solid #ffffff',
+                    boxShadow: '0 12px 32px rgba(29, 104, 254, 0.22), 0 4px 12px rgba(0,0,0,0.08)',
+                    background: '#ffffff'
                   }}
-                />
-              </div>
+                >
+                  <img 
+                    src="/hero-mobile.png" 
+                    alt="Bhaveshkumar Rathod"
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                      objectPosition: 'center 20%',
+                      display: 'block'
+                    }}
+                  />
+                </div>
+              </Tilt>
             </div>
 
-            {/* Action Buttons */}
+            {/* Action Buttons with 21st.dev Magnetic Attraction */}
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.85rem', alignItems: 'center', marginBottom: '2rem' }}>
               
               {/* View My Work Button */}
-              <a 
-                href="#projects" 
-                className="btn-hero-primary"
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '0.6rem',
-                  padding: '0.85rem 1.75rem',
-                  borderRadius: '9999px',
-                  background: '#1d68fe',
-                  color: '#ffffff',
-                  fontWeight: 700,
-                  fontSize: '0.98rem',
-                  boxShadow: '0 8px 20px rgba(29, 104, 254, 0.35)',
-                  transition: 'all 0.2s ease',
-                  textDecoration: 'none'
-                }}
-              >
-                <span>View My Work</span>
-                <ArrowRight size={18} />
-              </a>
+              <Magnetic strength={0.25}>
+                <motion.a 
+                  whileHover={{ scale: 1.04, y: -2 }}
+                  whileTap={{ scale: 0.96 }}
+                  href="#projects" 
+                  className="btn-hero-primary"
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '0.6rem',
+                    padding: '0.85rem 1.75rem',
+                    borderRadius: '9999px',
+                    background: '#1d68fe',
+                    color: '#ffffff',
+                    fontWeight: 700,
+                    fontSize: '0.98rem',
+                    boxShadow: '0 8px 20px rgba(29, 104, 254, 0.35)',
+                    textDecoration: 'none'
+                  }}
+                >
+                  <span>View My Work</span>
+                  <ArrowRight size={18} />
+                </motion.a>
+              </Magnetic>
 
               {/* Get In Touch with LinkedIn badge */}
-              <a 
-                href={personal.linkedin}
-                target="_blank"
-                rel="noreferrer"
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '0.65rem',
-                  padding: '0.85rem 1.6rem',
-                  borderRadius: '9999px',
-                  background: '#ffffff',
-                  border: '1px solid #e2e8f0',
-                  color: '#0f172a',
-                  fontWeight: 700,
-                  fontSize: '0.98rem',
-                  boxShadow: '0 4px 14px rgba(0, 0, 0, 0.06)',
-                  transition: 'all 0.2s ease',
-                  textDecoration: 'none'
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = '#1d68fe';
-                  e.currentTarget.style.transform = 'translateY(-1px)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = '#e2e8f0';
-                  e.currentTarget.style.transform = 'translateY(0)';
-                }}
-              >
-                <span>Get In Touch</span>
-                <LinkedinOfficialLogo size={18} />
-              </a>
+              <Magnetic strength={0.25}>
+                <motion.a 
+                  whileHover={{ scale: 1.04, y: -2 }}
+                  whileTap={{ scale: 0.96 }}
+                  href={personal.linkedin}
+                  target="_blank"
+                  rel="noreferrer"
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '0.65rem',
+                    padding: '0.85rem 1.6rem',
+                    borderRadius: '9999px',
+                    background: '#ffffff',
+                    border: '1px solid #e2e8f0',
+                    color: '#0f172a',
+                    fontWeight: 700,
+                    fontSize: '0.98rem',
+                    boxShadow: '0 4px 14px rgba(0, 0, 0, 0.06)',
+                    textDecoration: 'none'
+                  }}
+                >
+                  <span>Get In Touch</span>
+                  <LinkedinOfficialLogo size={18} />
+                </motion.a>
+              </Magnetic>
 
             </div>
 
-            {/* Solid High-Contrast Trust Metabar (100% Opaque & Visible) */}
+            {/* Solid High-Contrast Trust Metabar */}
             <div 
               style={{ 
                 display: 'flex', 
                 alignItems: 'center', 
                 gap: '0.85rem', 
                 flexWrap: 'wrap',
-                paddingBottom: '1.75rem',
+                paddingBottom: '1.5rem',
                 borderBottom: '1px solid rgba(226, 232, 240, 0.8)',
-                marginBottom: '1.75rem'
+                marginBottom: '1.5rem'
               }}
             >
               {/* Location Pill */}
@@ -409,8 +472,12 @@ export const Hero = ({ onOpenAiModal }) => {
                 </div>
               </div>
 
-              {/* AWS SuperHacks 2025 Winner Pill (Solid, Opaque & Clear) */}
-              <div 
+              {/* AWS SuperHacks 2025 Winner Pill with Confetti Burst */}
+              <motion.div 
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={triggerTrophyConfetti}
+                title="Click for celebration 🎉"
                 style={{ 
                   display: 'flex', 
                   alignItems: 'center', 
@@ -418,67 +485,61 @@ export const Hero = ({ onOpenAiModal }) => {
                   background: '#ffffff',
                   padding: '0.45rem 0.85rem',
                   borderRadius: '12px',
-                  border: '1.5px solid rgba(245, 158, 11, 0.5)',
-                  boxShadow: '0 2px 8px rgba(245, 158, 11, 0.12)'
+                  border: '1.5px solid rgba(245, 158, 11, 0.6)',
+                  boxShadow: '0 2px 8px rgba(245, 158, 11, 0.15)',
+                  cursor: 'pointer'
                 }}
               >
                 <div style={{ width: '28px', height: '28px', borderRadius: '8px', background: '#fffbeb', color: '#d97706', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px solid rgba(245, 158, 11, 0.3)' }}>
                   <Trophy size={15} color="#d97706" />
                 </div>
                 <div>
-                  <div style={{ fontSize: '0.82rem', fontWeight: 900, color: '#0f172a' }}>AWS SuperHacks</div>
+                  <div style={{ fontSize: '0.82rem', fontWeight: 900, color: '#0f172a' }}>AWS SuperHacks 🎉</div>
                   <div style={{ fontSize: '0.72rem', color: '#b45309', fontWeight: 800 }}>2025 Winner</div>
                 </div>
+              </motion.div>
+
+            </div>
+
+            {/* 21st.dev Infinite Infinite Tech Stack Marquee */}
+            <div style={{ marginTop: '0.5rem' }}>
+              <div style={{ fontSize: '0.7rem', fontWeight: 800, color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.04em', marginBottom: '0.5rem', fontFamily: 'var(--font-mono)' }}>
+                ⚡ Core Tech & Architecture Competencies:
               </div>
-
+              <Marquee speed={28} pauseOnHover={true}>
+                {techStackMarquee.map((tech, idx) => (
+                  <div
+                    key={idx}
+                    style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '0.5rem',
+                      padding: '0.45rem 0.85rem',
+                      borderRadius: '12px',
+                      background: 'rgba(255, 255, 255, 0.95)',
+                      border: '1px solid rgba(226, 232, 240, 0.9)',
+                      boxShadow: '0 2px 6px rgba(0,0,0,0.03)',
+                      whiteSpace: 'nowrap'
+                    }}
+                  >
+                    {tech.logo}
+                    <span style={{ fontSize: '0.82rem', fontWeight: 700, color: '#1e293b' }}>
+                      {tech.name}
+                    </span>
+                  </div>
+                ))}
+              </Marquee>
             </div>
 
-            {/* Bottom Floating Tech Stack Bar */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', flexWrap: 'wrap' }}>
-              {techStack.map((tech, idx) => (
-                <div 
-                  key={idx}
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    width: '68px',
-                    height: '68px',
-                    borderRadius: '16px',
-                    background: 'rgba(255, 255, 255, 0.92)',
-                    backdropFilter: 'blur(10px)',
-                    WebkitBackdropFilter: 'blur(10px)',
-                    border: '1px solid rgba(226, 232, 240, 0.9)',
-                    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.04)',
-                    transition: 'all 0.2s ease',
-                    cursor: 'pointer'
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.transform = 'translateY(-3px)';
-                    e.currentTarget.style.borderColor = '#1d68fe';
-                    e.currentTarget.style.boxShadow = '0 8px 18px rgba(29, 104, 254, 0.15)';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.transform = 'translateY(0)';
-                    e.currentTarget.style.borderColor = 'rgba(226, 232, 240, 0.9)';
-                    e.currentTarget.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.04)';
-                  }}
-                >
-                  <div style={{ marginBottom: '0.2rem' }}>{tech.logo}</div>
-                  <span style={{ fontSize: '0.65rem', fontWeight: 700, color: '#475569', textAlign: 'center', lineHeight: 1 }}>
-                    {tech.name}
-                  </span>
-                </div>
-              ))}
-            </div>
-
-          </div>
+          </motion.div>
 
           {/* ========================================================================= */}
-          {/* RIGHT COLUMN: 3 FLOATING GLASS CARDS + HANDWRITTEN CALLOUT */}
+          {/* RIGHT COLUMN: 3 3D TILT FLOATING GLASS CARDS + HANDWRITTEN CALLOUT */}
           {/* ========================================================================= */}
-          <div 
+          <motion.div 
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
             style={{ 
               display: 'flex', 
               flexDirection: 'column', 
@@ -490,95 +551,96 @@ export const Hero = ({ onOpenAiModal }) => {
             className="hero-right-content"
           >
             
-            {/* 3 Floating Glass Feature Cards */}
+            {/* 3 3D Parallax Tilt Floating Glass Feature Cards */}
             {floatingCards.map((card, idx) => (
-              <a
+              <Tilt
                 key={idx}
-                href={card.href}
-                className="floating-glass-pill"
-                style={{
-                  width: '100%',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  padding: '1.1rem 1.35rem',
-                  borderRadius: '1.25rem',
-                  background: 'rgba(255, 255, 255, 0.88)',
-                  backdropFilter: 'blur(16px)',
-                  WebkitBackdropFilter: 'blur(16px)',
-                  border: '1px solid rgba(255, 255, 255, 0.9)',
-                  boxShadow: '0 10px 30px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.04)',
-                  transition: 'all 0.25s cubic-bezier(0.16, 1, 0.3, 1)',
-                  textDecoration: 'none'
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = 'translateY(-3px) scale(1.02)';
-                  e.currentTarget.style.boxShadow = '0 16px 36px rgba(29, 104, 254, 0.15)';
-                  e.currentTarget.style.borderColor = 'rgba(29, 104, 254, 0.4)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'translateY(0) scale(1)';
-                  e.currentTarget.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.04)';
-                  e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.9)';
-                }}
+                tiltMaxAngleX={8}
+                tiltMaxAngleY={8}
+                glareEnable={true}
+                glareMaxOpacity={0.15}
+                glareColor="#ffffff"
+                glarePosition="all"
+                style={{ width: '100%', borderRadius: '1.25rem' }}
               >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.9rem' }}>
+                <motion.a
+                  href={card.href}
+                  className="floating-glass-pill"
+                  whileHover={{ scale: 1.02 }}
+                  style={{
+                    width: '100%',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    padding: '1.1rem 1.35rem',
+                    borderRadius: '1.25rem',
+                    background: 'rgba(255, 255, 255, 0.88)',
+                    backdropFilter: 'blur(16px)',
+                    WebkitBackdropFilter: 'blur(16px)',
+                    border: '1px solid rgba(255, 255, 255, 0.9)',
+                    boxShadow: '0 10px 30px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.04)',
+                    textDecoration: 'none'
+                  }}
+                >
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.9rem' }}>
+                    <div 
+                      style={{
+                        width: '44px',
+                        height: '44px',
+                        borderRadius: '12px',
+                        background: card.bgIcon,
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        flexShrink: 0
+                      }}
+                    >
+                      {card.icon}
+                    </div>
+                    <div>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                        <span style={{ fontSize: '1rem', fontWeight: 800, color: '#0f172a', lineHeight: 1.2 }}>
+                          {card.title}
+                        </span>
+                        <span style={{ fontSize: '0.68rem', padding: '0.1rem 0.4rem', borderRadius: '4px', background: 'rgba(241, 245, 249, 0.9)', color: '#64748b', fontWeight: 700, fontFamily: 'var(--font-mono)' }}>
+                          {card.tag}
+                        </span>
+                      </div>
+                      <div style={{ fontSize: '0.78rem', color: '#64748b', marginTop: '0.2rem', lineHeight: 1.3 }}>
+                        {card.subtitle}
+                      </div>
+                      <div style={{ fontSize: '0.72rem', color: '#94a3b8', marginTop: '0.1rem', fontFamily: 'var(--font-mono)' }}>
+                        {card.detail}
+                      </div>
+                    </div>
+                  </div>
+
                   <div 
                     style={{
-                      width: '44px',
-                      height: '44px',
-                      borderRadius: '12px',
-                      background: card.bgIcon,
+                      width: '28px',
+                      height: '28px',
+                      borderRadius: '50%',
+                      background: 'rgba(241, 245, 249, 0.8)',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
+                      color: '#64748b',
                       flexShrink: 0
                     }}
                   >
-                    {card.icon}
+                    <ChevronRight size={16} />
                   </div>
-                  <div>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                      <span style={{ fontSize: '1rem', fontWeight: 800, color: '#0f172a', lineHeight: 1.2 }}>
-                        {card.title}
-                      </span>
-                      <span style={{ fontSize: '0.68rem', padding: '0.1rem 0.4rem', borderRadius: '4px', background: 'rgba(241, 245, 249, 0.9)', color: '#64748b', fontWeight: 700, fontFamily: 'var(--font-mono)' }}>
-                        {card.tag}
-                      </span>
-                    </div>
-                    <div style={{ fontSize: '0.78rem', color: '#64748b', marginTop: '0.2rem', lineHeight: 1.3 }}>
-                      {card.subtitle}
-                    </div>
-                    <div style={{ fontSize: '0.72rem', color: '#94a3b8', marginTop: '0.1rem', fontFamily: 'var(--font-mono)' }}>
-                      {card.detail}
-                    </div>
-                  </div>
-                </div>
-
-                <div 
-                  style={{
-                    width: '28px',
-                    height: '28px',
-                    borderRadius: '50%',
-                    background: 'rgba(241, 245, 249, 0.8)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    color: '#64748b',
-                    flexShrink: 0
-                  }}
-                >
-                  <ChevronRight size={16} />
-                </div>
-              </a>
+                </motion.a>
+              </Tilt>
             ))}
 
             {/* Handwritten Signature / Callout */}
-            <div 
+            <motion.div 
+              animate={{ rotate: [-4, -2, -4] }}
+              transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
               style={{
                 marginTop: '1.5rem',
                 textAlign: 'center',
-                transform: 'rotate(-4deg)',
                 alignSelf: 'center',
                 paddingRight: '1rem'
               }}
@@ -606,9 +668,9 @@ export const Hero = ({ onOpenAiModal }) => {
                   boxShadow: '0 2px 6px rgba(29, 104, 254, 0.4)'
                 }}
               />
-            </div>
+            </motion.div>
 
-          </div>
+          </motion.div>
 
         </div>
       </div>

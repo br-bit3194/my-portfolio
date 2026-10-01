@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { motion, useScroll, useSpring } from 'framer-motion';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { Projects } from './components/Projects';
@@ -14,6 +15,15 @@ import { Bot, Sparkles } from 'lucide-react';
 export function App() {
   const [theme, setTheme] = useState('light');
   const [isAiModalOpen, setIsAiModalOpen] = useState(false);
+  const [mousePos, setMousePos] = useState({ x: -1000, y: -1000 });
+
+  // Scroll Progress Bar
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
 
   useEffect(() => {
     // Check saved theme in localStorage or default to light
@@ -25,6 +35,12 @@ export function App() {
       setTheme('light');
       document.documentElement.setAttribute('data-theme', 'light');
     }
+
+    const handleMouseMove = (e) => {
+      setMousePos({ x: e.clientX, y: e.clientY });
+    };
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
   const toggleTheme = () => {
@@ -35,7 +51,37 @@ export function App() {
   };
 
   return (
-    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', position: 'relative' }}>
+      {/* Top Reading Scroll Progress Bar */}
+      <motion.div
+        style={{
+          scaleX,
+          transformOrigin: '0%',
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          height: '3px',
+          background: 'var(--google-gradient)',
+          zIndex: 100
+        }}
+      />
+
+      {/* Dynamic Cursor Spotlight Radial Glow */}
+      <div 
+        style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          width: '100vw',
+          height: '100vh',
+          pointerEvents: 'none',
+          zIndex: 1,
+          background: `radial-gradient(750px circle at ${mousePos.x}px ${mousePos.y}px, ${theme === 'dark' ? 'rgba(66, 133, 244, 0.08)' : 'rgba(26, 115, 232, 0.045)'}, transparent 80%)`,
+          transition: 'background 0.15s ease-out'
+        }}
+      />
+
       {/* Top Fixed Navigation */}
       <Navbar 
         theme={theme} 
@@ -44,7 +90,7 @@ export function App() {
       />
 
       {/* Main Portfolio Sections */}
-      <main style={{ flex: 1 }}>
+      <main style={{ flex: 1, position: 'relative', zIndex: 2 }}>
         <Hero onOpenAiModal={() => setIsAiModalOpen(true)} />
         <Projects />
         <Certifications />
@@ -64,11 +110,16 @@ export function App() {
       />
 
       {/* Floating AI Assistant FAB Button */}
-      <button
+      <motion.button
         onClick={() => setIsAiModalOpen(true)}
         className="floating-ai-fab"
         aria-label="Ask AI Assistant about Bhavesh"
         title="Ask AI Assistant about Bhavesh"
+        whileHover={{ scale: 1.06, y: -3 }}
+        whileTap={{ scale: 0.94 }}
+        initial={{ opacity: 0, y: 20, scale: 0.8 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        transition={{ type: 'spring', stiffness: 300, damping: 20 }}
         style={{
           position: 'fixed',
           bottom: '2rem',
@@ -86,19 +137,8 @@ export function App() {
           cursor: 'pointer',
           fontWeight: 700,
           fontSize: '0.88rem',
-          transition: 'all 0.25s cubic-bezier(0.16, 1, 0.3, 1)',
           backdropFilter: 'blur(8px)',
           WebkitBackdropFilter: 'blur(8px)'
-        }}
-        onMouseEnter={(e) => {
-          e.currentTarget.style.transform = 'translateY(-3px) scale(1.02)';
-          e.currentTarget.style.boxShadow = '0 12px 30px rgba(26, 115, 232, 0.55), 0 4px 10px rgba(0, 0, 0, 0.12)';
-          e.currentTarget.style.background = '#1557b0';
-        }}
-        onMouseLeave={(e) => {
-          e.currentTarget.style.transform = 'translateY(0) scale(1)';
-          e.currentTarget.style.boxShadow = '0 8px 24px rgba(26, 115, 232, 0.4), 0 2px 6px rgba(0, 0, 0, 0.08)';
-          e.currentTarget.style.background = '#1a73e8';
         }}
       >
         <div 
@@ -117,13 +157,9 @@ export function App() {
         </div>
         <span className="fab-text" style={{ whiteSpace: 'nowrap' }}>Ask Bhavesh AI</span>
         <Sparkles size={14} color="#fde047" className="fab-sparkle" style={{ flexShrink: 0 }} />
-      </button>
+      </motion.button>
 
       <style>{`
-        @keyframes fadeIn {
-          from { opacity: 0; transform: scale(0.97); }
-          to { opacity: 1; transform: scale(1); }
-        }
         @keyframes fabPulse {
           0% { box-shadow: 0 0 0 0 rgba(26, 115, 232, 0.5), 0 8px 24px rgba(26, 115, 232, 0.4); }
           70% { box-shadow: 0 0 0 10px rgba(26, 115, 232, 0), 0 8px 24px rgba(26, 115, 232, 0.4); }
@@ -157,3 +193,4 @@ export function App() {
 }
 
 export default App;
+

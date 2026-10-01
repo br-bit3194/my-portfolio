@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Bot, 
   X, 
@@ -45,7 +46,7 @@ KEY 2-SECOND METRICS:
 
 FEATURED PROJECTS:
 1. MAESTRO: Autonomous Multi-Agent IT Operations Platform built with Amazon Bedrock, FastAPI, and Python. Won 'Special Jury Mention Award' at SuperHacks 2025 powered by AWS.
-2. GenAI Makegood Recommendation Engine: Vertex AI, Google Gemini 1.5, Google ADK, GCP Pub/Sub, BigQuery, GCS, AI Guardrails.
+2. GenAI Makegood Recommendation Engine: Vertex AI, Google Gemini, Google ADK, GCP Pub/Sub, BigQuery, GCS, AI Guardrails.
 3. Production Multi-Agent AI Platform: Agent-to-Agent (A2A) protocol, Model Context Protocol (MCP) for tool calling, FastAPI, Langfuse, RAG.
 4. Game Management System (GMS): Scaled to 90k+ athletes, Razorpay integration, AWS Lambda & CloudWatch automated monitoring (awarded 'PAT on the Back').
 5. Banking Deduplication Engine: 14+ Indian Banks, partitioned Oracle DB, Python ELT pipelines (saving 2 hrs daily), RSA asymmetric cryptography.
@@ -139,7 +140,7 @@ export const AiAssistantModal = ({ isOpen, onClose }) => {
     // 4. Vertex AI & Makegood Recommendation Engine
     if (q.includes('makegood') || q.includes('vertex') || q.includes('gemini') || q.includes('adk') || q.includes('guardrail') || q.includes('gcp')) {
       return {
-        text: `✨ **GenAI Makegood Recommendation Engine (Google Cloud)**\n\n• **Impact**: Reduced manual recommendation effort by **70%**.\n• **Tech Stack**: Google Vertex AI, Google Gemini 1.5, Google ADK (Agent Development Kit), GCP Pub/Sub, BigQuery, GCS.\n• **AI Safety**: Enforced Responsible AI with custom AI Guardrails and schema validation for production stability.`,
+        text: `✨ **GenAI Makegood Recommendation Engine (Google Cloud)**\n\n• **Impact**: Reduced manual recommendation effort by **70%**.\n• **Tech Stack**: Google Vertex AI, Google Gemini, Google ADK (Agent Development Kit), GCP Pub/Sub, BigQuery, GCS.\n• **AI Safety**: Enforced Responsible AI with custom AI Guardrails and schema validation for production stability.`,
         actions: [
           { label: "View Projects", targetId: "projects" }
         ]
@@ -303,42 +304,49 @@ export const AiAssistantModal = ({ isOpen, onClose }) => {
     }
   };
 
-  if (!isOpen) return null;
-
   return (
-    <div 
-      style={{
-        position: 'fixed',
-        inset: 0,
-        zIndex: 100,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: '1rem',
-        background: 'rgba(0, 0, 0, 0.75)',
-        backdropFilter: 'blur(8px)',
-        WebkitBackdropFilter: 'blur(8px)'
-      }}
-      onClick={onClose}
-    >
-      <div 
-        className="glass-card"
-        style={{
-          width: '100%',
-          maxWidth: '720px',
-          height: '85vh',
-          maxHeight: '740px',
-          display: 'flex',
-          flexDirection: 'column',
-          background: 'var(--bg-card-solid)',
-          border: '1px solid var(--border-color)',
-          borderRadius: '1.25rem',
-          boxShadow: 'var(--shadow-lg)',
-          overflow: 'hidden',
-          animation: 'fadeIn 0.2s ease-out'
-        }}
-        onClick={(e) => e.stopPropagation()}
-      >
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.2 }}
+          style={{
+            position: 'fixed',
+            inset: 0,
+            zIndex: 100,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: '1rem',
+            background: 'rgba(0, 0, 0, 0.75)',
+            backdropFilter: 'blur(8px)',
+            WebkitBackdropFilter: 'blur(8px)'
+          }}
+          onClick={onClose}
+        >
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.92, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.92, y: 20 }}
+            transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+            className="glass-card"
+            style={{
+              width: '100%',
+              maxWidth: '720px',
+              height: '85vh',
+              maxHeight: '740px',
+              display: 'flex',
+              flexDirection: 'column',
+              background: 'var(--bg-card-solid)',
+              border: '1px solid var(--border-color)',
+              borderRadius: '1.25rem',
+              boxShadow: 'var(--shadow-lg)',
+              overflow: 'hidden'
+            }}
+            onClick={(e) => e.stopPropagation()}
+          >
         {/* Header */}
         <div 
           style={{
@@ -678,7 +686,9 @@ export const AiAssistantModal = ({ isOpen, onClose }) => {
           </button>
         </form>
 
-      </div>
-    </div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 };

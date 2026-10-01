@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Sun, 
   Moon, 
@@ -42,23 +43,27 @@ export const Navbar = ({ theme, toggleTheme, onOpenAiModal }) => {
         right: 0,
         zIndex: 50,
         transition: 'all 0.3s ease',
-        background: isScrolled ? 'rgba(255, 255, 255, 0.92)' : 'rgba(255, 255, 255, 0.75)',
+        background: 'var(--bg-nav)',
         backdropFilter: 'blur(16px)',
         WebkitBackdropFilter: 'blur(16px)',
-        borderBottom: isScrolled ? '1px solid #e2e8f0' : '1px solid rgba(226, 232, 240, 0.6)',
-        padding: isScrolled ? '0.65rem 0' : '1rem 0'
+        borderBottom: isScrolled ? '1px solid var(--border-color)' : '1px solid var(--border-subtle)',
+        padding: isScrolled ? '0.65rem 0' : '0.9rem 0'
       }}
     >
-      <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+      <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '1rem' }}>
         
-        {/* Brand Logo with Profile Photo */}
-        <a 
+        {/* Brand Logo with Profile Photo (Always Single Line with Modern Typography) */}
+        <motion.a 
+          whileHover={{ scale: 1.03 }}
+          whileTap={{ scale: 0.97 }}
           href="#" 
           style={{ 
             display: 'flex', 
             alignItems: 'center', 
             gap: '0.65rem',
-            textDecoration: 'none' 
+            textDecoration: 'none',
+            whiteSpace: 'nowrap',
+            flexShrink: 0
           }}
         >
           <div 
@@ -72,7 +77,7 @@ export const Navbar = ({ theme, toggleTheme, onOpenAiModal }) => {
               alignItems: 'center',
               justifyContent: 'center',
               flexShrink: 0,
-              boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)'
+              boxShadow: '0 2px 8px rgba(0, 0, 0, 0.12)'
             }}
           >
             <img 
@@ -86,10 +91,20 @@ export const Navbar = ({ theme, toggleTheme, onOpenAiModal }) => {
               }}
             />
           </div>
-          <div style={{ fontWeight: 800, fontSize: '1.05rem', letterSpacing: '-0.02em', color: '#0f172a' }}>
+          <div 
+            style={{ 
+              fontFamily: 'var(--font-heading)',
+              fontWeight: 800, 
+              fontSize: '1.05rem', 
+              letterSpacing: '-0.02em',
+              whiteSpace: 'nowrap',
+              color: 'var(--text-primary)',
+              lineHeight: 1
+            }}
+          >
             Bhavesh Rathod
           </div>
-        </a>
+        </motion.a>
 
         {/* Center Nav Links */}
         <nav 
@@ -112,8 +127,8 @@ export const Navbar = ({ theme, toggleTheme, onOpenAiModal }) => {
                 style={{
                   fontSize: '0.9rem',
                   fontWeight: isActive ? 700 : 500,
-                  color: isActive ? '#0f172a' : '#64748b',
-                  transition: 'all 0.2s ease',
+                  color: isActive ? 'var(--text-primary)' : 'var(--text-secondary)',
+                  transition: 'color 0.2s ease',
                   padding: '0.25rem 0',
                   position: 'relative',
                   display: 'flex',
@@ -122,19 +137,18 @@ export const Navbar = ({ theme, toggleTheme, onOpenAiModal }) => {
                   whiteSpace: 'nowrap',
                   flexShrink: 0
                 }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = '#1d68fe')}
-                onMouseLeave={(e) => (e.currentTarget.style.color = isActive ? '#0f172a' : '#64748b')}
               >
                 <span>{link.label}</span>
                 {isActive && (
-                  <span 
+                  <motion.span 
+                    layoutId="activeNavIndicator"
                     style={{
                       position: 'absolute',
                       bottom: '-4px',
                       width: '20px',
                       height: '2.5px',
                       borderRadius: '2px',
-                      background: '#1d68fe'
+                      background: 'var(--google-blue)'
                     }}
                   />
                 )}
@@ -147,7 +161,9 @@ export const Navbar = ({ theme, toggleTheme, onOpenAiModal }) => {
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexShrink: 0, whiteSpace: 'nowrap' }}>
           
           {/* Open to Remote Pill Button */}
-          <a
+          <motion.a
+            whileHover={{ scale: 1.04, y: -1 }}
+            whileTap={{ scale: 0.96 }}
             href="#contact"
             style={{
               display: 'inline-flex',
@@ -155,33 +171,26 @@ export const Navbar = ({ theme, toggleTheme, onOpenAiModal }) => {
               gap: '0.45rem',
               padding: '0.45rem 0.95rem',
               borderRadius: '9999px',
-              background: '#ffffff',
-              border: '1px solid #e2e8f0',
-              boxShadow: '0 2px 6px rgba(0, 0, 0, 0.04)',
-              color: '#0f172a',
+              background: 'var(--bg-card)',
+              border: '1px solid var(--border-color)',
+              boxShadow: 'var(--shadow-sm)',
+              color: 'var(--text-primary)',
               fontSize: '0.82rem',
               fontWeight: 700,
               textDecoration: 'none',
-              transition: 'all 0.2s ease',
               whiteSpace: 'nowrap',
               flexShrink: 0
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.borderColor = '#1d68fe';
-              e.currentTarget.style.transform = 'translateY(-1px)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.borderColor = '#e2e8f0';
-              e.currentTarget.style.transform = 'translateY(0)';
             }}
           >
             <span style={{ width: '7px', height: '7px', borderRadius: '50%', background: '#10b981', boxShadow: '0 0 6px rgba(16, 185, 129, 0.8)', flexShrink: 0 }} />
             <span style={{ whiteSpace: 'nowrap' }}>Open to Remote</span>
-            <ChevronRight size={13} color="#94a3b8" style={{ flexShrink: 0 }} />
-          </a>
+            <ChevronRight size={13} color="var(--text-muted)" style={{ flexShrink: 0 }} />
+          </motion.a>
 
           {/* Ask AI Trigger Button */}
-          <button
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             onClick={onOpenAiModal}
             className="ai-pulse-btn"
             title="Ask Bhavesh's AI Assistant"
@@ -189,25 +198,26 @@ export const Navbar = ({ theme, toggleTheme, onOpenAiModal }) => {
               display: 'inline-flex',
               alignItems: 'center',
               gap: '0.4rem',
-              background: 'rgba(29, 104, 254, 0.08)',
-              border: '1px solid rgba(29, 104, 254, 0.25)',
-              color: '#1d68fe',
+              background: 'var(--google-blue-soft)',
+              border: '1px solid rgba(26, 115, 232, 0.25)',
+              color: 'var(--google-blue)',
               padding: '0.45rem 0.85rem',
               borderRadius: '9999px',
               fontSize: '0.82rem',
               fontWeight: 700,
               cursor: 'pointer',
-              transition: 'all 0.2s ease',
               whiteSpace: 'nowrap',
               flexShrink: 0
             }}
           >
             <Bot size={15} style={{ flexShrink: 0 }} />
             <span style={{ whiteSpace: 'nowrap' }}>Ask AI</span>
-          </button>
+          </motion.button>
 
           {/* Theme Toggle */}
-          <button
+          <motion.button
+            whileHover={{ scale: 1.1, rotate: 20 }}
+            whileTap={{ scale: 0.9 }}
             onClick={toggleTheme}
             aria-label="Toggle Theme"
             style={{
@@ -217,19 +227,20 @@ export const Navbar = ({ theme, toggleTheme, onOpenAiModal }) => {
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              background: '#ffffff',
-              border: '1px solid #e2e8f0',
-              color: '#0f172a',
+              background: 'var(--bg-card)',
+              border: '1px solid var(--border-color)',
+              color: 'var(--text-primary)',
               cursor: 'pointer',
-              transition: 'all 0.2s ease',
               flexShrink: 0
             }}
           >
-            {theme === 'dark' ? <Sun size={17} color="#f59e0b" /> : <Moon size={17} color="#1d68fe" />}
-          </button>
+            {theme === 'dark' ? <Sun size={17} color="#f59e0b" /> : <Moon size={17} color="#1a73e8" />}
+          </motion.button>
 
           {/* Resume Download Button */}
-          <a
+          <motion.a
+            whileHover={{ scale: 1.04 }}
+            whileTap={{ scale: 0.96 }}
             href={portfolioData.personal.resumeUrl}
             download="Bhavesh_Rathod_GenAI_Engineer_Resume.pdf"
             className="btn-primary hide-mobile"
@@ -237,17 +248,18 @@ export const Navbar = ({ theme, toggleTheme, onOpenAiModal }) => {
               padding: '0.45rem 0.95rem',
               fontSize: '0.82rem',
               borderRadius: '9999px',
-              background: '#0f172a',
+              background: 'var(--google-blue)',
               whiteSpace: 'nowrap',
               flexShrink: 0
             }}
           >
             <Download size={14} style={{ flexShrink: 0 }} />
             <span style={{ whiteSpace: 'nowrap' }}>Resume</span>
-          </a>
+          </motion.a>
 
           {/* Mobile Menu Toggle Button */}
-          <button
+          <motion.button
+            whileTap={{ scale: 0.9 }}
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="mobile-toggle"
             aria-label="Toggle Menu"
@@ -258,70 +270,77 @@ export const Navbar = ({ theme, toggleTheme, onOpenAiModal }) => {
               borderRadius: '8px',
               alignItems: 'center',
               justifyContent: 'center',
-              background: '#ffffff',
-              border: '1px solid #e2e8f0',
-              color: '#0f172a',
+              background: 'var(--bg-card)',
+              border: '1px solid var(--border-color)',
+              color: 'var(--text-primary)',
               flexShrink: 0
             }}
           >
             {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
-          </button>
+          </motion.button>
         </div>
 
       </div>
 
       {/* Mobile Drawer */}
-      {mobileMenuOpen && (
-        <div
-          style={{
-            position: 'absolute',
-            top: '100%',
-            left: 0,
-            right: 0,
-            background: '#ffffff',
-            borderBottom: '1px solid #e2e8f0',
-            padding: '1.5rem',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '1rem',
-            boxShadow: '0 10px 25px rgba(0, 0, 0, 0.1)'
-          }}
-        >
-          {navLinks.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              onClick={() => {
-                setActiveNav(link.label);
-                setMobileMenuOpen(false);
-              }}
-              style={{
-                fontSize: '1rem',
-                fontWeight: 600,
-                color: '#0f172a',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                padding: '0.5rem 0',
-                borderBottom: '1px solid #f1f5f9'
-              }}
-            >
-              <span>{link.label}</span>
-              <ChevronRight size={16} color="#94a3b8" />
-            </a>
-          ))}
-          <a
-            href={portfolioData.personal.resumeUrl}
-            download="Bhavesh_Rathod_GenAI_Engineer_Resume.pdf"
-            className="btn-primary"
-            style={{ marginTop: '0.5rem', width: '100%', borderRadius: '9999px', background: '#0f172a' }}
-            onClick={() => setMobileMenuOpen(false)}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.25 }}
+            style={{
+              position: 'absolute',
+              top: '100%',
+              left: 0,
+              right: 0,
+              background: 'var(--bg-card)',
+              borderBottom: '1px solid var(--border-color)',
+              padding: '1.5rem',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '1rem',
+              boxShadow: '0 10px 25px rgba(0, 0, 0, 0.1)',
+              overflow: 'hidden'
+            }}
           >
-            <Download size={16} />
-            <span>Download Resume PDF</span>
-          </a>
-        </div>
-      )}
+            {navLinks.map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                onClick={() => {
+                  setActiveNav(link.label);
+                  setMobileMenuOpen(false);
+                }}
+                style={{
+                  fontSize: '1rem',
+                  fontWeight: 600,
+                  color: 'var(--text-primary)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  padding: '0.5rem 0',
+                  borderBottom: '1px solid var(--border-subtle)'
+                }}
+              >
+                <span>{link.label}</span>
+                <ChevronRight size={16} color="var(--text-muted)" />
+              </a>
+            ))}
+            <a
+              href={portfolioData.personal.resumeUrl}
+              download="Bhavesh_Rathod_GenAI_Engineer_Resume.pdf"
+              className="btn-primary"
+              style={{ marginTop: '0.5rem', width: '100%', borderRadius: '9999px', background: 'var(--google-blue)' }}
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              <Download size={16} />
+              <span>Download Resume PDF</span>
+            </a>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <style>{`
         @media (min-width: 1024px) {

@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import Tilt from 'react-parallax-tilt';
 import { 
   Network, 
   Bot, 
@@ -35,8 +37,14 @@ export const ArchitectureShowcase = () => {
     <section id="architecture" className="section">
       <div className="container">
         
-        {/* Header */}
-        <div className="section-header">
+        {/* Header with Animation */}
+        <motion.div 
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          className="section-header"
+        >
           <div className="section-tag" style={{ color: 'var(--google-blue)', background: 'var(--google-blue-soft)' }}>
             <Network size={14} />
             AI Agent Systems
@@ -45,13 +53,15 @@ export const ArchitectureShowcase = () => {
           <p className="section-subtitle">
             Interactive blueprints of production Multi-Agent workflows (A2A, MCP), GCP event streams, and high-concurrency FinTech data engines.
           </p>
-        </div>
+        </motion.div>
 
         {/* System Selector Tabs */}
         <div style={{ display: 'flex', justifyContent: 'center', gap: '0.65rem', flexWrap: 'wrap', marginBottom: '2.5rem' }}>
           {portfolioData.architectures.map((arch) => (
-            <button
+            <motion.button
               key={arch.id}
+              whileHover={{ scale: 1.04 }}
+              whileTap={{ scale: 0.96 }}
               onClick={() => {
                 setSelectedArchId(arch.id);
                 setSelectedNode(null);
@@ -70,166 +80,191 @@ export const ArchitectureShowcase = () => {
               }}
             >
               {arch.title}
-            </button>
+            </motion.button>
           ))}
         </div>
 
         {/* Architecture Bento Canvas */}
-        <div 
-          className="bento-card"
-          style={{ 
-            padding: '2.5rem',
-            position: 'relative'
-          }}
+        <motion.div
+          key={activeArch.id}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4 }}
         >
-          <div className="google-strip" />
-
-          {/* Header Info */}
-          <div style={{ marginBottom: '2rem', paddingBottom: '1.25rem', borderBottom: '1px solid var(--border-subtle)' }}>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem' }}>
-              <div>
-                <span className="badge badge-blue" style={{ marginBottom: '0.4rem' }}>{activeArch.category}</span>
-                <h3 style={{ fontSize: '1.4rem', fontWeight: 800, color: 'var(--text-primary)', marginTop: '0.2rem' }}>
-                  {activeArch.title}
-                </h3>
-                <p style={{ color: 'var(--text-secondary)', fontSize: '0.92rem' }}>
-                  {activeArch.description}
-                </p>
-              </div>
-              <span className="badge badge-green">Production Verified</span>
-            </div>
-          </div>
-
-          {/* Interactive Flow Nodes */}
-          <div 
-            className="arch-nodes-grid"
-            style={{ 
-              display: 'grid', 
-              gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', 
-              gap: '1rem',
-              alignItems: 'stretch',
-              position: 'relative',
-              marginBottom: '2rem'
-            }}
+          <Tilt
+            tiltMaxAngleX={3}
+            tiltMaxAngleY={3}
+            glareEnable={true}
+            glareMaxOpacity={0.08}
+            glareColor="#ffffff"
+            glarePosition="all"
+            style={{ borderRadius: '1.25rem' }}
           >
-            {activeArch.nodes.map((node, index) => {
-              const isSelected = selectedNode?.id === node.id;
-              return (
-                <div 
-                  key={node.id}
-                  onClick={() => setSelectedNode(node)}
-                  style={{
-                    background: isSelected ? 'var(--google-blue-soft)' : 'var(--bg-input)',
-                    border: isSelected ? '2px solid var(--google-blue)' : '1px solid var(--border-color)',
-                    borderRadius: '0.85rem',
-                    padding: '1.15rem',
-                    cursor: 'pointer',
-                    transition: 'all 0.2s ease',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'space-between',
-                    transform: isSelected ? 'scale(1.02)' : 'none',
-                    boxShadow: isSelected ? '0 4px 12px rgba(26, 115, 232, 0.15)' : 'none'
-                  }}
-                >
+            <div 
+              className="bento-card"
+              style={{ 
+                padding: '2.5rem',
+                position: 'relative'
+              }}
+            >
+              <div className="google-strip" />
+
+              {/* Header Info */}
+              <div style={{ marginBottom: '2rem', paddingBottom: '1.25rem', borderBottom: '1px solid var(--border-subtle)' }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem' }}>
                   <div>
-                    {/* Node Step & Icon */}
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
-                      <span 
-                        style={{ 
-                          fontSize: '0.72rem', 
-                          fontWeight: 700, 
-                          color: 'var(--text-muted)', 
-                          fontFamily: 'var(--font-mono)' 
-                        }}
-                      >
-                        STEP 0{index + 1}
-                      </span>
+                    <span className="badge badge-blue" style={{ marginBottom: '0.4rem' }}>{activeArch.category}</span>
+                    <h3 style={{ fontSize: '1.4rem', fontWeight: 800, color: 'var(--text-primary)', marginTop: '0.2rem' }}>
+                      {activeArch.title}
+                    </h3>
+                    <p style={{ color: 'var(--text-secondary)', fontSize: '0.92rem' }}>
+                      {activeArch.description}
+                    </p>
+                  </div>
+                  <span className="badge badge-green">Production Verified</span>
+                </div>
+              </div>
+
+              {/* Interactive Flow Nodes */}
+              <div 
+                className="arch-nodes-grid"
+                style={{ 
+                  display: 'grid', 
+                  gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', 
+                  gap: '1rem',
+                  alignItems: 'stretch',
+                  position: 'relative',
+                  marginBottom: '2rem'
+                }}
+              >
+                {activeArch.nodes.map((node, index) => {
+                  const isSelected = selectedNode?.id === node.id;
+                  return (
+                    <motion.div 
+                      key={node.id}
+                      whileHover={{ y: -4, scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      onClick={() => setSelectedNode(node)}
+                      style={{
+                        background: isSelected ? 'var(--google-blue-soft)' : 'var(--bg-input)',
+                        border: isSelected ? '2px solid var(--google-blue)' : '1px solid var(--border-color)',
+                        borderRadius: '0.85rem',
+                        padding: '1.15rem',
+                        cursor: 'pointer',
+                        transition: 'border-color 0.2s ease, background-color 0.2s ease',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'space-between',
+                        boxShadow: isSelected ? '0 4px 14px rgba(26, 115, 232, 0.2)' : 'none'
+                      }}
+                    >
+                      <div>
+                        {/* Node Step & Icon */}
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
+                          <span 
+                            style={{ 
+                              fontSize: '0.72rem', 
+                              fontWeight: 700, 
+                              color: 'var(--text-muted)', 
+                              fontFamily: 'var(--font-mono)' 
+                            }}
+                          >
+                            STEP 0{index + 1}
+                          </span>
+                          <div 
+                            style={{ 
+                              width: '32px', 
+                              height: '32px', 
+                              borderRadius: '8px', 
+                              background: 'var(--bg-card)', 
+                              border: '1px solid var(--border-subtle)',
+                              display: 'flex', 
+                              alignItems: 'center', 
+                              justifyContent: 'center' 
+                            }}
+                          >
+                            {getNodeIcon(node.type)}
+                          </div>
+                        </div>
+
+                        <h4 style={{ fontSize: '0.92rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '0.35rem', lineHeight: 1.3 }}>
+                          {node.title}
+                        </h4>
+
+                        <p style={{ fontSize: '0.78rem', color: 'var(--text-secondary)', lineHeight: 1.4 }}>
+                          {node.desc}
+                        </p>
+                      </div>
+
+                      <div style={{ marginTop: '0.75rem', fontSize: '0.72rem', color: 'var(--google-blue)', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '0.2rem' }}>
+                        <span>Inspect</span>
+                        <ArrowRight size={11} />
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </div>
+
+              {/* Node Inspector */}
+              <AnimatePresence mode="wait">
+                {selectedNode ? (
+                  <motion.div 
+                    key={selectedNode.id}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.25 }}
+                    style={{
+                      background: 'var(--bg-input)',
+                      border: '1px solid var(--border-color)',
+                      borderRadius: '0.85rem',
+                      padding: '1.25rem 1.5rem',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      flexWrap: 'wrap',
+                      gap: '1rem'
+                    }}
+                  >
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                       <div 
-                        style={{ 
-                          width: '32px', 
-                          height: '32px', 
-                          borderRadius: '8px', 
-                          background: 'var(--bg-card)', 
-                          border: '1px solid var(--border-subtle)',
-                          display: 'flex', 
-                          alignItems: 'center', 
-                          justifyContent: 'center' 
+                        style={{
+                          width: '42px',
+                          height: '42px',
+                          borderRadius: '10px',
+                          background: 'var(--bg-card)',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center'
                         }}
                       >
-                        {getNodeIcon(node.type)}
+                        {getNodeIcon(selectedNode.type)}
+                      </div>
+                      <div>
+                        <div style={{ fontWeight: 700, fontSize: '0.98rem', color: 'var(--text-primary)' }}>
+                          {selectedNode.title}
+                        </div>
+                        <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
+                          {selectedNode.desc}
+                        </div>
                       </div>
                     </div>
 
-                    <h4 style={{ fontSize: '0.92rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '0.35rem', lineHeight: 1.3 }}>
-                      {node.title}
-                    </h4>
-
-                    <p style={{ fontSize: '0.78rem', color: 'var(--text-secondary)', lineHeight: 1.4 }}>
-                      {node.desc}
-                    </p>
+                    <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+                      <span className="badge badge-blue">Telemetry Verified</span>
+                      <span className="badge badge-green">Production Ready</span>
+                    </div>
+                  </motion.div>
+                ) : (
+                  <div style={{ textAlign: 'center', fontSize: '0.82rem', color: 'var(--text-muted)' }}>
+                    💡 Click any step above to inspect its architecture role and telemetry status
                   </div>
+                )}
+              </AnimatePresence>
 
-                  <div style={{ marginTop: '0.75rem', fontSize: '0.72rem', color: 'var(--google-blue)', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '0.2rem' }}>
-                    <span>Inspect</span>
-                    <ArrowRight size={11} />
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-
-          {/* Node Inspector */}
-          {selectedNode ? (
-            <div 
-              style={{
-                background: 'var(--bg-input)',
-                border: '1px solid var(--border-color)',
-                borderRadius: '0.85rem',
-                padding: '1.25rem 1.5rem',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                flexWrap: 'wrap',
-                gap: '1rem'
-              }}
-            >
-              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                <div 
-                  style={{
-                    width: '42px',
-                    height: '42px',
-                    borderRadius: '10px',
-                    background: 'var(--bg-card)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center'
-                  }}
-                >
-                  {getNodeIcon(selectedNode.type)}
-                </div>
-                <div>
-                  <div style={{ fontWeight: 700, fontSize: '0.98rem', color: 'var(--text-primary)' }}>
-                    {selectedNode.title}
-                  </div>
-                  <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
-                    {selectedNode.desc}
-                  </div>
-                </div>
-              </div>
-
-              <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
-                <span className="badge badge-blue">Telemetry Verified</span>
-                <span className="badge badge-green">Production Ready</span>
-              </div>
             </div>
-          ) : (
-            <div style={{ textAlign: 'center', fontSize: '0.82rem', color: 'var(--text-muted)' }}>
-              💡 Click any step above to inspect its architecture role and telemetry status
-            </div>
-          )}
-
-        </div>
+          </Tilt>
+        </motion.div>
 
       </div>
 

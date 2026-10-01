@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
+import Tilt from 'react-parallax-tilt';
 import { 
   Mail, 
   MapPin, 
@@ -18,38 +20,38 @@ import { portfolioData } from '../data/portfolioData';
 export const Contact = () => {
   const { personal } = portfolioData;
   const [copiedField, setCopiedField] = useState(null);
-  const [formState, setFormState] = useState({ name: '', email: '', subject: '', message: '' });
-  const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const handleCopy = (field, text) => {
+  const handleCopy = (field, text, e) => {
     navigator.clipboard.writeText(text);
     setCopiedField(field);
-    setTimeout(() => setCopiedField(null), 2000);
-  };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!formState.name || !formState.email || !formState.message) return;
-
-    try {
+    if (e) {
+      const rect = e.currentTarget.getBoundingClientRect();
+      const x = (rect.left + rect.width / 2) / window.innerWidth;
+      const y = (rect.top + rect.height / 2) / window.innerHeight;
       confetti({
-        particleCount: 80,
-        spread: 70,
-        origin: { y: 0.6 }
+        particleCount: 35,
+        spread: 50,
+        origin: { x, y },
+        colors: ['#4285f4', '#34a853', '#ea4335', '#fbbc05']
       });
-    } catch (err) {
-      // ignore
     }
 
-    setIsSubmitted(true);
+    setTimeout(() => setCopiedField(null), 2000);
   };
 
   return (
     <section id="contact" className="section" style={{ background: 'var(--bg-secondary)', borderTop: '1px solid var(--border-color)' }}>
       <div className="container">
         
-        {/* Header */}
-        <div className="section-header">
+        {/* Header with Animation */}
+        <motion.div 
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          className="section-header"
+        >
           <div className="section-tag" style={{ color: 'var(--google-blue)', background: 'var(--google-blue-soft)' }}>
             <Mail size={14} />
             Let's Connect
@@ -58,343 +60,211 @@ export const Contact = () => {
           <p className="section-subtitle">
             Actively open to <strong>Remote Opportunities across India & Worldwide</strong> (AI Engineer, GenAI Architect, and Lead AI Platform roles). Reach out via Email or LinkedIn.
           </p>
-        </div>
+        </motion.div>
 
         <div style={{ maxWidth: '1050px', margin: '0 auto' }}>
           
-          {/* Bento Box Container */}
-          <div 
-            className="bento-card" 
-            style={{ 
-              padding: '2.5rem',
-              boxShadow: 'var(--shadow-md)'
-            }}
+          {/* Bento Box Container with 3D Tilt */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-40px" }}
+            transition={{ duration: 0.6 }}
           >
-            <div style={{ textAlign: 'center', maxWidth: '640px', margin: '0 auto 2rem' }}>
-              <h3 style={{ fontSize: '1.45rem', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '0.4rem' }}>
-                Direct Professional Inquiries
-              </h3>
-              <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: 1.6 }}>
-                I respond directly to technical recruiters, engineering leaders, and collaborators via Email and LinkedIn.
-              </p>
-            </div>
-
-            {/* Single Row 3-Column Grid */}
-            <div className="direct-inquiries-grid">
-              
-              {/* Card 1: Email */}
-              <div className="direct-inquiry-card">
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', minWidth: 0 }}>
-                  <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: 'var(--google-red-soft)', color: 'var(--google-red)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                    <Mail size={18} />
-                  </div>
-                  <div style={{ minWidth: 0 }}>
-                    <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', textTransform: 'uppercase', fontFamily: 'var(--font-mono)', fontWeight: 700 }}>
-                      Email Channel
-                    </div>
-                    <a 
-                      href={`mailto:${personal.email}`} 
-                      title={personal.email}
-                      style={{ 
-                        fontWeight: 700, 
-                        color: 'var(--text-primary)', 
-                        fontSize: '0.86rem', 
-                        display: 'block',
-                        overflow: 'hidden',
-                        textOverflow: 'ellipsis',
-                        whiteSpace: 'nowrap'
-                      }}
-                    >
-                      {personal.email}
-                    </a>
-                  </div>
+            <Tilt
+              tiltMaxAngleX={3}
+              tiltMaxAngleY={3}
+              glareEnable={true}
+              glareMaxOpacity={0.06}
+              glareColor="#ffffff"
+              glarePosition="all"
+              style={{ borderRadius: '1.25rem' }}
+            >
+              <div 
+                className="bento-card" 
+                style={{ 
+                  padding: '2.5rem',
+                  boxShadow: 'var(--shadow-md)'
+                }}
+              >
+                <div style={{ textAlign: 'center', maxWidth: '640px', margin: '0 auto 2rem' }}>
+                  <h3 style={{ fontSize: '1.45rem', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '0.4rem' }}>
+                    Direct Professional Inquiries
+                  </h3>
+                  <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: 1.6 }}>
+                    I respond directly to technical recruiters, engineering leaders, and collaborators via Email and LinkedIn.
+                  </p>
                 </div>
 
-                <button
-                  onClick={() => handleCopy('email', personal.email)}
-                  title="Copy Email"
-                  style={{ 
-                    padding: '0.45rem', 
-                    borderRadius: '8px', 
-                    background: 'var(--bg-card)', 
-                    border: '1px solid var(--border-color)',
-                    color: 'var(--text-muted)', 
-                    cursor: 'pointer',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    flexShrink: 0,
-                    marginLeft: '0.5rem'
-                  }}
-                >
-                  {copiedField === 'email' ? <Check size={15} color="var(--google-green)" /> : <Copy size={15} />}
-                </button>
-              </div>
-
-              {/* Card 2: LinkedIn */}
-              <div className="direct-inquiry-card">
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', minWidth: 0 }}>
-                  <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: 'rgba(10, 102, 194, 0.1)', color: '#0A66C2', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                    <LinkedinIcon size={18} />
-                  </div>
-                  <div style={{ minWidth: 0 }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', marginBottom: '0.1rem' }}>
-                      <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)', textTransform: 'uppercase', fontFamily: 'var(--font-mono)', fontWeight: 700 }}>LinkedIn</span>
-                      <span style={{ fontSize: '0.62rem', fontWeight: 700, padding: '0.05rem 0.35rem', borderRadius: '4px', background: 'rgba(10, 102, 194, 0.1)', color: '#0A66C2' }}>
-                        5K+ Family
-                      </span>
+                {/* Single Row 3-Column Grid */}
+                <div className="direct-inquiries-grid">
+                  
+                  {/* Card 1: Email */}
+                  <motion.div 
+                    whileHover={{ y: -3 }}
+                    className="direct-inquiry-card"
+                  >
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', minWidth: 0 }}>
+                      <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: 'var(--google-red-soft)', color: 'var(--google-red)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                        <Mail size={18} />
+                      </div>
+                      <div style={{ minWidth: 0 }}>
+                        <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', textTransform: 'uppercase', fontFamily: 'var(--font-mono)', fontWeight: 700 }}>
+                          Email Channel
+                        </div>
+                        <a 
+                          href={`mailto:${personal.email}`} 
+                          title={personal.email}
+                          style={{ 
+                            fontWeight: 700, 
+                            color: 'var(--text-primary)', 
+                            fontSize: '0.86rem', 
+                            display: 'block',
+                            overflow: 'hidden',
+                            textOverflow: 'ellipsis',
+                            whiteSpace: 'nowrap'
+                          }}
+                        >
+                          {personal.email}
+                        </a>
+                      </div>
                     </div>
-                    <a 
+
+                    <motion.button
+                      whileHover={{ scale: 1.15 }}
+                      whileTap={{ scale: 0.9 }}
+                      onClick={(e) => handleCopy('email', personal.email, e)}
+                      title="Copy Email"
+                      style={{ 
+                        padding: '0.45rem', 
+                        borderRadius: '8px', 
+                        background: 'var(--bg-card)', 
+                        border: '1px solid var(--border-color)', 
+                        color: 'var(--text-muted)', 
+                        cursor: 'pointer',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        flexShrink: 0,
+                        marginLeft: '0.5rem'
+                      }}
+                    >
+                      {copiedField === 'email' ? <Check size={15} color="var(--google-green)" /> : <Copy size={15} />}
+                    </motion.button>
+                  </motion.div>
+
+                  {/* Card 2: LinkedIn */}
+                  <motion.div 
+                    whileHover={{ y: -3 }}
+                    className="direct-inquiry-card"
+                  >
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', minWidth: 0 }}>
+                      <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: 'rgba(10, 102, 194, 0.1)', color: '#0A66C2', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                        <LinkedinIcon size={18} />
+                      </div>
+                      <div style={{ minWidth: 0 }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', marginBottom: '0.1rem' }}>
+                          <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)', textTransform: 'uppercase', fontFamily: 'var(--font-mono)', fontWeight: 700 }}>LinkedIn</span>
+                          <span style={{ fontSize: '0.62rem', fontWeight: 700, padding: '0.05rem 0.35rem', borderRadius: '4px', background: 'rgba(10, 102, 194, 0.1)', color: '#0A66C2' }}>
+                            5K+ Family
+                          </span>
+                        </div>
+                        <a 
+                          href={personal.linkedin} 
+                          target="_blank" 
+                          rel="noreferrer" 
+                          title="LinkedIn Profile"
+                          style={{ 
+                            fontWeight: 700, 
+                            color: 'var(--google-blue)', 
+                            fontSize: '0.86rem', 
+                            display: 'block',
+                            overflow: 'hidden',
+                            textOverflow: 'ellipsis',
+                            whiteSpace: 'nowrap'
+                          }}
+                        >
+                          in/bhaveshkumar-rathod
+                        </a>
+                      </div>
+                    </div>
+
+                    <motion.a 
+                      whileHover={{ scale: 1.15 }}
+                      whileTap={{ scale: 0.9 }}
                       href={personal.linkedin} 
                       target="_blank" 
                       rel="noreferrer" 
-                      title="LinkedIn Profile"
+                      title="Visit LinkedIn Profile"
                       style={{ 
-                        fontWeight: 700, 
-                        color: 'var(--google-blue)', 
-                        fontSize: '0.86rem',
-                        display: 'block',
-                        overflow: 'hidden',
-                        textOverflow: 'ellipsis',
-                        whiteSpace: 'nowrap'
+                        padding: '0.45rem', 
+                        borderRadius: '8px', 
+                        background: 'var(--bg-card)', 
+                        border: '1px solid var(--border-color)', 
+                        color: 'var(--text-muted)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        flexShrink: 0,
+                        marginLeft: '0.5rem'
                       }}
                     >
-                      in/bhaveshkumar-rathod
-                    </a>
-                  </div>
+                      <ArrowRight size={15} />
+                    </motion.a>
+                  </motion.div>
+
+                  {/* Card 3: Location */}
+                  <motion.div 
+                    whileHover={{ y: -3 }}
+                    className="direct-inquiry-card"
+                  >
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', minWidth: 0 }}>
+                      <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: 'var(--google-green-soft)', color: 'var(--google-green)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                        <MapPin size={18} />
+                      </div>
+                      <div style={{ minWidth: 0 }}>
+                        <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', textTransform: 'uppercase', fontFamily: 'var(--font-mono)', fontWeight: 700 }}>
+                          Work Location
+                        </div>
+                        <div style={{ fontWeight: 700, color: 'var(--text-primary)', fontSize: '0.86rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                          Ahmedabad, India
+                        </div>
+                        <div style={{ fontSize: '0.72rem', color: 'var(--google-green)', fontWeight: 600, whiteSpace: 'nowrap' }}>
+                          Open to Remote (Worldwide)
+                        </div>
+                      </div>
+                    </div>
+                  </motion.div>
+
                 </div>
 
-                <a 
-                  href={personal.linkedin} 
-                  target="_blank" 
-                  rel="noreferrer" 
-                  title="Visit LinkedIn Profile"
-                  style={{ 
-                    padding: '0.45rem', 
-                    borderRadius: '8px', 
-                    background: 'var(--bg-card)', 
-                    border: '1px solid var(--border-color)',
-                    color: 'var(--text-muted)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    flexShrink: 0,
-                    marginLeft: '0.5rem'
-                  }}
-                >
-                  <ArrowRight size={15} />
-                </a>
-              </div>
-
-              {/* Card 3: Location */}
-              <div className="direct-inquiry-card">
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', minWidth: 0 }}>
-                  <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: 'var(--google-green-soft)', color: 'var(--google-green)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                    <MapPin size={18} />
-                  </div>
-                  <div style={{ minWidth: 0 }}>
-                    <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', textTransform: 'uppercase', fontFamily: 'var(--font-mono)', fontWeight: 700 }}>
-                      Work Location
-                    </div>
-                    <div style={{ fontWeight: 700, color: 'var(--text-primary)', fontSize: '0.86rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                      Ahmedabad, India
-                    </div>
-                    <div style={{ fontSize: '0.72rem', color: 'var(--google-green)', fontWeight: 600, whiteSpace: 'nowrap' }}>
-                      Open to Remote (Worldwide)
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-
-            {/* Resume Download CTA Strip */}
-            <div style={{ maxWidth: '420px', margin: '0 auto' }}>
-              <a 
-                href={personal.resumeUrl}
-                download="Bhavesh_Rathod_GenAI_Engineer_Resume.pdf"
-                className="btn-primary"
-                style={{ 
-                  width: '100%', 
-                  display: 'flex', 
-                  alignItems: 'center', 
-                  justifyContent: 'center', 
-                  gap: '0.65rem', 
-                  padding: '0.9rem 1.5rem',
-                  borderRadius: '9999px',
-                  boxShadow: '0 4px 14px rgba(26, 115, 232, 0.3)'
-                }}
-              >
-                <Download size={18} />
-                <span>Download Verified Resume PDF</span>
-              </a>
-            </div>
-
-          </div>
-
-          {/* Contact form commented out for now per user request */}
-          {/*
-          <div>
-            <div 
-              className="bento-card"
-              style={{
-                padding: '2.5rem'
-              }}
-            >
-              <h3 style={{ fontSize: '1.4rem', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '0.5rem' }}>
-                Send a Message
-              </h3>
-              <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', marginBottom: '1.75rem' }}>
-                Discuss a role opportunity, project collaboration, or technical exchange.
-              </p>
-
-              {isSubmitted ? (
-                <div 
-                  style={{
-                    padding: '2.5rem 1.5rem',
-                    textAlign: 'center',
-                    background: 'var(--bg-input)',
-                    borderRadius: '1rem',
-                    border: '1px solid var(--google-green)'
-                  }}
-                >
-                  <div 
-                    style={{
-                      width: '56px',
-                      height: '56px',
-                      borderRadius: '50%',
-                      background: 'var(--google-green-soft)',
-                      color: 'var(--google-green)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      margin: '0 auto 1rem'
+                {/* Resume Download CTA Strip */}
+                <div style={{ maxWidth: '420px', margin: '0 auto' }}>
+                  <motion.a 
+                    whileHover={{ scale: 1.04, y: -2 }}
+                    whileTap={{ scale: 0.96 }}
+                    href={personal.resumeUrl}
+                    download="Bhavesh_Rathod_GenAI_Engineer_Resume.pdf"
+                    className="btn-primary"
+                    style={{ 
+                      width: '100%', 
+                      display: 'flex', 
+                      alignItems: 'center', 
+                      justifyContent: 'center', 
+                      gap: '0.65rem', 
+                      padding: '0.9rem 1.5rem',
+                      borderRadius: '9999px',
+                      boxShadow: '0 4px 14px rgba(26, 115, 232, 0.3)'
                     }}
                   >
-                    <Check size={28} />
-                  </div>
-                  <h4 style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '0.5rem' }}>
-                    Message Dispatched!
-                  </h4>
-                  <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', marginBottom: '1.5rem' }}>
-                    Thank you, {formState.name}. Bhavesh will receive your note and get back to you promptly.
-                  </p>
-                  <button 
-                    onClick={() => {
-                      setIsSubmitted(false);
-                      setFormState({ name: '', email: '', subject: '', message: '' });
-                    }}
-                    className="btn-secondary"
-                  >
-                    Send Another Note
-                  </button>
+                    <Download size={18} />
+                    <span>Download Verified Resume PDF</span>
+                  </motion.a>
                 </div>
-              ) : (
-                <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-                  
-                  <div>
-                    <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-primary)', marginBottom: '0.4rem' }}>
-                      Your Name *
-                    </label>
-                    <input 
-                      type="text" 
-                      required
-                      value={formState.name}
-                      onChange={(e) => setFormState({ ...formState, name: e.target.value })}
-                      placeholder="e.g. Alex Miller"
-                      style={{
-                        width: '100%',
-                        padding: '0.8rem 1rem',
-                        borderRadius: '0.65rem',
-                        background: 'var(--bg-input)',
-                        border: '1px solid var(--border-color)',
-                        color: 'var(--text-primary)',
-                        fontSize: '0.9rem',
-                        outline: 'none'
-                      }}
-                    />
-                  </div>
 
-                  <div>
-                    <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-primary)', marginBottom: '0.4rem' }}>
-                      Your Email *
-                    </label>
-                    <input 
-                      type="email" 
-                      required
-                      value={formState.email}
-                      onChange={(e) => setFormState({ ...formState, email: e.target.value })}
-                      placeholder="e.g. alex@techcompany.com"
-                      style={{
-                        width: '100%',
-                        padding: '0.8rem 1rem',
-                        borderRadius: '0.65rem',
-                        background: 'var(--bg-input)',
-                        border: '1px solid var(--border-color)',
-                        color: 'var(--text-primary)',
-                        fontSize: '0.9rem',
-                        outline: 'none'
-                      }}
-                    />
-                  </div>
-
-                  <div>
-                    <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-primary)', marginBottom: '0.4rem' }}>
-                      Subject / Role Discussion
-                    </label>
-                    <input 
-                      type="text" 
-                      value={formState.subject}
-                      onChange={(e) => setFormState({ ...formState, subject: e.target.value })}
-                      placeholder="e.g. Senior AI Engineer Role"
-                      style={{
-                        width: '100%',
-                        padding: '0.8rem 1rem',
-                        borderRadius: '0.65rem',
-                        background: 'var(--bg-input)',
-                        border: '1px solid var(--border-color)',
-                        color: 'var(--text-primary)',
-                        fontSize: '0.9rem',
-                        outline: 'none'
-                      }}
-                    />
-                  </div>
-
-                  <div>
-                    <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-primary)', marginBottom: '0.4rem' }}>
-                      Message *
-                    </label>
-                    <textarea 
-                      rows={4}
-                      required
-                      value={formState.message}
-                      onChange={(e) => setFormState({ ...formState, message: e.target.value })}
-                      placeholder="Hi Bhavesh, I'd like to connect regarding an AI Engineer opportunity..."
-                      style={{
-                        width: '100%',
-                        padding: '0.8rem 1rem',
-                        borderRadius: '0.65rem',
-                        background: 'var(--bg-input)',
-                        border: '1px solid var(--border-color)',
-                        color: 'var(--text-primary)',
-                        fontSize: '0.9rem',
-                        outline: 'none',
-                        resize: 'vertical'
-                      }}
-                    />
-                  </div>
-
-                  <button type="submit" className="btn-primary" style={{ width: '100%', marginTop: '0.5rem' }}>
-                    <Send size={16} />
-                    <span>Send Message</span>
-                  </button>
-
-                </form>
-              )}
-
-            </div>
-          </div>
-          */}
+              </div>
+            </Tilt>
+          </motion.div>
 
         </div>
 

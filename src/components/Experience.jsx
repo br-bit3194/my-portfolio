@@ -1,22 +1,26 @@
 import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import Tilt from 'react-parallax-tilt';
 import { 
   Briefcase, 
   Calendar, 
   MapPin, 
   ChevronRight, 
-  ChevronLeft,
+  ChevronLeft, 
   CheckCircle2, 
-  Building2,
-  Sparkles,
-  Zap,
-  Play,
-  Pause,
-  Layers,
-  Flame,
-  Award
+  Building2, 
+  Sparkles, 
+  Zap, 
+  Play, 
+  Pause, 
+  Layers, 
+  Flame, 
+  Award 
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { portfolioData } from '../data/portfolioData';
+import { SpotlightCard } from './ui/SpotlightCard';
+import { Magnetic } from './ui/Magnetic';
 
 export const Experience = () => {
   const [currentLevelIndex, setCurrentLevelIndex] = useState(0); // 0 = Level 5 (Current Present)
@@ -142,7 +146,6 @@ export const Experience = () => {
     if (isPlaying) {
       interval = setInterval(() => {
         setCurrentLevelIndex((prev) => {
-          // Progress from Level 1 (idx 4) -> Level 2 (idx 3) -> Level 3 (idx 2) -> Level 4 (idx 1) -> Level 5 (idx 0)
           const nextIdx = prev > 0 ? prev - 1 : chronologicalLevels.length - 1;
           if (chronologicalLevels[nextIdx].levelNum === 5) {
             try {
@@ -175,7 +178,6 @@ export const Experience = () => {
     }
   };
 
-  // Toggle Auto Tour: Starts journey from Level 01 up to Level 05
   const toggleAutoTour = () => {
     if (!isPlaying) {
       const level1Idx = chronologicalLevels.findIndex((l) => l.levelNum === 1);
@@ -186,13 +188,11 @@ export const Experience = () => {
     }
   };
 
-  // Step down one level
   const handlePrevLevel = () => {
     const prevIdx = (currentLevelIndex + 1) % chronologicalLevels.length;
     handleLevelSelect(prevIdx);
   };
 
-  // Step up one level
   const handleNextLevel = () => {
     const nextIdx = currentLevelIndex > 0 ? currentLevelIndex - 1 : chronologicalLevels.length - 1;
     handleLevelSelect(nextIdx);
@@ -202,8 +202,14 @@ export const Experience = () => {
     <section id="experience" className="section" style={{ background: 'var(--bg-secondary)', borderTop: '1px solid var(--border-color)', borderBottom: '1px solid var(--border-color)' }}>
       <div className="container">
         
-        {/* Header */}
-        <div className="section-header">
+        {/* Header with Animation */}
+        <motion.div 
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          className="section-header"
+        >
           <div className="section-tag" style={{ color: 'var(--google-green)', background: 'var(--google-green-soft)' }}>
             <Briefcase size={14} />
             Interactive Career Progression
@@ -212,9 +218,9 @@ export const Experience = () => {
           <p className="section-subtitle">
             An interactive level-up journey through {portfolioData.personal.experienceYears || '5.8+ years'} of engineering mastery across autonomous Multi-Agent AI, high-throughput FinTech, and cloud scale.
           </p>
-        </div>
+        </motion.div>
 
-        {/* View Mode Switcher (RPG Level Controller vs Full Classic List) */}
+        {/* View Mode Switcher */}
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '1rem', marginBottom: '2.5rem', flexWrap: 'wrap' }}>
           <div 
             style={{
@@ -226,7 +232,8 @@ export const Experience = () => {
               boxShadow: 'var(--shadow-sm)'
             }}
           >
-            <button
+            <motion.button
+              whileTap={{ scale: 0.96 }}
               onClick={() => setViewMode('rpg')}
               style={{
                 display: 'flex',
@@ -244,9 +251,10 @@ export const Experience = () => {
             >
               <Zap size={14} />
               <span>🎮 RPG Level Questline</span>
-            </button>
+            </motion.button>
 
-            <button
+            <motion.button
+              whileTap={{ scale: 0.96 }}
               onClick={() => setViewMode('classic')}
               style={{
                 display: 'flex',
@@ -264,11 +272,13 @@ export const Experience = () => {
             >
               <Layers size={14} />
               <span>Full Career List</span>
-            </button>
+            </motion.button>
           </div>
 
           {viewMode === 'rpg' && (
-            <button
+            <motion.button
+              whileHover={{ scale: 1.04 }}
+              whileTap={{ scale: 0.96 }}
               onClick={toggleAutoTour}
               style={{
                 display: 'flex',
@@ -287,7 +297,7 @@ export const Experience = () => {
             >
               {isPlaying ? <Pause size={14} /> : <Play size={14} />}
               <span>{isPlaying ? 'Pause Auto Tour' : '▶ Auto Tour Career (Lvl 1 → 5)'}</span>
-            </button>
+            </motion.button>
           )}
         </div>
 
@@ -297,7 +307,7 @@ export const Experience = () => {
         {viewMode === 'rpg' ? (
           <div>
             
-            {/* Interactive Level Map Bar (Decreasing order: Level 5 down to Level 1) */}
+            {/* Interactive Level Map Bar */}
             <div 
               style={{
                 display: 'grid',
@@ -312,8 +322,10 @@ export const Experience = () => {
                 const isActive = currentLevelIndex === idx;
                 const isPassed = lvl.levelNum <= activeQuest.levelNum;
                 return (
-                  <div
+                  <motion.div
                     key={lvl.id}
+                    whileHover={{ y: -4, scale: 1.02 }}
+                    whileTap={{ scale: 0.96 }}
                     onClick={() => handleLevelSelect(idx)}
                     style={{
                       padding: '1rem 0.85rem',
@@ -326,13 +338,11 @@ export const Experience = () => {
                         : '1px solid var(--border-color)',
                       boxShadow: isActive ? `0 8px 24px ${lvl.color}26` : 'none',
                       cursor: 'pointer',
-                      transition: 'all 0.25s cubic-bezier(0.16, 1, 0.3, 1)',
                       display: 'flex',
                       flexDirection: 'column',
                       alignItems: 'center',
                       textAlign: 'center',
-                      position: 'relative',
-                      transform: isActive ? 'translateY(-3px)' : 'none'
+                      position: 'relative'
                     }}
                   >
                     {/* Level Badge Number */}
@@ -361,208 +371,209 @@ export const Experience = () => {
                     <div style={{ fontSize: '0.82rem', fontWeight: 800, color: 'var(--text-primary)', marginTop: '0.15rem' }}>
                       {lvl.era}
                     </div>
-                    <div style={{ fontSize: '0.72rem', color: 'var(--text-secondary)', marginTop: '0.2rem', whiteHeight: 1.2 }} className="hide-mobile">
+                    <div style={{ fontSize: '0.72rem', color: 'var(--text-secondary)', marginTop: '0.2rem' }} className="hide-mobile">
                       {lvl.company.split(' ')[0]}
                     </div>
-                  </div>
+                  </motion.div>
                 );
               })}
             </div>
 
-            {/* Main Active Quest Card (The RPG Stage HUD) */}
-            <div 
-              className="bento-card"
-              style={{
-                padding: '2.5rem',
-                borderTop: `5px solid ${activeQuest.color}`,
-                boxShadow: '0 12px 35px rgba(0, 0, 0, 0.06)',
-                position: 'relative'
-              }}
-            >
-              <div className="google-strip" />
-
-              {/* Top Level Metadata Bar */}
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '1rem', marginBottom: '1.75rem' }}>
-                <div>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', flexWrap: 'wrap', marginBottom: '0.4rem' }}>
-                    <span 
-                      style={{
-                        fontSize: '0.78rem',
-                        fontWeight: 900,
-                        padding: '0.25rem 0.75rem',
-                        borderRadius: '9999px',
-                        background: activeQuest.color,
-                        color: '#ffffff',
-                        letterSpacing: '0.02em',
-                        fontFamily: 'var(--font-mono)',
-                        boxShadow: `0 2px 8px ${activeQuest.color}40`
-                      }}
-                    >
-                      LEVEL 0{activeQuest.levelNum} OF 05
-                    </span>
-                    <span className="badge" style={{ background: 'var(--bg-input)', color: activeQuest.color, fontWeight: 700, border: '1px solid var(--border-color)' }}>
-                      {activeQuest.badge}
-                    </span>
-                  </div>
-
-                  <h3 style={{ fontSize: '1.65rem', fontWeight: 900, color: 'var(--text-primary)', lineHeight: 1.25 }}>
-                    {activeQuest.title}
-                  </h3>
-                  
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', fontSize: '1.05rem', fontWeight: 700, color: 'var(--google-blue)', marginTop: '0.3rem' }}>
-                    <Building2 size={18} />
-                    <span>{activeQuest.company}</span>
-                    <span style={{ color: 'var(--text-muted)' }}>•</span>
-                    <span style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>{activeQuest.rank}</span>
-                  </div>
-                </div>
-
-                <div style={{ textAlign: 'right' }} className="quest-time-box">
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', fontSize: '0.88rem', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)', fontWeight: 600 }}>
-                    <Calendar size={14} />
-                    <span>{activeQuest.period}</span>
-                  </div>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.82rem', color: 'var(--text-muted)', justifyContent: 'flex-end', marginTop: '0.25rem' }}>
-                    <MapPin size={13} />
-                    <span>{activeQuest.location}</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* RPG Power Boost Callout Banner */}
-              <div 
-                style={{
-                  padding: '1.25rem 1.5rem',
-                  borderRadius: '1rem',
-                  background: 'linear-gradient(135deg, var(--bg-input) 0%, var(--bg-card) 100%)',
-                  border: `1.5px solid ${activeQuest.color}40`,
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '1.25rem',
-                  marginBottom: '2rem',
-                  flexWrap: 'wrap'
-                }}
+            {/* Main Active Quest Card with 3D Tilt and AnimatePresence */}
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeQuest.id}
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -15 }}
+                transition={{ duration: 0.35 }}
               >
-                <div 
-                  style={{
-                    width: '48px',
-                    height: '48px',
-                    borderRadius: '12px',
-                    background: `${activeQuest.color}18`,
-                    color: activeQuest.color,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    flexShrink: 0
-                  }}
+                <Tilt
+                  tiltMaxAngleX={3}
+                  tiltMaxAngleY={3}
+                  glareEnable={true}
+                  glareMaxOpacity={0.08}
+                  glareColor="#ffffff"
+                  glarePosition="all"
+                  style={{ borderRadius: '1.25rem' }}
                 >
-                  <Flame size={26} />
-                </div>
-                <div>
-                  <div style={{ fontSize: '0.75rem', fontWeight: 800, color: activeQuest.color, textTransform: 'uppercase', letterSpacing: '0.04em', fontFamily: 'var(--font-mono)' }}>
-                    ⚡ Key Unlocked Power Stat
-                  </div>
-                  <div style={{ fontSize: '1.15rem', fontWeight: 900, color: 'var(--text-primary)', marginTop: '0.15rem' }}>
-                    {activeQuest.statBoost}
-                  </div>
-                  <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginTop: '0.15rem' }}>
-                    {activeQuest.statDetail}
-                  </div>
-                </div>
-              </div>
+                  <SpotlightCard
+                    spotlightColor={`${activeQuest.color}18`}
+                    borderColor={`${activeQuest.color}60`}
+                    style={{
+                      borderTop: `5px solid ${activeQuest.color}`,
+                      boxShadow: '0 12px 35px rgba(0, 0, 0, 0.06)'
+                    }}
+                  >
+                    <div style={{ padding: '2.5rem', position: 'relative' }}>
+                      <div className="google-strip" />
 
-              {/* Unlocked Superpowers Grid */}
-              <div style={{ marginBottom: '2rem' }}>
-                <div style={{ fontSize: '0.82rem', fontWeight: 800, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.04em', marginBottom: '0.85rem', fontFamily: 'var(--font-mono)' }}>
-                  🛡️ Superpowers Mastered at this Level:
-                </div>
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.55rem' }}>
-                  {activeQuest.powersUnlocked.map((p, pIdx) => (
+                    {/* Top Level Metadata Bar */}
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '1rem', marginBottom: '1.75rem' }}>
+                      <div>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', flexWrap: 'wrap', marginBottom: '0.4rem' }}>
+                          <span 
+                            style={{
+                              fontSize: '0.78rem',
+                              fontWeight: 900,
+                              padding: '0.25rem 0.75rem',
+                              borderRadius: '9999px',
+                              background: activeQuest.color,
+                              color: '#ffffff',
+                              letterSpacing: '0.02em',
+                              fontFamily: 'var(--font-mono)',
+                              boxShadow: `0 2px 8px ${activeQuest.color}40`
+                            }}
+                          >
+                            LEVEL 0{activeQuest.levelNum} OF 05
+                          </span>
+                          <span className="badge" style={{ background: 'var(--bg-input)', color: activeQuest.color, fontWeight: 700, border: '1px solid var(--border-color)' }}>
+                            {activeQuest.badge}
+                          </span>
+                        </div>
+
+                        <h3 style={{ fontSize: '1.65rem', fontWeight: 900, color: 'var(--text-primary)', lineHeight: 1.25 }}>
+                          {activeQuest.title}
+                        </h3>
+                        
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', fontSize: '1.05rem', fontWeight: 700, color: 'var(--google-blue)', marginTop: '0.3rem' }}>
+                          <Building2 size={18} />
+                          <span>{activeQuest.company}</span>
+                          <span style={{ color: 'var(--text-muted)' }}>•</span>
+                          <span style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>{activeQuest.rank}</span>
+                        </div>
+                      </div>
+
+                      <div style={{ textAlign: 'right' }} className="quest-time-box">
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', fontSize: '0.88rem', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)', fontWeight: 600 }}>
+                          <Calendar size={14} />
+                          <span>{activeQuest.period}</span>
+                        </div>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.82rem', color: 'var(--text-muted)', justifyContent: 'flex-end', marginTop: '0.25rem' }}>
+                          <MapPin size={13} />
+                          <span>{activeQuest.location}</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* RPG Power Boost Callout Banner */}
                     <div 
-                      key={pIdx}
                       style={{
+                        padding: '1.25rem 1.5rem',
+                        borderRadius: '1rem',
+                        background: 'linear-gradient(135deg, var(--bg-input) 0%, var(--bg-card) 100%)',
+                        border: `1.5px solid ${activeQuest.color}40`,
                         display: 'flex',
                         alignItems: 'center',
-                        gap: '0.45rem',
-                        padding: '0.4rem 0.85rem',
-                        borderRadius: '8px',
-                        background: 'var(--bg-input)',
-                        border: '1px solid var(--border-color)',
-                        fontSize: '0.82rem',
-                        fontWeight: 700,
-                        color: 'var(--text-primary)'
+                        gap: '1.25rem',
+                        marginBottom: '2rem',
+                        flexWrap: 'wrap'
                       }}
                     >
-                      <Sparkles size={13} color={activeQuest.color} />
-                      <span>{p}</span>
+                      <div 
+                        style={{
+                          width: '48px',
+                          height: '48px',
+                          borderRadius: '12px',
+                          background: `${activeQuest.color}18`,
+                          border: `1px solid ${activeQuest.color}40`,
+                          color: activeQuest.color,
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          flexShrink: 0
+                        }}
+                      >
+                        <Flame size={24} />
+                      </div>
+                      <div>
+                        <div style={{ fontSize: '0.78rem', fontWeight: 800, color: activeQuest.color, textTransform: 'uppercase', letterSpacing: '0.04em', fontFamily: 'var(--font-mono)' }}>
+                          ⚡ POWER STAT UNLOCKED:
+                        </div>
+                        <div style={{ fontSize: '1.05rem', fontWeight: 800, color: 'var(--text-primary)', marginTop: '0.1rem' }}>
+                          {activeQuest.statBoost}
+                        </div>
+                        <div style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', marginTop: '0.2rem' }}>
+                          {activeQuest.statDetail}
+                        </div>
+                      </div>
                     </div>
-                  ))}
-                </div>
-              </div>
 
-              {/* Mission Achievements */}
-              <div style={{ marginBottom: '2rem' }}>
-                <div style={{ fontSize: '0.82rem', fontWeight: 800, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.04em', marginBottom: '0.85rem', fontFamily: 'var(--font-mono)' }}>
-                  🎯 Mission Brief & Architecture Highlights:
-                </div>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                  {activeQuest.missionBrief.map((item, mIdx) => (
-                    <div key={mIdx} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.65rem' }}>
-                      <CheckCircle2 size={17} color="var(--google-green)" style={{ flexShrink: 0, marginTop: '3px' }} />
-                      <p style={{ fontSize: '0.92rem', color: 'var(--text-primary)', lineHeight: 1.6 }}>
-                        {item}
-                      </p>
+                    {/* Mission Achievements */}
+                    <div style={{ marginBottom: '2rem' }}>
+                      <div style={{ fontSize: '0.82rem', fontWeight: 800, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.04em', marginBottom: '0.85rem', fontFamily: 'var(--font-mono)' }}>
+                        🎯 Mission Brief & Architecture Highlights:
+                      </div>
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                        {activeQuest.missionBrief.map((item, mIdx) => (
+                          <div key={mIdx} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.65rem' }}>
+                            <CheckCircle2 size={17} color="var(--google-green)" style={{ flexShrink: 0, marginTop: '3px' }} />
+                            <p style={{ fontSize: '0.92rem', color: 'var(--text-primary)', lineHeight: 1.6 }}>
+                              {item}
+                            </p>
+                          </div>
+                        ))}
+                      </div>
                     </div>
-                  ))}
-                </div>
-              </div>
 
-              {/* Inventory / Tech Stack */}
-              <div style={{ paddingTop: '1.25rem', borderTop: '1px solid var(--border-subtle)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem' }}>
-                <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '0.45rem' }}>
-                  <span style={{ fontSize: '0.75rem', fontWeight: 800, color: 'var(--text-muted)', textTransform: 'uppercase', fontFamily: 'var(--font-mono)' }}>
-                    Equipment Stack:
-                  </span>
-                  {activeQuest.equipment.map((eq, eIdx) => (
-                    <span
-                      key={eIdx}
-                      style={{
-                        fontSize: '0.75rem',
-                        padding: '0.2rem 0.55rem',
-                        borderRadius: '4px',
-                        background: 'var(--bg-input)',
-                        color: 'var(--text-secondary)',
-                        fontFamily: 'var(--font-mono)',
-                        border: '1px solid var(--border-subtle)'
-                      }}
-                    >
-                      {eq}
-                    </span>
-                  ))}
-                </div>
+                    {/* Inventory / Tech Stack */}
+                    <div style={{ paddingTop: '1.25rem', borderTop: '1px solid var(--border-subtle)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '0.45rem' }}>
+                        <span style={{ fontSize: '0.75rem', fontWeight: 800, color: 'var(--text-muted)', textTransform: 'uppercase', fontFamily: 'var(--font-mono)' }}>
+                          Equipment Stack:
+                        </span>
+                        {activeQuest.equipment.map((eq, eIdx) => (
+                          <span
+                            key={eIdx}
+                            style={{
+                              fontSize: '0.75rem',
+                              padding: '0.2rem 0.55rem',
+                              borderRadius: '4px',
+                              background: 'var(--bg-input)',
+                              color: 'var(--text-secondary)',
+                              fontFamily: 'var(--font-mono)',
+                              border: '1px solid var(--border-subtle)'
+                            }}
+                          >
+                            {eq}
+                          </span>
+                        ))}
+                      </div>
 
-                {/* Level Navigation Controls */}
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                  <button
-                    onClick={handlePrevLevel}
-                    className="btn-secondary"
-                    style={{ padding: '0.45rem 0.9rem', fontSize: '0.82rem', borderRadius: '9999px' }}
-                  >
-                    <ChevronLeft size={16} />
-                    <span>{activeQuest.levelNum > 1 ? `Lvl 0${activeQuest.levelNum - 1}` : 'Level 05'}</span>
-                  </button>
-                  <button
-                    onClick={handleNextLevel}
-                    className="btn-primary"
-                    style={{ padding: '0.45rem 1.1rem', fontSize: '0.82rem', borderRadius: '9999px', background: activeQuest.color }}
-                  >
-                    <span>{activeQuest.levelNum < 5 ? `Level Up (Lvl 0${activeQuest.levelNum + 1})` : 'Replay from Lvl 01'}</span>
-                    <ChevronRight size={16} />
-                  </button>
-                </div>
-              </div>
+                      {/* Level Navigation Controls */}
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                        <Magnetic strength={0.2}>
+                          <motion.button
+                            whileHover={{ scale: 1.04 }}
+                            whileTap={{ scale: 0.96 }}
+                            onClick={handlePrevLevel}
+                            className="btn-secondary"
+                            style={{ padding: '0.45rem 0.9rem', fontSize: '0.82rem', borderRadius: '9999px' }}
+                          >
+                            <ChevronLeft size={16} />
+                            <span>{activeQuest.levelNum > 1 ? `Lvl 0${activeQuest.levelNum - 1}` : 'Level 05'}</span>
+                          </motion.button>
+                        </Magnetic>
+                        <Magnetic strength={0.2}>
+                          <motion.button
+                            whileHover={{ scale: 1.04 }}
+                            whileTap={{ scale: 0.96 }}
+                            onClick={handleNextLevel}
+                            className="btn-primary"
+                            style={{ padding: '0.45rem 1.1rem', fontSize: '0.82rem', borderRadius: '9999px', background: activeQuest.color }}
+                          >
+                            <span>{activeQuest.levelNum < 5 ? `Level Up (Lvl 0${activeQuest.levelNum + 1})` : 'Replay from Lvl 01'}</span>
+                            <ChevronRight size={16} />
+                          </motion.button>
+                        </Magnetic>
+                      </div>
+                    </div>
 
-            </div>
+                    </div>
+                  </SpotlightCard>
+                </Tilt>
+              </motion.div>
+            </AnimatePresence>
 
           </div>
         ) : (
@@ -571,8 +582,12 @@ export const Experience = () => {
           /* ========================================================================= */
           <div style={{ maxWidth: '920px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
             {portfolioData.experience.map((exp, index) => (
-              <div 
+              <motion.div 
                 key={exp.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.4, delay: index * 0.1 }}
                 className="bento-card"
                 style={{
                   padding: '2rem',
@@ -641,7 +656,7 @@ export const Experience = () => {
                     </span>
                   ))}
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         )}

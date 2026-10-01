@@ -139,7 +139,7 @@ export const Footer = ({ onOpenAiModal }) => {
               <a href="#about">Overview</a>
               <a href="#projects">Projects & Hackathons</a>
               <a href="#architecture">Architecture Patterns</a>
-              <a href="#experience">5+ Years Experience</a>
+              <a href="#experience">{portfolioData.personal.experienceYears || '5+ Years'} Experience</a>
               <a href="#skills">Skills Matrix</a>
               <a href="#certifications">Certifications & Awards</a>
               <a href="#contact">Contact</a>
