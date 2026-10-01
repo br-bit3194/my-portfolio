@@ -70,6 +70,12 @@ html {
   background-color: var(--bg-primary);
 }
 
+@media (min-width: 1024px) {
+  html {
+    zoom: 0.85;
+  }
+}
+
 body {
   min-height: 100vh;
   overflow-x: hidden;
