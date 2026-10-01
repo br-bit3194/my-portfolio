@@ -231,76 +231,50 @@ export const Hero = ({ onOpenAiModal }) => {
               Building production-grade AI systems with Generative AI, RAG and Agentic AI, backed by 5+ years of experience in scalable backend systems and cloud-native solutions.
             </p>
 
-            {/* Mobile-Only Focused Portrait Showcase with Soft Ambient Blur */}
-            <div className="mobile-hero-poster-frame" style={{ margin: '1.25rem auto 2rem', textAlign: 'center', maxWidth: '320px', position: 'relative' }}>
+            {/* Mobile Visual Portrait Centerpiece (From Poster, Zero Text Artifacts) */}
+            <div className="mobile-portrait-center" style={{ margin: '1.25rem auto 1.75rem', textAlign: 'center', maxWidth: '300px', position: 'relative' }}>
               
-              {/* Ambient Blurred Aura from Poster */}
+              {/* Ambient Blurred Aura */}
               <div 
                 style={{
                   position: 'absolute',
-                  inset: '-10px',
-                  backgroundImage: 'url(/hero.png)',
-                  backgroundPosition: 'center 30%',
+                  inset: '-6px',
+                  backgroundImage: 'url(/hero-mobile.png)',
+                  backgroundPosition: 'center',
                   backgroundSize: 'cover',
-                  filter: 'blur(24px)',
-                  opacity: 0.5,
-                  borderRadius: '2rem',
+                  filter: 'blur(20px)',
+                  opacity: 0.4,
+                  borderRadius: '1.75rem',
                   zIndex: 0
                 }}
               />
 
-              {/* Centered Focused Portrait Frame (Only Bhavesh visible, surroundings cropped out) */}
               <div 
                 style={{
                   position: 'relative',
                   zIndex: 1,
-                  width: '260px',
+                  width: '240px',
                   height: '310px',
                   margin: '0 auto',
-                  borderRadius: '1.75rem',
+                  borderRadius: '1.5rem',
                   overflow: 'hidden',
                   border: '2.5px solid #ffffff',
-                  boxShadow: '0 12px 35px rgba(29, 104, 254, 0.2), 0 4px 12px rgba(0, 0, 0, 0.08)',
+                  boxShadow: '0 12px 32px rgba(29, 104, 254, 0.22), 0 4px 12px rgba(0,0,0,0.08)',
                   background: '#ffffff'
                 }}
               >
-                {/* Zoomed in tightly on Bhavesh only */}
                 <img 
-                  src="/hero.png" 
-                  alt="Bhavesh Rathod"
+                  src="/hero-mobile.png" 
+                  alt="Bhaveshkumar Rathod"
                   style={{
                     width: '100%',
                     height: '100%',
                     objectFit: 'cover',
                     objectPosition: 'center 20%',
-                    transform: 'scale(1.55)',
-                    transformOrigin: 'center 24%',
                     display: 'block'
                   }}
                 />
-
-                {/* Soft bottom vignette overlay */}
-                <div 
-                  style={{
-                    position: 'absolute',
-                    inset: 0,
-                    background: 'linear-gradient(to top, rgba(15, 23, 42, 0.65) 0%, rgba(15, 23, 42, 0.05) 35%, transparent 100%)',
-                    pointerEvents: 'none',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'flex-end',
-                    padding: '0.85rem'
-                  }}
-                >
-                  <div style={{ color: '#ffffff', fontWeight: 800, fontSize: '0.98rem', textShadow: '0 2px 6px rgba(0,0,0,0.6)' }}>
-                    Bhavesh Rathod
-                  </div>
-                  <div style={{ color: '#93c5fd', fontSize: '0.72rem', fontWeight: 700, fontFamily: 'var(--font-mono)' }}>
-                    AI Engineer • Senior Software Engineer
-                  </div>
-                </div>
               </div>
-
             </div>
 
             {/* Action Buttons */}
@@ -625,7 +599,7 @@ export const Hero = ({ onOpenAiModal }) => {
       </div>
 
       <style>{`
-        .mobile-hero-poster-frame {
+        .mobile-portrait-center {
           display: none;
         }
 
@@ -636,8 +610,12 @@ export const Hero = ({ onOpenAiModal }) => {
         }
 
         @media (max-width: 1023px) {
-          .mobile-hero-poster-frame {
+          .mobile-portrait-center {
             display: block !important;
+          }
+          .hero-poster-section {
+            padding-top: 5rem !important;
+            padding-bottom: 2.5rem !important;
           }
           .hero-bg-poster {
             display: none !important;
