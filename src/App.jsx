@@ -11,6 +11,7 @@ import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
 import { AiAssistantModal } from './components/AiAssistantModal';
 import { JadeSkyBackground } from './components/ui/JadeSkyBackground';
+import { SideNavigator } from './components/ui/SideNavigator';
 import { Bot, Sparkles } from 'lucide-react';
 
 export function App() {
@@ -106,6 +107,9 @@ export function App() {
         isOpen={isAiModalOpen} 
         onClose={() => setIsAiModalOpen(false)} 
       />
+
+      {/* Right Side Slidebar Navigator */}
+      <SideNavigator />
 
       {/* Floating AI Assistant FAB Button */}
       <motion.button
