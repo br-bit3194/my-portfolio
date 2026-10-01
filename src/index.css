@@ -375,6 +375,23 @@ button {
   -webkit-backdrop-filter: blur(16px);
 }
 
+/* Mobile Cropped Portrait in Hero */
+@media (min-width: 1024px) {
+  .mobile-portrait-center {
+    display: none !important;
+  }
+}
+
+@media (max-width: 1023px) {
+  .mobile-portrait-center {
+    display: flex !important;
+  }
+  .hero-bg-poster,
+  .hero-scrim {
+    display: none !important;
+  }
+}
+
 .btn-hero-primary:hover {
   background: #1557b0 !important;
   transform: translateY(-2px);

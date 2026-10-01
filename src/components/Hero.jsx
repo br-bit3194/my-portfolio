@@ -15,7 +15,8 @@ import {
   Users,
   ShieldCheck,
   Sparkles,
-  Trophy
+  Trophy,
+  Zap
 } from 'lucide-react';
 import { LinkedinIcon } from './Icons';
 import {
@@ -44,11 +45,11 @@ export const Hero = ({ onOpenAiModal }) => {
     "Senior Software Engineer"
   ];
   const [roleIndex, setRoleIndex] = useState(0);
-  const [isDesktop, setIsDesktop] = useState(typeof window !== 'undefined' ? window.innerWidth >= 900 : true);
+  const [isDesktop, setIsDesktop] = useState(typeof window !== 'undefined' ? window.innerWidth >= 1024 : true);
 
   useEffect(() => {
     const handleResize = () => {
-      setIsDesktop(window.innerWidth >= 900);
+      setIsDesktop(window.innerWidth >= 1024);
     };
     handleResize();
     window.addEventListener('resize', handleResize);
@@ -139,32 +140,35 @@ export const Hero = ({ onOpenAiModal }) => {
       {/* 21st.dev Interactive Canvas Particle Constellation */}
       <ParticleCanvas quantity={30} color="#1a73e8" />
 
-      {/* High-Resolution Center Studio Photo Background */}
-      <div
-        className="hero-bg-poster"
-        style={{
-          position: 'absolute',
-          inset: 0,
-          backgroundImage: 'url(/hero.png)',
-          backgroundPosition: 'center 45%',
-          backgroundSize: 'cover',
-          backgroundRepeat: 'no-repeat',
-          zIndex: 0,
-          opacity: 0.98
-        }}
-      />
-
-      {/* Jade Sky gradient scrim for crisp text readability */}
-      <div
-        className="hero-scrim"
-        style={{
-          position: 'absolute',
-          inset: 0,
-          background: 'linear-gradient(90deg, rgba(238, 246, 227, 0.96) 0%, rgba(238, 246, 227, 0.92) 34%, rgba(238, 246, 227, 0.1) 50%, rgba(207, 233, 240, 0.88) 75%, rgba(238, 246, 227, 0.96) 100%)',
-          zIndex: 1,
-          pointerEvents: 'none'
-        }}
-      />
+      {/* High-Resolution Center Studio Photo Background - Desktop Only */}
+      {isDesktop && (
+        <>
+          <div
+            className="hero-bg-poster"
+            style={{
+              position: 'absolute',
+              inset: 0,
+              backgroundImage: 'url(/hero.png)',
+              backgroundPosition: 'center 45%',
+              backgroundSize: 'cover',
+              backgroundRepeat: 'no-repeat',
+              zIndex: 0,
+              opacity: 0.98
+            }}
+          />
+          {/* Jade Sky gradient scrim for crisp text readability */}
+          <div
+            className="hero-scrim"
+            style={{
+              position: 'absolute',
+              inset: 0,
+              background: 'linear-gradient(90deg, rgba(238, 246, 227, 0.96) 0%, rgba(238, 246, 227, 0.92) 34%, rgba(238, 246, 227, 0.1) 50%, rgba(207, 233, 240, 0.88) 75%, rgba(238, 246, 227, 0.96) 100%)',
+              zIndex: 1,
+              pointerEvents: 'none'
+            }}
+          />
+        </>
+      )}
 
       {/* Hero Content Container */}
       <div className="container" style={{ position: 'relative', zIndex: 2, width: '100%' }}>
@@ -271,6 +275,111 @@ export const Hero = ({ onOpenAiModal }) => {
               <span style={{ color: '#1d68fe', display: 'block' }}>Rathod</span>
             </h1>
 
+            {/* Mobile-Only Passport Size Photo (Placed right after "Hi, I'm Bhavesh Rathod") */}
+            <div 
+              className="mobile-portrait-center" 
+              style={{ 
+                margin: '1.25rem auto 1.5rem', 
+                textAlign: 'center', 
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                gap: '0.65rem'
+              }}
+            >
+              <div
+                style={{
+                  position: 'relative',
+                  width: '135px',
+                  height: '170px',
+                  borderRadius: '16px',
+                  padding: '3px',
+                  background: 'linear-gradient(135deg, #1d68fe, #10b981, #f59e0b)',
+                  boxShadow: '0 12px 28px rgba(26, 115, 232, 0.22), 0 4px 10px rgba(0, 0, 0, 0.08)'
+                }}
+              >
+                <div
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    borderRadius: '13px',
+                    overflow: 'hidden',
+                    background: '#ffffff',
+                    position: 'relative'
+                  }}
+                >
+                  <img 
+                    src="/passport_photo.png" 
+                    alt="Bhavesh Rathod"
+                    onError={(e) => {
+                      const target = e.currentTarget;
+                      if (!target.dataset.tried1) {
+                        target.dataset.tried1 = 'true';
+                        target.src = '/photo.jpeg';
+                      } else if (!target.dataset.tried2) {
+                        target.dataset.tried2 = 'true';
+                        target.src = '/cropped_poster.png';
+                      }
+                    }}
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                      objectPosition: 'center 12%',
+                      display: 'block'
+                    }}
+                  />
+                </div>
+
+                {/* Verified Online Status Beacon */}
+                <div
+                  style={{
+                    position: 'absolute',
+                    bottom: '-6px',
+                    right: '-6px',
+                    background: '#ffffff',
+                    padding: '3px',
+                    borderRadius: '50%',
+                    boxShadow: '0 2px 6px rgba(0,0,0,0.15)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                  }}
+                >
+                  <div
+                    style={{
+                      width: '14px',
+                      height: '14px',
+                      borderRadius: '50%',
+                      background: '#10b981',
+                      border: '2px solid #ffffff',
+                      boxShadow: '0 0 8px rgba(16, 185, 129, 0.8)'
+                    }}
+                  />
+                </div>
+              </div>
+
+              {/* Status Pill Badge under Passport Photo */}
+              <div
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '0.4rem',
+                  padding: '0.25rem 0.75rem',
+                  borderRadius: '9999px',
+                  background: 'rgba(26, 115, 232, 0.08)',
+                  border: '1px solid rgba(26, 115, 232, 0.22)',
+                  fontSize: '0.74rem',
+                  fontWeight: 700,
+                  color: '#1d68fe',
+                  fontFamily: 'var(--font-mono)'
+                }}
+              >
+                <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#10b981' }} />
+                <span>Open to Remote • Worldwide</span>
+              </div>
+            </div>
+
             {/* Kinetic Animated Role Subtitle */}
             <div
               style={{
@@ -286,34 +395,34 @@ export const Hero = ({ onOpenAiModal }) => {
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
-                  overflow: 'hidden',
-                  height: '2rem'
+                  minHeight: '2rem'
                 }}
               >
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={roleIndex}
-                    initial={{ opacity: 0, y: 18 }}
+                    initial={{ opacity: 0, y: 12 }}
                     animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -18 }}
-                    transition={{ duration: 0.35, ease: 'easeOut' }}
+                    exit={{ opacity: 0, y: -12 }}
+                    transition={{ duration: 0.3, ease: 'easeOut' }}
                     style={{
-                      fontSize: '1.2rem',
+                      fontSize: 'clamp(1.05rem, 3.5vw, 1.25rem)',
                       fontWeight: 800,
                       color: '#0f172a',
                       letterSpacing: '-0.01em',
                       display: 'flex',
                       alignItems: 'center',
-                      gap: '0.45rem'
+                      gap: '0.45rem',
+                      flexWrap: 'wrap'
                     }}
                   >
-                    <span style={{ color: '#1d68fe' }}>⚡</span>
+                    <Zap size={18} color="#1d68fe" style={{ flexShrink: 0 }} />
                     <span>{roles[roleIndex]}</span>
                   </motion.div>
                 </AnimatePresence>
               </div>
 
-              <span style={{ fontSize: '0.78rem', background: 'rgba(16, 185, 129, 0.12)', color: '#059669', padding: '0.2rem 0.55rem', borderRadius: '6px', fontWeight: 700, border: '1px solid rgba(16, 185, 129, 0.25)', display: 'inline-flex', alignItems: 'center', gap: '0.25rem' }}>
+              <span style={{ fontSize: '0.78rem', background: 'rgba(16, 185, 129, 0.12)', color: '#059669', padding: '0.2rem 0.55rem', borderRadius: '6px', fontWeight: 700, border: '1px solid rgba(16, 185, 129, 0.25)', display: 'inline-flex', alignItems: 'center', gap: '0.25rem', whiteSpace: 'nowrap' }}>
                 <NumberTicker value={parseFloat(personal.experienceDecimal) || 5.8} decimalPlaces={1} suffix="+ Yrs Exp" />
               </span>
             </div>
@@ -330,96 +439,6 @@ export const Hero = ({ onOpenAiModal }) => {
             >
               Building production-grade AI systems with Generative AI, RAG and Agentic AI, backed by {personal.experienceYears} of experience in scalable backend systems and cloud-native solutions.
             </p>
-
-            {/* Mobile-Only Focused Poster Portrait Showcase with Ambient Blur Aura */}
-            <div className="mobile-portrait-center" style={{ margin: '1.5rem auto 2rem', textAlign: 'center', maxWidth: '320px', position: 'relative' }}>
-              
-              {/* Ambient Blurred Aura from Poster */}
-              <div 
-                style={{
-                  position: 'absolute',
-                  inset: '-10px',
-                  backgroundImage: 'url(/hero-cropped-mobile.png)',
-                  backgroundPosition: 'center 20%',
-                  backgroundSize: 'cover',
-                  filter: 'blur(24px)',
-                  opacity: 0.5,
-                  borderRadius: '2rem',
-                  zIndex: 0
-                }}
-              />
-
-              {/* Centered Focused Portrait Frame (Direct from Poster) */}
-              <Tilt
-                tiltEnable={isDesktop}
-                glareEnable={isDesktop}
-                tiltMaxAngleX={8}
-                tiltMaxAngleY={8}
-                glareMaxOpacity={0.15}
-                glareColor="#ffffff"
-                glarePosition="all"
-                style={{ borderRadius: '1.75rem', position: 'relative', zIndex: 1 }}
-              >
-                <div 
-                  style={{
-                    position: 'relative',
-                    width: '270px',
-                    height: '340px',
-                    margin: '0 auto',
-                    borderRadius: '1.75rem',
-                    overflow: 'hidden',
-                    border: '2.5px solid var(--border-color)',
-                    boxShadow: '0 14px 36px rgba(29, 104, 254, 0.22), 0 4px 12px rgba(0, 0, 0, 0.08)',
-                    background: 'var(--bg-card)'
-                  }}
-                >
-                  <img 
-                    src="/hero-cropped-mobile.png" 
-                    alt="Bhavesh Rathod"
-                    onError={(e) => {
-                      const target = e.currentTarget;
-                      if (!target.dataset.tried1) {
-                        target.dataset.tried1 = 'true';
-                        target.src = '/hero-mobile.png';
-                      } else if (!target.dataset.tried2) {
-                        target.dataset.tried2 = 'true';
-                        target.src = '/hero.png';
-                      }
-                    }}
-                    style={{
-                      width: '100%',
-                      height: '100%',
-                      objectFit: 'cover',
-                      objectPosition: 'center 10%',
-                      display: 'block'
-                    }}
-                  />
-
-                  {/* Soft bottom vignette overlay */}
-                  <div 
-                    style={{
-                      position: 'absolute',
-                      inset: 0,
-                      background: 'linear-gradient(to top, rgba(15, 23, 42, 0.75) 0%, rgba(15, 23, 42, 0.05) 35%, transparent 100%)',
-                      pointerEvents: 'none',
-                      display: 'flex',
-                      flexDirection: 'column',
-                      justifyContent: 'flex-end',
-                      padding: '0.85rem',
-                      textAlign: 'left'
-                    }}
-                  >
-                    <div style={{ color: '#ffffff', fontWeight: 800, fontSize: '1rem', textShadow: '0 2px 6px rgba(0,0,0,0.6)' }}>
-                      Bhavesh Rathod
-                    </div>
-                    <div style={{ color: '#93c5fd', fontSize: '0.72rem', fontWeight: 700, fontFamily: 'var(--font-mono)' }}>
-                      AI Engineer • Senior Software Engineer
-                    </div>
-                  </div>
-                </div>
-              </Tilt>
-
-            </div>
 
             {/* Action Buttons with 21st.dev Magnetic Attraction */}
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.85rem', alignItems: 'center', marginBottom: '2rem' }}>
@@ -486,10 +505,9 @@ export const Hero = ({ onOpenAiModal }) => {
             {/* Solid High-Contrast Trust Metabar */}
             <div
               style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '0.85rem',
-                flexWrap: 'wrap',
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 150px), 1fr))',
+                gap: '0.65rem',
                 paddingBottom: '1.5rem',
                 borderBottom: '1px solid var(--border-subtle)',
                 marginBottom: '1.5rem'
@@ -576,8 +594,9 @@ export const Hero = ({ onOpenAiModal }) => {
 
             {/* 21st.dev Infinite Tech Stack Marquee */}
             <div style={{ marginTop: '0.5rem' }}>
-              <div style={{ fontSize: '0.7rem', fontWeight: 800, color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.04em', marginBottom: '0.5rem', fontFamily: 'var(--font-mono)' }}>
-                ⚡ Core Tech & Architecture Competencies:
+              <div style={{ fontSize: '0.7rem', fontWeight: 800, color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.04em', marginBottom: '0.5rem', fontFamily: 'var(--font-mono)', display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
+                <Zap size={13} color="#1d68fe" style={{ flexShrink: 0 }} />
+                <span>Core Tech & Architecture Competencies:</span>
               </div>
               <Marquee speed={28} pauseOnHover={true}>
                 {techStackMarquee.map((tech, idx) => (
@@ -760,12 +779,14 @@ export const Hero = ({ onOpenAiModal }) => {
           display: none;
         }
 
-        @media (min-width: 900px) {
+        @media (min-width: 1024px) {
           .hero-layout-grid {
             grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr) !important;
           }
           .hero-bg-poster {
             display: block !important;
+            background-position: center 45% !important;
+            opacity: 0.98 !important;
           }
           .hero-scrim {
             display: block !important;
@@ -775,7 +796,7 @@ export const Hero = ({ onOpenAiModal }) => {
           }
         }
 
-        @media (max-width: 899px) {
+        @media (max-width: 1023px) {
           .mobile-portrait-center {
             display: block !important;
           }
@@ -784,10 +805,14 @@ export const Hero = ({ onOpenAiModal }) => {
             padding-bottom: 2.5rem !important;
           }
           .hero-bg-poster {
-            display: none !important;
+            display: block !important;
+            background-position: 68% 15% !important;
+            background-size: cover !important;
+            opacity: 0.75 !important;
           }
           .hero-scrim {
-            display: none !important;
+            display: block !important;
+            background: linear-gradient(180deg, rgba(238, 246, 227, 0.7) 0%, rgba(238, 246, 227, 0.88) 40%, rgba(238, 246, 227, 0.98) 100%) !important;
           }
           .hero-left-content {
             padding-top: 0 !important;

@@ -254,7 +254,7 @@ export const Experience = () => {
               }}
             >
               <Zap size={14} />
-              <span>🎮 RPG Level Questline</span>
+              <span>RPG Level Questline</span>
             </motion.button>
 
             <motion.button
@@ -505,8 +505,9 @@ export const Experience = () => {
                         <Flame size={24} />
                       </div>
                       <div>
-                        <div style={{ fontSize: '0.78rem', fontWeight: 800, color: activeQuest.color, textTransform: 'uppercase', letterSpacing: '0.04em', fontFamily: 'var(--font-mono)' }}>
-                          ⚡ POWER STAT UNLOCKED:
+                        <div style={{ fontSize: '0.78rem', fontWeight: 800, color: activeQuest.color, textTransform: 'uppercase', letterSpacing: '0.04em', fontFamily: 'var(--font-mono)', display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
+                          <Zap size={14} color={activeQuest.color} style={{ flexShrink: 0 }} />
+                          <span>POWER STAT UNLOCKED:</span>
                         </div>
                         <div style={{ fontSize: '1.05rem', fontWeight: 800, color: 'var(--text-primary)', marginTop: '0.1rem' }}>
                           {activeQuest.statBoost}
@@ -519,8 +520,9 @@ export const Experience = () => {
 
                     {/* Mission Achievements */}
                     <div style={{ marginBottom: '2rem' }}>
-                      <div style={{ fontSize: '0.82rem', fontWeight: 800, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.04em', marginBottom: '0.85rem', fontFamily: 'var(--font-mono)' }}>
-                        🎯 Mission Brief & Architecture Highlights:
+                      <div style={{ fontSize: '0.82rem', fontWeight: 800, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.04em', marginBottom: '0.85rem', fontFamily: 'var(--font-mono)', display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
+                        <CheckCircle2 size={14} color="#10b981" style={{ flexShrink: 0 }} />
+                        <span>Mission Brief & Architecture Highlights:</span>
                       </div>
                       <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                         {activeQuest.missionBrief.map((item, mIdx) => (
@@ -687,7 +689,7 @@ export const Experience = () => {
             padding: 1.35rem !important;
           }
           .rpg-level-track {
-            gap: 0.35rem !important;
+            gap: 0.45rem !important;
           }
           .rpg-level-track > div {
             padding: 0.65rem 0.4rem !important;
@@ -697,6 +699,19 @@ export const Experience = () => {
           }
           .quest-time-box div {
             justify-content: flex-start !important;
+          }
+        }
+        @media (max-width: 540px) {
+          .rpg-level-track {
+            display: flex !important;
+            overflow-x: auto !important;
+            padding-bottom: 0.6rem !important;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: thin;
+          }
+          .rpg-level-track > div {
+            min-width: 82px !important;
+            flex-shrink: 0 !important;
           }
         }
       `}</style>

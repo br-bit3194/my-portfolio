@@ -3,7 +3,12 @@ import {
   ArrowUp, 
   Mail, 
   Bot,
-  Sparkles
+  Sparkles,
+  Trophy,
+  Award,
+  Zap,
+  ShieldCheck,
+  Star
 } from 'lucide-react';
 import { LinkedinIcon } from './Icons';
 import { portfolioData } from '../data/portfolioData';
@@ -151,12 +156,27 @@ export const Footer = ({ onOpenAiModal }) => {
             <h4 style={{ fontSize: '0.9rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
               Recognitions
             </h4>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', fontSize: '0.84rem', color: 'var(--text-secondary)' }}>
-              <div>🏆 AWS SuperHacks 2025 Special Jury Award</div>
-              <div>🌟 Talentica 'PAT on the Back' Award</div>
-              <div>🏅 Google Cloud Certified GenAI Leader</div>
-              <div>🏅 Databricks Certified GenAI Associate</div>
-              <div>⚡ Top 5% Python Global (LinkedIn)</div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem', fontSize: '0.84rem', color: 'var(--text-secondary)' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem' }}>
+                <Trophy size={15} color="#f59e0b" style={{ flexShrink: 0 }} />
+                <span>AWS SuperHacks 2025 Special Jury Award</span>
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem' }}>
+                <Star size={15} color="#eab308" style={{ flexShrink: 0 }} />
+                <span>Talentica 'PAT on the Back' Award</span>
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem' }}>
+                <Award size={15} color="#1d68fe" style={{ flexShrink: 0 }} />
+                <span>Google Cloud Certified GenAI Leader</span>
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem' }}>
+                <ShieldCheck size={15} color="#10b981" style={{ flexShrink: 0 }} />
+                <span>Databricks Certified GenAI Associate</span>
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem' }}>
+                <Zap size={15} color="#1d68fe" style={{ flexShrink: 0 }} />
+                <span>Top 5% Python Global (LinkedIn)</span>
+              </div>
             </div>
           </div>
 

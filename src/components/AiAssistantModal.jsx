@@ -111,7 +111,7 @@ export const AiAssistantModal = ({ isOpen, onClose }) => {
     // 3. 94% Latency Cut & Backend Optimization
     if (q.includes('94%') || q.includes('latency') || q.includes('optimize') || q.includes('optimization') || q.includes('speed') || q.includes('performance') || q.includes('bottleneck')) {
       return {
-        text: `⚡ **Verified Production Performance Benchmarks**:\n\n1. **94% Django API Cut**: Scaled processing from **1,200 records/min to 4 seconds** with batch data pipeline optimizations.\n2. **67% Agent Speedup**: Reduced Multi-Agent response from **3m to 1m** via Langfuse trace analysis.\n3. **GMS Batch Optimization**: Reduced critical execution times from **30-40 minutes to milliseconds**.\n4. **FinTech Multi-Threading**: Achieved **25% faster lookups** across 14+ Indian commercial banks.`,
+        text: `📊 **Verified Production Performance Benchmarks**:\n\n1. **94% Django API Cut**: Scaled processing from **1,200 records/min to 4 seconds** with batch data pipeline optimizations.\n2. **67% Agent Speedup**: Reduced Multi-Agent response from **3m to 1m** via Langfuse trace analysis.\n3. **GMS Batch Optimization**: Reduced critical execution times from **30-40 minutes to milliseconds**.\n4. **FinTech Multi-Threading**: Achieved **25% faster lookups** across 14+ Indian commercial banks.`,
         actions: [
           { label: "View Experience", targetId: "experience" },
           { label: "💻 GitHub Profile", link: "https://github.com/br-bit3194", external: true }
@@ -667,10 +667,10 @@ export const AiAssistantModal = ({ isOpen, onClose }) => {
       <style>{`
         @media (max-width: 640px) {
           .ai-modal-card {
-            width: 95vw !important;
-            height: 90vh !important;
+            width: 100% !important;
+            height: calc(100dvh - 1.5rem) !important;
             max-height: none !important;
-            border-radius: 1rem !important;
+            border-radius: 1.15rem !important;
           }
         }
       `}</style>

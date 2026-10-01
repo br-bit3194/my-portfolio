@@ -274,8 +274,9 @@ export const Projects = () => {
                     <div>
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem', flexWrap: 'wrap', gap: '0.5rem' }}>
                         <span className="badge badge-blue">{proj.tag}</span>
-                        <span style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--google-green)', fontFamily: 'var(--font-mono)' }}>
-                          {proj.award}
+                        <span style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--google-green)', fontFamily: 'var(--font-mono)', display: 'inline-flex', alignItems: 'center', gap: '0.35rem' }}>
+                          <Award size={13} color="var(--google-green)" style={{ flexShrink: 0 }} />
+                          <span>{proj.award}</span>
                         </span>
                       </div>
 

@@ -11,7 +11,8 @@ import {
   Cpu, 
   ArrowRight, 
   Zap,
-  CheckCircle2
+  CheckCircle2,
+  Sparkles
 } from 'lucide-react';
 import { portfolioData } from '../data/portfolioData';
 
@@ -256,8 +257,9 @@ export const ArchitectureShowcase = () => {
                     </div>
                   </motion.div>
                 ) : (
-                  <div style={{ textAlign: 'center', fontSize: '0.82rem', color: 'var(--text-muted)' }}>
-                    💡 Click any step above to inspect its architecture role and telemetry status
+                  <div style={{ textAlign: 'center', fontSize: '0.82rem', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.35rem' }}>
+                    <Sparkles size={14} color="#1d68fe" style={{ flexShrink: 0 }} />
+                    <span>Click any step above to inspect its architecture role and telemetry status</span>
                   </div>
                 )}
               </AnimatePresence>
