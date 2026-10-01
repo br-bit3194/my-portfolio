@@ -60,137 +60,180 @@ export const Contact = () => {
           </p>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '2.5rem', maxWidth: '1000px', margin: '0 auto' }} className="contact-grid">
+        <div style={{ maxWidth: '1050px', margin: '0 auto' }}>
           
-          {/* Left Column: Direct Channels (Email + LinkedIn Only) */}
-          <div>
-            <div 
-              className="bento-card" 
-              style={{ 
-                padding: '2.5rem', 
-                height: '100%',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-between'
-              }}
-            >
-              <div>
-                <h3 style={{ fontSize: '1.4rem', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '0.5rem' }}>
-                  Direct Professional Inquiries
-                </h3>
-                <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: 1.6, marginBottom: '2rem' }}>
-                  I respond to technical recruiters, engineering leaders, and collaborators directly via email and LinkedIn.
-                </p>
+          {/* Bento Box Container */}
+          <div 
+            className="bento-card" 
+            style={{ 
+              padding: '2.5rem',
+              boxShadow: 'var(--shadow-md)'
+            }}
+          >
+            <div style={{ textAlign: 'center', maxWidth: '640px', margin: '0 auto 2rem' }}>
+              <h3 style={{ fontSize: '1.45rem', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '0.4rem' }}>
+                Direct Professional Inquiries
+              </h3>
+              <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: 1.6 }}>
+                I respond directly to technical recruiters, engineering leaders, and collaborators via Email and LinkedIn.
+              </p>
+            </div>
 
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', marginBottom: '2rem' }}>
-                  
-                  {/* Email */}
-                  <div 
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'space-between',
-                      background: 'var(--bg-input)',
-                      border: '1px solid var(--border-color)',
-                      borderRadius: '0.75rem',
-                      padding: '1.1rem 1.25rem'
-                    }}
-                  >
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                      <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: 'var(--google-red-soft)', color: 'var(--google-red)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                        <Mail size={20} />
-                      </div>
-                      <div>
-                        <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Email Address</div>
-                        <a href={`mailto:${personal.email}`} style={{ fontWeight: 600, color: 'var(--text-primary)', fontSize: '0.95rem' }}>
-                          {personal.email}
-                        </a>
-                      </div>
-                    </div>
-
-                    <button
-                      onClick={() => handleCopy('email', personal.email)}
-                      title="Copy Email"
-                      style={{ padding: '0.4rem', color: 'var(--text-muted)', cursor: 'pointer' }}
-                    >
-                      {copiedField === 'email' ? <Check size={18} color="var(--google-green)" /> : <Copy size={18} />}
-                    </button>
+            {/* Single Row 3-Column Grid */}
+            <div className="direct-inquiries-grid">
+              
+              {/* Card 1: Email */}
+              <div className="direct-inquiry-card">
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', minWidth: 0 }}>
+                  <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: 'var(--google-red-soft)', color: 'var(--google-red)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                    <Mail size={18} />
                   </div>
-
-                  {/* LinkedIn */}
-                  <div 
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'space-between',
-                      background: 'var(--bg-input)',
-                      border: '1px solid var(--border-color)',
-                      borderRadius: '0.75rem',
-                      padding: '1.1rem 1.25rem'
-                    }}
-                  >
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                      <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: 'rgba(10, 102, 194, 0.1)', color: '#0A66C2', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                        <LinkedinIcon size={20} />
-                      </div>
-                      <div>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem' }}>
-                          <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>LinkedIn Network</span>
-                          <span style={{ fontSize: '0.68rem', fontWeight: 700, padding: '0.1rem 0.4rem', borderRadius: '4px', background: 'rgba(10, 102, 194, 0.1)', color: '#0A66C2' }}>
-                            5K+ Family
-                          </span>
-                        </div>
-                        <a href={personal.linkedin} target="_blank" rel="noreferrer" style={{ fontWeight: 600, color: 'var(--google-blue)', fontSize: '0.95rem' }}>
-                          in/bhaveshkumar-rathod
-                        </a>
-                      </div>
+                  <div style={{ minWidth: 0 }}>
+                    <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', textTransform: 'uppercase', fontFamily: 'var(--font-mono)', fontWeight: 700 }}>
+                      Email Channel
                     </div>
-
-                    <a href={personal.linkedin} target="_blank" rel="noreferrer" style={{ padding: '0.4rem', color: 'var(--text-muted)' }}>
-                      <ArrowRight size={18} />
+                    <a 
+                      href={`mailto:${personal.email}`} 
+                      title={personal.email}
+                      style={{ 
+                        fontWeight: 700, 
+                        color: 'var(--text-primary)', 
+                        fontSize: '0.86rem', 
+                        display: 'block',
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
+                        whiteSpace: 'nowrap'
+                      }}
+                    >
+                      {personal.email}
                     </a>
                   </div>
+                </div>
 
-                  {/* Location */}
-                  <div 
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '1rem',
-                      background: 'var(--bg-input)',
-                      border: '1px solid var(--border-color)',
-                      borderRadius: '0.75rem',
-                      padding: '1.1rem 1.25rem'
-                    }}
-                  >
-                    <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: 'var(--google-green-soft)', color: 'var(--google-green)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                      <MapPin size={20} />
+                <button
+                  onClick={() => handleCopy('email', personal.email)}
+                  title="Copy Email"
+                  style={{ 
+                    padding: '0.45rem', 
+                    borderRadius: '8px', 
+                    background: 'var(--bg-card)', 
+                    border: '1px solid var(--border-color)',
+                    color: 'var(--text-muted)', 
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    flexShrink: 0,
+                    marginLeft: '0.5rem'
+                  }}
+                >
+                  {copiedField === 'email' ? <Check size={15} color="var(--google-green)" /> : <Copy size={15} />}
+                </button>
+              </div>
+
+              {/* Card 2: LinkedIn */}
+              <div className="direct-inquiry-card">
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', minWidth: 0 }}>
+                  <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: 'rgba(10, 102, 194, 0.1)', color: '#0A66C2', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                    <LinkedinIcon size={18} />
+                  </div>
+                  <div style={{ minWidth: 0 }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', marginBottom: '0.1rem' }}>
+                      <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)', textTransform: 'uppercase', fontFamily: 'var(--font-mono)', fontWeight: 700 }}>LinkedIn</span>
+                      <span style={{ fontSize: '0.62rem', fontWeight: 700, padding: '0.05rem 0.35rem', borderRadius: '4px', background: 'rgba(10, 102, 194, 0.1)', color: '#0A66C2' }}>
+                        5K+ Family
+                      </span>
                     </div>
-                    <div>
-                      <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Location</div>
-                      <div style={{ fontWeight: 600, color: 'var(--text-primary)', fontSize: '0.95rem' }}>
-                        {personal.location}
-                      </div>
+                    <a 
+                      href={personal.linkedin} 
+                      target="_blank" 
+                      rel="noreferrer" 
+                      title="LinkedIn Profile"
+                      style={{ 
+                        fontWeight: 700, 
+                        color: 'var(--google-blue)', 
+                        fontSize: '0.86rem',
+                        display: 'block',
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
+                        whiteSpace: 'nowrap'
+                      }}
+                    >
+                      in/bhaveshkumar-rathod
+                    </a>
+                  </div>
+                </div>
+
+                <a 
+                  href={personal.linkedin} 
+                  target="_blank" 
+                  rel="noreferrer" 
+                  title="Visit LinkedIn Profile"
+                  style={{ 
+                    padding: '0.45rem', 
+                    borderRadius: '8px', 
+                    background: 'var(--bg-card)', 
+                    border: '1px solid var(--border-color)',
+                    color: 'var(--text-muted)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    flexShrink: 0,
+                    marginLeft: '0.5rem'
+                  }}
+                >
+                  <ArrowRight size={15} />
+                </a>
+              </div>
+
+              {/* Card 3: Location */}
+              <div className="direct-inquiry-card">
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', minWidth: 0 }}>
+                  <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: 'var(--google-green-soft)', color: 'var(--google-green)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                    <MapPin size={18} />
+                  </div>
+                  <div style={{ minWidth: 0 }}>
+                    <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', textTransform: 'uppercase', fontFamily: 'var(--font-mono)', fontWeight: 700 }}>
+                      Work Location
+                    </div>
+                    <div style={{ fontWeight: 700, color: 'var(--text-primary)', fontSize: '0.86rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                      Ahmedabad, India
+                    </div>
+                    <div style={{ fontSize: '0.72rem', color: 'var(--google-green)', fontWeight: 600, whiteSpace: 'nowrap' }}>
+                      Open to Remote (Worldwide)
                     </div>
                   </div>
-
                 </div>
               </div>
 
-              {/* Resume Download CTA */}
+            </div>
+
+            {/* Resume Download CTA Strip */}
+            <div style={{ maxWidth: '420px', margin: '0 auto' }}>
               <a 
                 href={personal.resumeUrl}
                 download="Bhavesh_Rathod_GenAI_Engineer_Resume.pdf"
                 className="btn-primary"
-                style={{ width: '100%' }}
+                style={{ 
+                  width: '100%', 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  justifyContent: 'center', 
+                  gap: '0.65rem', 
+                  padding: '0.9rem 1.5rem',
+                  borderRadius: '9999px',
+                  boxShadow: '0 4px 14px rgba(26, 115, 232, 0.3)'
+                }}
               >
                 <Download size={18} />
-                <span>Download Resume PDF</span>
+                <span>Download Verified Resume PDF</span>
               </a>
             </div>
+
           </div>
 
-          {/* Right Column: Clean Minimal Contact Form */}
+          {/* Contact form commented out for now per user request */}
+          {/*
           <div>
             <div 
               className="bento-card"
@@ -351,18 +394,11 @@ export const Contact = () => {
 
             </div>
           </div>
+          */}
 
         </div>
 
       </div>
-
-      <style>{`
-        @media (min-width: 900px) {
-          .contact-grid {
-            grid-template-columns: 1fr 1.15fr !important;
-          }
-        }
-      `}</style>
     </section>
   );
 };

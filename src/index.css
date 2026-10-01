@@ -361,10 +361,43 @@ button {
   }
 }
 
+/* Direct Professional Inquiries Single Row Grid */
+.direct-inquiries-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.direct-inquiry-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--bg-input);
+  border: 1px solid var(--border-color);
+  border-radius: 1rem;
+  padding: 1.15rem 1.25rem;
+  transition: all 0.2s ease;
+}
+
+.direct-inquiry-card:hover {
+  border-color: var(--google-blue);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+@media (max-width: 920px) {
+  .direct-inquiries-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
 /* Touch targets for mobile */
 @media (max-width: 640px) {
   button, a {
     min-height: 38px;
   }
 }
+
 

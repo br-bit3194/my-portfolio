@@ -47,10 +47,10 @@ export function App() {
       <main style={{ flex: 1 }}>
         <Hero onOpenAiModal={() => setIsAiModalOpen(true)} />
         <Projects />
+        <Certifications />
         <ArchitectureShowcase />
         <Experience />
         <Skills />
-        <Certifications />
         <Contact />
       </main>
 
@@ -67,6 +67,7 @@ export function App() {
       <button
         onClick={() => setIsAiModalOpen(true)}
         className="floating-ai-fab"
+        aria-label="Ask AI Assistant about Bhavesh"
         title="Ask AI Assistant about Bhavesh"
         style={{
           position: 'fixed',
@@ -76,41 +77,46 @@ export function App() {
           display: 'flex',
           alignItems: 'center',
           gap: '0.65rem',
-          padding: '0.85rem 1.25rem',
+          padding: '0.75rem 1.25rem',
           borderRadius: '9999px',
-          background: 'var(--accent-gradient)',
+          background: '#1a73e8',
           color: '#ffffff',
-          boxShadow: '0 8px 25px rgba(37, 99, 235, 0.45)',
-          border: '1px solid rgba(255, 255, 255, 0.2)',
+          boxShadow: '0 8px 24px rgba(26, 115, 232, 0.4), 0 2px 6px rgba(0, 0, 0, 0.08)',
+          border: '1px solid rgba(255, 255, 255, 0.3)',
           cursor: 'pointer',
           fontWeight: 700,
-          fontSize: '0.9rem',
-          transition: 'all 0.2s cubic-bezier(0.16, 1, 0.3, 1)'
+          fontSize: '0.88rem',
+          transition: 'all 0.25s cubic-bezier(0.16, 1, 0.3, 1)',
+          backdropFilter: 'blur(8px)',
+          WebkitBackdropFilter: 'blur(8px)'
         }}
         onMouseEnter={(e) => {
-          e.currentTarget.style.transform = 'translateY(-3px) scale(1.03)';
-          e.currentTarget.style.boxShadow = '0 12px 30px rgba(37, 99, 235, 0.6)';
+          e.currentTarget.style.transform = 'translateY(-3px) scale(1.02)';
+          e.currentTarget.style.boxShadow = '0 12px 30px rgba(26, 115, 232, 0.55), 0 4px 10px rgba(0, 0, 0, 0.12)';
+          e.currentTarget.style.background = '#1557b0';
         }}
         onMouseLeave={(e) => {
           e.currentTarget.style.transform = 'translateY(0) scale(1)';
-          e.currentTarget.style.boxShadow = '0 8px 25px rgba(37, 99, 235, 0.45)';
+          e.currentTarget.style.boxShadow = '0 8px 24px rgba(26, 115, 232, 0.4), 0 2px 6px rgba(0, 0, 0, 0.08)';
+          e.currentTarget.style.background = '#1a73e8';
         }}
       >
         <div 
           style={{
-            width: '24px',
-            height: '24px',
+            width: '26px',
+            height: '26px',
             borderRadius: '50%',
-            background: 'rgba(255, 255, 255, 0.2)',
+            background: 'rgba(255, 255, 255, 0.22)',
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'center'
+            justifyContent: 'center',
+            flexShrink: 0
           }}
         >
-          <Bot size={15} />
+          <Bot size={16} color="#ffffff" />
         </div>
-        <span>Ask Bhavesh AI</span>
-        <Sparkles size={14} color="#fef08a" />
+        <span className="fab-text" style={{ whiteSpace: 'nowrap' }}>Ask Bhavesh AI</span>
+        <Sparkles size={14} color="#fde047" className="fab-sparkle" style={{ flexShrink: 0 }} />
       </button>
 
       <style>{`
@@ -118,15 +124,31 @@ export function App() {
           from { opacity: 0; transform: scale(0.97); }
           to { opacity: 1; transform: scale(1); }
         }
+        @keyframes fabPulse {
+          0% { box-shadow: 0 0 0 0 rgba(26, 115, 232, 0.5), 0 8px 24px rgba(26, 115, 232, 0.4); }
+          70% { box-shadow: 0 0 0 10px rgba(26, 115, 232, 0), 0 8px 24px rgba(26, 115, 232, 0.4); }
+          100% { box-shadow: 0 0 0 0 rgba(26, 115, 232, 0), 0 8px 24px rgba(26, 115, 232, 0.4); }
+        }
+        .floating-ai-fab {
+          animation: fabPulse 3.5s infinite;
+        }
         @media (max-width: 640px) {
-          .floating-ai-fab span {
-            display: none;
+          .floating-ai-fab .fab-text,
+          .floating-ai-fab .fab-sparkle {
+            display: none !important;
           }
           .floating-ai-fab {
-            padding: 0.85rem !important;
+            padding: 0 !important;
             border-radius: 50% !important;
             bottom: 1.25rem !important;
             right: 1.25rem !important;
+            width: 48px !important;
+            height: 48px !important;
+            justify-content: center !important;
+          }
+          .floating-ai-fab div {
+            width: 32px !important;
+            height: 32px !important;
           }
         }
       `}</style>

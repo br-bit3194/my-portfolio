@@ -25,11 +25,12 @@ export const Navbar = ({ theme, toggleTheme, onOpenAiModal }) => {
 
   const navLinks = [
     { label: 'Home', href: '#about' },
-    { label: 'About', href: '#about' },
     { label: 'Projects', href: '#projects' },
-    { label: 'Journey', href: '#experience' },
+    { label: 'Certifications', href: '#certifications' },
     { label: 'Architecture', href: '#architecture' },
-    { label: 'Skills', href: '#skills' }
+    { label: 'Journey', href: '#experience' },
+    { label: 'Skills', href: '#skills' },
+    { label: 'Contact', href: '#contact' }
   ];
 
   return (
@@ -95,7 +96,9 @@ export const Navbar = ({ theme, toggleTheme, onOpenAiModal }) => {
           style={{ 
             display: 'none', 
             alignItems: 'center', 
-            gap: '1.75rem',
+            gap: '1.25rem',
+            flexShrink: 0,
+            whiteSpace: 'nowrap'
           }}
           className="desktop-nav"
         >
@@ -107,7 +110,7 @@ export const Navbar = ({ theme, toggleTheme, onOpenAiModal }) => {
                 href={link.href}
                 onClick={() => setActiveNav(link.label)}
                 style={{
-                  fontSize: '0.92rem',
+                  fontSize: '0.9rem',
                   fontWeight: isActive ? 700 : 500,
                   color: isActive ? '#0f172a' : '#64748b',
                   transition: 'all 0.2s ease',
@@ -115,7 +118,9 @@ export const Navbar = ({ theme, toggleTheme, onOpenAiModal }) => {
                   position: 'relative',
                   display: 'flex',
                   flexDirection: 'column',
-                  alignItems: 'center'
+                  alignItems: 'center',
+                  whiteSpace: 'nowrap',
+                  flexShrink: 0
                 }}
                 onMouseEnter={(e) => (e.currentTarget.style.color = '#1d68fe')}
                 onMouseLeave={(e) => (e.currentTarget.style.color = isActive ? '#0f172a' : '#64748b')}
@@ -139,9 +144,9 @@ export const Navbar = ({ theme, toggleTheme, onOpenAiModal }) => {
         </nav>
 
         {/* Right Action Buttons */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexShrink: 0, whiteSpace: 'nowrap' }}>
           
-          {/* Open to Remote Pill Button (From Poster) */}
+          {/* Open to Remote Pill Button */}
           <a
             href="#contact"
             style={{
@@ -157,7 +162,9 @@ export const Navbar = ({ theme, toggleTheme, onOpenAiModal }) => {
               fontSize: '0.82rem',
               fontWeight: 700,
               textDecoration: 'none',
-              transition: 'all 0.2s ease'
+              transition: 'all 0.2s ease',
+              whiteSpace: 'nowrap',
+              flexShrink: 0
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.borderColor = '#1d68fe';
@@ -168,9 +175,9 @@ export const Navbar = ({ theme, toggleTheme, onOpenAiModal }) => {
               e.currentTarget.style.transform = 'translateY(0)';
             }}
           >
-            <span style={{ width: '7px', height: '7px', borderRadius: '50%', background: '#10b981', boxShadow: '0 0 6px rgba(16, 185, 129, 0.8)' }} />
-            <span>Open to Remote</span>
-            <ChevronRight size={13} color="#94a3b8" />
+            <span style={{ width: '7px', height: '7px', borderRadius: '50%', background: '#10b981', boxShadow: '0 0 6px rgba(16, 185, 129, 0.8)', flexShrink: 0 }} />
+            <span style={{ whiteSpace: 'nowrap' }}>Open to Remote</span>
+            <ChevronRight size={13} color="#94a3b8" style={{ flexShrink: 0 }} />
           </a>
 
           {/* Ask AI Trigger Button */}
@@ -185,16 +192,18 @@ export const Navbar = ({ theme, toggleTheme, onOpenAiModal }) => {
               background: 'rgba(29, 104, 254, 0.08)',
               border: '1px solid rgba(29, 104, 254, 0.25)',
               color: '#1d68fe',
-              padding: '0.45rem 0.8rem',
+              padding: '0.45rem 0.85rem',
               borderRadius: '9999px',
               fontSize: '0.82rem',
               fontWeight: 700,
               cursor: 'pointer',
-              transition: 'all 0.2s ease'
+              transition: 'all 0.2s ease',
+              whiteSpace: 'nowrap',
+              flexShrink: 0
             }}
           >
-            <Bot size={15} />
-            <span className="hide-mobile">Ask AI</span>
+            <Bot size={15} style={{ flexShrink: 0 }} />
+            <span style={{ whiteSpace: 'nowrap' }}>Ask AI</span>
           </button>
 
           {/* Theme Toggle */}
@@ -212,7 +221,8 @@ export const Navbar = ({ theme, toggleTheme, onOpenAiModal }) => {
               border: '1px solid #e2e8f0',
               color: '#0f172a',
               cursor: 'pointer',
-              transition: 'all 0.2s ease'
+              transition: 'all 0.2s ease',
+              flexShrink: 0
             }}
           >
             {theme === 'dark' ? <Sun size={17} color="#f59e0b" /> : <Moon size={17} color="#1d68fe" />}
@@ -227,11 +237,13 @@ export const Navbar = ({ theme, toggleTheme, onOpenAiModal }) => {
               padding: '0.45rem 0.95rem',
               fontSize: '0.82rem',
               borderRadius: '9999px',
-              background: '#0f172a'
+              background: '#0f172a',
+              whiteSpace: 'nowrap',
+              flexShrink: 0
             }}
           >
-            <Download size={14} />
-            <span>Resume</span>
+            <Download size={14} style={{ flexShrink: 0 }} />
+            <span style={{ whiteSpace: 'nowrap' }}>Resume</span>
           </a>
 
           {/* Mobile Menu Toggle Button */}
@@ -249,6 +261,7 @@ export const Navbar = ({ theme, toggleTheme, onOpenAiModal }) => {
               background: '#ffffff',
               border: '1px solid #e2e8f0',
               color: '#0f172a',
+              flexShrink: 0
             }}
           >
             {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
@@ -311,7 +324,7 @@ export const Navbar = ({ theme, toggleTheme, onOpenAiModal }) => {
       )}
 
       <style>{`
-        @media (min-width: 900px) {
+        @media (min-width: 1024px) {
           .desktop-nav {
             display: flex !important;
           }
@@ -319,13 +332,21 @@ export const Navbar = ({ theme, toggleTheme, onOpenAiModal }) => {
             display: none !important;
           }
         }
-        @media (max-width: 899px) {
+        @media (max-width: 1023px) {
+          .desktop-nav {
+            display: none !important;
+          }
           .mobile-toggle {
             display: flex !important;
           }
         }
-        @media (max-width: 600px) {
+        @media (max-width: 640px) {
           .hide-mobile {
+            display: none !important;
+          }
+        }
+        @media (max-width: 480px) {
+          .hide-xs {
             display: none !important;
           }
         }

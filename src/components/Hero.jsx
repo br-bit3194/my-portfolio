@@ -133,7 +133,9 @@ export const Hero = ({ onOpenAiModal }) => {
             {/* Top Featured Credentials Badge: Google Cloud Certified GenAI Leader */}
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.65rem', alignItems: 'center', marginBottom: '1rem' }}>
               
-              <div 
+              <a
+                href="#certifications"
+                title="Jump to Certifications & Awards"
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
@@ -145,12 +147,25 @@ export const Hero = ({ onOpenAiModal }) => {
                   color: '#1a73e8',
                   fontSize: '0.82rem',
                   fontWeight: 800,
-                  boxShadow: '0 2px 10px rgba(26, 115, 232, 0.12)'
+                  textDecoration: 'none',
+                  boxShadow: '0 2px 10px rgba(26, 115, 232, 0.12)',
+                  transition: 'all 0.2s ease',
+                  cursor: 'pointer'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = '#1a73e8';
+                  e.currentTarget.style.boxShadow = '0 4px 14px rgba(26, 115, 232, 0.22)';
+                  e.currentTarget.style.transform = 'translateY(-1px)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = 'rgba(26, 115, 232, 0.35)';
+                  e.currentTarget.style.boxShadow = '0 2px 10px rgba(26, 115, 232, 0.12)';
+                  e.currentTarget.style.transform = 'translateY(0)';
                 }}
               >
                 <GoogleCloudLogo size={18} />
                 <span>Google Cloud Certified Generative AI Leader</span>
-              </div>
+              </a>
 
               <a
                 href={personal.linkedin}
@@ -214,7 +229,7 @@ export const Hero = ({ onOpenAiModal }) => {
               <span style={{ color: '#1d68fe' }}>•</span>
               <span>Senior Software Engineer</span>
               <span style={{ fontSize: '0.78rem', background: 'rgba(16, 185, 129, 0.12)', color: '#059669', padding: '0.2rem 0.55rem', borderRadius: '6px', fontWeight: 700, border: '1px solid rgba(16, 185, 129, 0.25)' }}>
-                5+ Years Exp
+                {personal.experienceYearsShort || personal.experienceYears} Exp
               </span>
             </div>
 
@@ -228,7 +243,7 @@ export const Hero = ({ onOpenAiModal }) => {
                 maxWidth: '490px'
               }}
             >
-              Building production-grade AI systems with Generative AI, RAG and Agentic AI, backed by 5+ years of experience in scalable backend systems and cloud-native solutions.
+              Building production-grade AI systems with Generative AI, RAG and Agentic AI, backed by {personal.experienceYears} of experience in scalable backend systems and cloud-native solutions.
             </p>
 
             {/* Mobile Visual Portrait Centerpiece (From Poster, Zero Text Artifacts) */}

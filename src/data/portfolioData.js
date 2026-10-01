@@ -1,12 +1,37 @@
 /**
  * ========================================================================
- * PORTFOLIO DATA - SINGLE SOURCE OF TRUTH (FUTURE-READY)
+ * PORTFOLIO DATA - SINGLE SOURCE OF TRUTH (DYNAMIC & FUTURE-READY)
  * ========================================================================
- * Whenever your skills, experience, projects, or certifications change:
- * Simply edit this file! All UI components, Bento cards, and the AI Assistant
- * dynamically adapt without touching any React code or CSS.
+ * Dynamically computes career experience based on the current date
+ * (5.8 Years as of September 2026, auto-incrementing as months pass).
  * ========================================================================
  */
+
+export const calculateDynamicExperience = () => {
+  // Baseline: 5.8 Years (70 total working months) as of September 2026 (Month index 8 in JS)
+  const baselineMonths = 70;
+  const now = new Date();
+  
+  // Calculate months passed since September 2026
+  const monthsDiff = (now.getFullYear() - 2026) * 12 + (now.getMonth() - 8);
+  const currentTotalMonths = Math.max(70, baselineMonths + monthsDiff);
+  
+  const years = Math.floor(currentTotalMonths / 12);
+  const remainingMonths = currentTotalMonths % 12;
+  const decimalYears = (currentTotalMonths / 12).toFixed(1);
+
+  return {
+    years,
+    remainingMonths,
+    totalMonths: currentTotalMonths,
+    decimal: decimalYears, // e.g. "5.8"
+    formattedPlus: `${decimalYears}+ Years`, // e.g. "5.8+ Years"
+    formattedShort: `${decimalYears}+ Yrs`,
+    formattedDetailed: `${years} yrs ${remainingMonths > 0 ? `${remainingMonths} mos` : ''}`.trim()
+  };
+};
+
+const dynamicExp = calculateDynamicExperience();
 
 export const portfolioData = {
   personal: {
@@ -15,7 +40,9 @@ export const portfolioData = {
     role: "AI Engineer",
     headline: "AI Engineer | Agentic AI • Multi-Agent Systems • RAG • LLM Applications | Senior Software Engineer | Python | AWS & GCP",
     company: "Talentica Software",
-    experienceYears: "5+",
+    experienceYears: dynamicExp.formattedPlus,
+    experienceYearsShort: dynamicExp.formattedShort,
+    experienceDecimal: dynamicExp.decimal,
     location: "Ahmedabad, Gujarat, India (Open to Remote: India & Worldwide)",
     availability: "Open to Remote Opportunities (India & Worldwide)",
     email: "bhavesh3194@gmail.com",
@@ -25,11 +52,11 @@ export const portfolioData = {
     resumeUrl: "/Bhavesh_Rathod_GenAI_Engineer_Resume.pdf",
     avatarUrl: "/photo.jpeg",
     featuredCert: "Google Cloud Certified Generative AI Leader",
-    summary: "AI Engineer and Senior Software Engineer with 5+ years of experience building scalable backend systems and production-grade AI applications. Core focus on Generative AI, Retrieval-Augmented Generation (RAG), and Agentic AI systems (A2A, MCP), delivering client-facing AI solutions with Google Gemini, Vertex AI, BigQuery, AWS Bedrock, and FastAPI.",
+    summary: `AI Engineer and Senior Software Engineer with ${dynamicExp.formattedPlus} of experience building scalable backend systems and production-grade AI applications. Core focus on Generative AI, Retrieval-Augmented Generation (RAG), and Agentic AI systems (A2A, MCP), delivering client-facing AI solutions with Google Gemini, Vertex AI, BigQuery, AWS Bedrock, and FastAPI.`,
     
-    // 2-Second Recruiter Metrics (5+ Years Industry Exp)
+    // 2-Second Recruiter Metrics (Dynamic Industry Exp)
     metrics: [
-      { metric: "5+ Years", label: "Industry Experience", desc: "Production GenAI, Agentic AI & distributed Python systems" },
+      { metric: dynamicExp.formattedPlus, label: "Industry Experience", desc: "Production GenAI, Agentic AI & distributed Python systems" },
       { metric: "94%", label: "API Latency Cut", desc: "Optimized Django API from 1,200 records/min to 4 seconds" },
       { metric: "67%", label: "Agent Speedup", desc: "Cut Multi-Agent latency from 3m to 1m via OpenTelemetry & Langfuse" },
       { metric: "5K+", label: "LinkedIn Family", desc: "Active network of 5,000+ AI engineers, founders & tech leaders" }
