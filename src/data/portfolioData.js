@@ -121,7 +121,7 @@ export const portfolioData = {
         "Real-time log ingestion, root cause correlation, and autonomous issue remediation",
         "Sub-second event routing with FastAPI and event-driven architecture"
       ],
-      techStack: ["Amazon Bedrock", "AWS Lambda", "CloudWatch", "FastAPI", "Python", "Multi-Agent Orchestration", "RAG"]
+      techStack: ["Amazon Bedrock", "FastAPI", "Python", "Multi-Agent Orchestration", "RAG"]
     },
     {
       id: "makegood",
