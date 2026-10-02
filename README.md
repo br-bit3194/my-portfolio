@@ -1,4 +1,4 @@
-# Bhavesh Rathod — Personal Portfolio & AI Systems Showcase
+# Bhavesh Rathod - Personal Portfolio & AI Systems Showcase
 
 [![Live Website](https://img.shields.io/badge/Live%20Website-bhavesh--rathod.vercel.app-1d68fe?style=for-the-badge&logo=vercel&logoColor=white)](https://bhavesh-rathod.vercel.app/)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-5K%2B%20Network-0a66c2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/bhaveshkumar-rathod/)
